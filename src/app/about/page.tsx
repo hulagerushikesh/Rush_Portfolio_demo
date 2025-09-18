@@ -3,6 +3,9 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { Award, GraduationCap, Briefcase, Users, Code, Database, Cloud, Brain, Star } from 'lucide-react'
+import TestimonialsCarousel from '@/components/TestimonialsCarousel'
+import AnimatedSkills from '@/components/AnimatedSkills'
+import CareerTimeline from '@/components/CareerTimeline'
 
 const experience = [
   {
@@ -316,7 +319,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Skills Section */}
+      {/* Animated Skills Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -329,43 +332,18 @@ export default function AboutPage() {
               Technical Skills
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300">
-              Comprehensive expertise across multiple technology domains
+              Comprehensive expertise across multiple technology domains with proficiency levels
             </p>
           </motion.div>
 
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-          >
-            {skills.map((skill, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                whileHover={{ y: -5, scale: 1.02 }}
-                className="bg-white dark:bg-dark-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300"
-              >
-                <div className="flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg mb-4 mx-auto">
-                  <skill.icon className="h-6 w-6 text-primary-600 dark:text-primary-400" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 text-center">
-                  {skill.category}
-                </h3>
-                <div className="flex flex-wrap gap-2 justify-center">
-                  {skill.items.map((item) => (
-                    <span
-                      key={item}
-                      className="px-3 py-1 bg-gray-100 dark:bg-dark-700 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-full"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+          <AnimatedSkills />
+        </div>
+      </section>
+
+      {/* Career Timeline Section */}
+      <section className="py-20 bg-gray-50 dark:bg-dark-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <CareerTimeline />
         </div>
       </section>
 
@@ -465,7 +443,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Animated Testimonials Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -482,38 +460,7 @@ export default function AboutPage() {
             </p>
           </motion.div>
 
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
-          >
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="bg-white dark:bg-dark-800 rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300"
-              >
-                <div className="flex items-center mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <blockquote className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                  "{testimonial.quote}"
-                </blockquote>
-                <div>
-                  <p className="font-semibold text-gray-900 dark:text-white">
-                    {testimonial.author}
-                  </p>
-                  <p className="text-primary-600 dark:text-primary-400 text-sm">
-                    {testimonial.company}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+          <TestimonialsCarousel />
         </div>
       </section>
     </div>

@@ -2,8 +2,9 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowRight, Download, Github, Linkedin, Mail, Code, Database, Cloud, Brain } from 'lucide-react'
+import { ArrowRight, Download, Github, Linkedin, Mail, Code, Database, Cloud, Brain, Users, Award, Clock, Star } from 'lucide-react'
 import Image from 'next/image'
+import AnimatedCounter from '@/components/AnimatedCounter'
 
 const skills = [
   { name: 'AI/ML', icon: Brain, description: 'NLP, Computer Vision, RAG, Agentic Workflows' },
@@ -184,6 +185,58 @@ export default function HomePage() {
             />
           </motion.div>
         </motion.div>
+      </section>
+
+      {/* Statistics Section */}
+      <section className="py-20 bg-primary-600 dark:bg-primary-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold text-white mb-4">
+              Impact & Achievements
+            </h2>
+            <p className="text-xl text-primary-100 max-w-2xl mx-auto">
+              Quantifying the value I bring to projects and teams
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8"
+          >
+            {[
+              { icon: Users, label: 'Projects Delivered', value: 15, suffix: '+' },
+              { icon: Award, label: 'Years Experience', value: 2, suffix: '+' },
+              { icon: Clock, label: 'Uptime Achieved', value: 99, suffix: '.9%' },
+              { icon: Star, label: 'Client Satisfaction', value: 100, suffix: '%' }
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="text-center"
+              >
+                <div className="flex justify-center mb-4">
+                  <div className="p-4 bg-white/10 rounded-full">
+                    <stat.icon className="h-8 w-8 text-white" />
+                  </div>
+                </div>
+                <div className="text-4xl font-bold text-white mb-2">
+                  <AnimatedCounter end={stat.value} suffix={stat.suffix} />
+                </div>
+                <p className="text-primary-100 text-sm font-medium">
+                  {stat.label}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </section>
 
       {/* Skills Section */}
