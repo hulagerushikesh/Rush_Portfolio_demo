@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Download, Mail, Phone, MapPin, Linkedin, Github, Calendar, Briefcase, GraduationCap, Award, Code, Database, Cloud, Brain } from 'lucide-react'
+import { useState, useEffect } from 'react'
 
 const personalInfo = {
   name: 'Rushikesh Hulage',
@@ -19,7 +20,9 @@ const experience = [
     company: 'Telstra',
     location: 'Pune, India',
     period: 'July 2023 – Present',
-    description: 'Developed and maintained robust backend services for authentication and authorization using Java, Spring Boot, and AWS (EC2, IAM, API Gateway), ensuring secure and scalable access for internal applications.',
+    description: [
+      'Developed and maintained robust backend services for authentication and authorization using Java, Spring Boot, and AWS (EC2, IAM, API Gateway), ensuring secure and scalable access for internal applications.'
+    ],
     achievements: [
       'Led the critical migration from AWS WAF Classic to WAFv2 for all internal Telstra applications, significantly enhancing security posture and threat detection capabilities',
       'Architected the WAFv2 integration with AWS services including CloudFront, S3, and CloudWatch, and configured Nginx reverse proxies to establish a comprehensive security monitoring and response system'
@@ -46,7 +49,9 @@ const projects = [
   {
     title: 'Enterprise Generative AI Platform',
     year: '2025',
-    description: 'Architected and led the end-to-end development of a scalable enterprise search platform using Retrieval-Augmented Generation (RAG) with LLMs on AWS SageMaker, significantly improving information retrieval accuracy.',
+    description: [
+      'Architected and led the end-to-end development of a scalable enterprise search platform using Retrieval-Augmented Generation (RAG) with LLMs on AWS SageMaker, significantly improving information retrieval accuracy.'
+    ],
     achievements: [
       'Engineered robust MLOps pipelines using Kubeflow and MLflow for automated CI/CD, model versioning, and real-time performance monitoring, drastically reducing deployment cycles'
     ]
@@ -54,7 +59,9 @@ const projects = [
   {
     title: 'AI-Powered Personalization Engine',
     year: '2024',
-    description: 'Designed and deployed a high-throughput deep learning recommendation system on GCP Vertex AI, serving millions of users with low latency and driving a significant uplift in user engagement.',
+    description: [
+      'Designed and deployed a high-throughput deep learning recommendation system on GCP Vertex AI, serving millions of users with low latency and driving a significant uplift in user engagement.'
+    ],
     achievements: [
       'Drove model optimization through techniques like quantization and pruning, and established a rigorous A/B testing and explainability (SHAP) framework to validate business impact and ensure model transparency'
     ]
@@ -145,12 +152,26 @@ const itemVariants = {
 }
 
 export default function ResumePage() {
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  useEffect(() => {
+    setIsLoaded(true)
+  }, [])
+
   const handleDownload = () => {
     // In a real implementation, this would download the actual PDF
     const link = document.createElement('a')
     link.href = '/resume.pdf' // You would need to add this file to the public folder
     link.download = 'Rushikesh_Hulage_Resume.pdf'
     link.click()
+  }
+
+  if (!isLoaded) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-600"></div>
+      </div>
+    )
   }
 
   return (
@@ -247,12 +268,14 @@ export default function ResumePage() {
                     <p className="text-primary-600 dark:text-primary-400 font-medium mb-3">
                       {exp.company} • {exp.location}
                     </p>
-                    <p className="text-gray-600 dark:text-gray-300 mb-3 leading-relaxed">
-                      {exp.description}
-                    </p>
-                    <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300">
+                    <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300 mb-3 ml-4">
+                      {exp.description.map((desc, idx) => (
+                        <li key={idx} className="list-item">{desc}</li>
+                      ))}
+                    </ul>
+                    <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300 ml-4">
                       {exp.achievements.map((achievement, idx) => (
-                        <li key={idx}>{achievement}</li>
+                        <li key={idx} className="list-item">{achievement}</li>
                       ))}
                     </ul>
                   </div>
@@ -300,12 +323,14 @@ export default function ResumePage() {
                         {project.year}
                       </div>
                     </div>
-                    <p className="text-gray-600 dark:text-gray-300 mb-3 leading-relaxed">
-                      {project.description}
-                    </p>
-                    <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300">
+                    <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300 mb-3 ml-4">
+                      {project.description.map((desc, idx) => (
+                        <li key={idx} className="list-item">{desc}</li>
+                      ))}
+                    </ul>
+                    <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300 ml-4">
                       {project.achievements.map((achievement, idx) => (
-                        <li key={idx}>{achievement}</li>
+                        <li key={idx} className="list-item">{achievement}</li>
                       ))}
                     </ul>
                   </div>

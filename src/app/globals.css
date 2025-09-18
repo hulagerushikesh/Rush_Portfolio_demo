@@ -106,3 +106,26 @@ a {
   background: rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+/* Ensure bullet points are always visible */
+.list-item {
+  display: list-item !important;
+  list-style-type: disc !important;
+  list-style-position: inside !important;
+}
+
+.list-item::marker {
+  color: #6b7280 !important; /* gray-500 */
+  font-size: 1em !important;
+}
+
+.dark .list-item::marker {
+  color: #9ca3af !important; /* gray-400 */
+}
+
+/* Additional fallback for bullet points */
+ul.list-disc li {
+  display: list-item !important;
+  list-style-type: disc !important;
+  list-style-position: inside !important;
+}
