@@ -16,7 +16,7 @@ const featuredProject = {
   title: 'Enterprise Generative AI Platform',
   description: 'Architected and led the end-to-end development of a scalable enterprise search platform using Retrieval-Augmented Generation (RAG) with LLMs on AWS SageMaker.',
   technologies: ['Python', 'AWS SageMaker', 'RAG', 'LLMs', 'MLOps'],
-  image: '/api/placeholder/600/400',
+  image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop&crop=center',
   github: '#',
   live: '#',
 }
@@ -303,6 +303,8 @@ export default function HomePage() {
                   className="object-cover"
                   unoptimized
                 />
+                {/* Optional: Add a subtle overlay for better text readability if needed */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
               </div>
             </div>
           </motion.div>

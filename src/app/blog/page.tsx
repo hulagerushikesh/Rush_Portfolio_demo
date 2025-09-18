@@ -17,7 +17,7 @@ const blogPosts = [
     readTime: '12 min read',
     category: 'AI/ML',
     tags: ['RAG', 'AWS', 'SageMaker', 'Enterprise AI'],
-    image: '/api/placeholder/600/400',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop&crop=center',
     slug: 'building-scalable-rag-systems-aws-sagemaker'
   },
   {
@@ -30,7 +30,7 @@ const blogPosts = [
     readTime: '8 min read',
     category: 'MLOps',
     tags: ['MLOps', 'Kubeflow', 'MLflow', 'CI/CD'],
-    image: '/api/placeholder/600/400',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop&crop=center',
     slug: 'mlops-best-practices-development-production'
   },
   {
@@ -43,7 +43,7 @@ const blogPosts = [
     readTime: '10 min read',
     category: 'Cloud Security',
     tags: ['AWS', 'WAF', 'Migration', 'Security'],
-    image: '/api/placeholder/600/400',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop&crop=center',
     slug: 'aws-wafv2-migration-lessons-learned'
   },
   {
@@ -56,7 +56,7 @@ const blogPosts = [
     readTime: '15 min read',
     category: 'AI/ML',
     tags: ['Deep Learning', 'Optimization', 'Quantization', 'Pruning'],
-    image: '/api/placeholder/600/400',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop&crop=center',
     slug: 'deep-learning-model-optimization-techniques'
   },
   {
@@ -69,7 +69,7 @@ const blogPosts = [
     readTime: '11 min read',
     category: 'Backend',
     tags: ['Spring Boot', 'Microservices', 'AWS', 'Architecture'],
-    image: '/api/placeholder/600/400',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop&crop=center',
     slug: 'building-microservices-spring-boot-aws'
   },
   {
@@ -82,7 +82,7 @@ const blogPosts = [
     readTime: '9 min read',
     category: 'AI/ML',
     tags: ['A/B Testing', 'ML Models', 'Statistics', 'Experimentation'],
-    image: '/api/placeholder/600/400',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop&crop=center',
     slug: 'ab-testing-framework-ml-models'
   }
 ]

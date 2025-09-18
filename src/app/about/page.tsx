@@ -156,7 +156,7 @@ export default function AboutPage() {
             <div className="space-y-6">
               <div className="relative w-80 h-80 mx-auto">
                 <Image
-                  src="/api/placeholder/400/400"
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
                   alt="Rushikesh Hulage"
                   fill
                   className="rounded-full object-cover shadow-2xl"
