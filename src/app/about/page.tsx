@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { Award, GraduationCap, Briefcase, Users, Code, Database, Cloud, Brain, Star } from 'lucide-react'
 import TestimonialsCarousel from '@/components/TestimonialsCarousel'
 import AnimatedSkills from '@/components/AnimatedSkills'
-import CareerTimeline from '@/components/CareerTimeline'
 
 const experience = [
   {
@@ -340,12 +339,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Career Timeline Section */}
-      <section className="py-20 bg-gray-50 dark:bg-dark-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <CareerTimeline />
-        </div>
-      </section>
 
       {/* Achievements & Certifications */}
       <section className="py-20 bg-gray-50 dark:bg-dark-800">

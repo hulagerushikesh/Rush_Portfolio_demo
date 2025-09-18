@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { ArrowRight, Download, Github, Linkedin, Mail, Code, Database, Cloud, Brain, Users, Award, Clock, Star } from 'lucide-react'
 import Image from 'next/image'
 import AnimatedCounter from '@/components/AnimatedCounter'
+import CareerTimeline from '@/components/CareerTimeline'
 
 const skills = [
   { name: 'AI/ML', icon: Brain, description: 'NLP, Computer Vision, RAG, Agentic Workflows' },
@@ -236,6 +237,13 @@ export default function HomePage() {
               </motion.div>
             ))}
           </motion.div>
+        </div>
+      </section>
+
+      {/* Career Journey Section */}
+      <section className="py-20 bg-gray-50 dark:bg-dark-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <CareerTimeline />
         </div>
       </section>
 

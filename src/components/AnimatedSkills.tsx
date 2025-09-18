@@ -129,7 +129,7 @@ export default function AnimatedSkills() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <div ref={ref} className="space-y-12">
+    <div ref={ref} className="grid grid-cols-1 lg:grid-cols-2 gap-8">
       {skills.map((category, categoryIndex) => (
         <motion.div
           key={category.category}

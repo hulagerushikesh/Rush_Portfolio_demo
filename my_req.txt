@@ -130,3 +130,13 @@ Best Practices for Stable Building
 	•	Use error boundaries and fallback UIs for critical components.
 	•	Keep feature logic simple and incrementally test features—avoid merging unrelated major changes at once.
 	•	Document unresolved errors, and steps tried, as TODOs or in readme files for future context.
+
+
+
+
+
+    well, awsome, you are making great progress. Now this is good website.
+But I want more features as this is for someone who will visit my website, but what if I want to make some changes to my porfolio, might needs to update exsting things or adding new stuff. So I need a Admin side as well
+1) Maybe I wants to update my projects or add new one, there should be video demo I will attach to that project as we have view demo. Think more in user persepctive as well
+2) I want to change my personal info, about, contant, resume, or even contanct. 
+3) I wants to add my blogs in future, this should be dynamic, as I will add screenshots, images, video's, etc.

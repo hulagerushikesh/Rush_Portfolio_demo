@@ -6,6 +6,16 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar, Clock, User, ArrowRight, Tag } from 'lucide-react'
 
+// Helper function to format dates consistently
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString)
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  })
+}
+
 const blogPosts = [
   {
     id: 1,
@@ -201,7 +211,7 @@ export default function BlogPage() {
                   </span>
                   <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm">
                     <Calendar className="h-4 w-4 mr-1" />
-                    {new Date(blogPosts[0].date).toLocaleDateString()}
+                    {formatDate(blogPosts[0].date)}
                   </div>
                   <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm">
                     <Clock className="h-4 w-4 mr-1" />
@@ -286,7 +296,7 @@ export default function BlogPage() {
                   <div className="flex items-center space-x-4 mb-3 text-sm text-gray-500 dark:text-gray-400">
                     <div className="flex items-center">
                       <Calendar className="h-4 w-4 mr-1" />
-                      {new Date(post.date).toLocaleDateString()}
+                      {formatDate(post.date)}
                     </div>
                     <div className="flex items-center">
                       <Clock className="h-4 w-4 mr-1" />
