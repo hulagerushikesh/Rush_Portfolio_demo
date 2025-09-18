@@ -1,0 +1,43 @@
+Rushikesh Hulage
+Pune, Maharashtra | hulagerushikesh@gmail.com | +91-8975173649 | Linkedin | github
+Experience
+Software Engineer – Platform Engineering, Telstra, Pune, India July 2023 – Present
+• Developed and maintained robust backend services for authentication and authorization using Java, Spring
+Boot, and AWS (EC2, IAM, API Gateway), ensuring secure and scalable access for internal applications.
+• Led the critical migration from AWS WAF Classic to WAFv2 for all internal Telstra applications, significantly
+enhancing security posture and threat detection capabilities.
+• Architected the WAFv2 integration with AWS services including CloudFront, S3, and CloudWatch, and
+configured Nginx reverse proxies to establish a comprehensive security monitoring and response system.
+Education
+Veermata Jijabai Technological Institute, Mumbai, B.Tech in Information
+Technology
+Aug 2019 – May 2023
+Residential Junior College, Ahmednagar, HSC (Maharashtra State Board) Jun 2017 – May 2019
+Projects
+Enterprise Generative AI Platform 2025
+• Architected and led the end-to-end development of a scalable enterprise search platform using
+Retrieval-Augmented Generation (RAG) with LLMs on AWS SageMaker, significantly improving information
+retrieval accuracy.
+• Engineered robust MLOps pipelines using Kubeflow and MLflow for automated CI/CD, model versioning, and
+real-time performance monitoring, drastically reducing deployment cycles.
+AI-Powered Personalization Engine 2024
+• Designed and deployed a high-throughput deep learning recommendation system on GCP Vertex AI, serving
+millions of users with low latency and driving a significant uplift in user engagement.
+• Drove model optimization through techniques like quantization and pruning, and established a rigorous A/B
+testing and explainability (SHAP) framework to validate business impact and ensure model transparency.
+Skills
+Languages: Python, C++, Java, SQL, Bash
+Core AI/ML: Natural Language Processing (NLP), Computer Vision (CV), Vision-Language Models (VLM),
+Retrieval-Augmented Generation (RAG), Agentic Workflows
+Frameworks & Libraries: PyTorch, TensorFlow, Hugging Face Transformers, LangChain, OpenCV, Scikit-learn,
+Vector Databases (FAISS, Pinecone)
+Data & MLOps: Spark, Airflow, Kafka
+MLOps & Cloud: AWS (SageMaker, WAF, EC2), GCP (Vertex AI), Kubeflow, MLflow, CI/CD, Git
+Soft Skills: Leadership, Communication, Analytical Thinking, Mentoring
+Achievements
+• Top 10 Rank – Google APAC Challenge 2025
+• Participant – Agentic AI Hackathon, Bangalore 2025
+• Open-source contributor – Hugging Face Transformers
+Certifications
+• Machine Learning by Stanford University (Coursera)
+• Deep Learning Specialization (deeplearning.ai / Coursera)
