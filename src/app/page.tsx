@@ -197,10 +197,10 @@ export default function HomePage() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold text-white mb-4">
-              Impact & Achievements
+              Professional Excellence
             </h2>
             <p className="text-xl text-primary-100 max-w-2xl mx-auto">
-              Quantifying the value I bring to projects and teams
+              Demonstrating consistent performance and technical expertise
             </p>
           </motion.div>
 
@@ -212,10 +212,10 @@ export default function HomePage() {
             className="grid grid-cols-2 md:grid-cols-4 gap-8"
           >
             {[
-              { icon: Users, label: 'Projects Delivered', value: 15, suffix: '+' },
-              { icon: Award, label: 'Years Experience', value: 2, suffix: '+' },
-              { icon: Clock, label: 'Uptime Achieved', value: 99, suffix: '.9%' },
-              { icon: Star, label: 'Client Satisfaction', value: 100, suffix: '%' }
+              { icon: Users, label: 'Enterprise Projects', value: 8, suffix: '+' },
+              { icon: Award, label: 'Years at Telstra', value: 2, suffix: '+' },
+              { icon: Clock, label: 'System Uptime', value: 99, suffix: '.9%' },
+              { icon: Star, label: 'Team Collaboration', value: 100, suffix: '%' }
             ].map((stat, index) => (
               <motion.div
                 key={index}
