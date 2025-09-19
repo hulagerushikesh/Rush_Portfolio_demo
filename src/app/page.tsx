@@ -94,7 +94,7 @@ export default function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                Hi, I'm{' '}
+                Hi, I&apos;m{' '}
                 <span className="gradient-text">Rushikesh</span>
               </motion.h1>
               <motion.p 
@@ -398,12 +398,12 @@ export default function HomePage() {
             className="space-y-8"
           >
             <h2 className="text-4xl font-bold text-white">
-              Let's Build Something Amazing Together
+              Let&apos;s Build Something Amazing Together
             </h2>
             <p className="text-xl text-primary-100 max-w-2xl mx-auto">
-              I'm always interested in new opportunities and exciting projects. 
+              I&apos;m always interested in new opportunities and exciting projects. 
               Whether you need AI/ML solutions, backend development, or cloud architecture, 
-              let's discuss how we can work together.
+              let&apos;s discuss how we can work together.
             </p>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link

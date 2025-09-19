@@ -169,16 +169,16 @@ export default function AboutPage() {
             <div className="space-y-6">
               <div>
                 <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-                  Hi, I'm Rushikesh Hulage
+                  Hi, I&apos;m Rushikesh Hulage
                 </h2>
                 <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-                  I'm a Software Engineer at Telstra, specializing in AI/ML, backend development, and cloud architecture. 
+                  I&apos;m a Software Engineer at Telstra, specializing in AI/ML, backend development, and cloud architecture. 
                   With a strong foundation in computer science and hands-on experience in enterprise-scale projects, 
-                  I'm passionate about building innovative solutions that solve real-world problems.
+                  I&apos;m passionate about building innovative solutions that solve real-world problems.
                 </p>
                 <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                   My journey in technology started with a curiosity about how things work, which led me to pursue 
-                  Information Technology at VJTI Mumbai. Today, I'm focused on pushing the boundaries of AI/ML 
+                  Information Technology at VJTI Mumbai. Today, I&apos;m focused on pushing the boundaries of AI/ML 
                   applications in enterprise environments while maintaining a commitment to clean, scalable code.
                 </p>
               </div>

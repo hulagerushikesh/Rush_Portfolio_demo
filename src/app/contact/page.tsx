@@ -118,9 +118,9 @@ export default function ContactPage() {
               Get In <span className="gradient-text">Touch</span>
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              I'm always interested in new opportunities and exciting projects. 
+              I&apos;m always interested in new opportunities and exciting projects. 
               Whether you need AI/ML solutions, backend development, or cloud architecture, 
-              let's discuss how we can work together.
+              let&apos;s discuss how we can work together.
             </p>
           </motion.div>
         </div>
@@ -140,10 +140,10 @@ export default function ContactPage() {
             <motion.div variants={itemVariants} className="space-y-8">
               <div>
                 <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-                  Let's Connect
+                  Let&apos;s Connect
                 </h2>
                 <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-                  I'm available for freelance projects, consulting opportunities, and full-time positions. 
+                  I&apos;m available for freelance projects, consulting opportunities, and full-time positions. 
                   Feel free to reach out through any of the channels below.
                 </p>
               </div>
@@ -303,7 +303,7 @@ export default function ContactPage() {
                       className="p-4 bg-green-100 dark:bg-green-900 border border-green-300 dark:border-green-700 rounded-lg"
                     >
                       <p className="text-green-800 dark:text-green-200 text-sm">
-                        Thank you! Your message has been sent successfully. I'll get back to you soon.
+                        Thank you! Your message has been sent successfully. I&apos;ll get back to you soon.
                       </p>
                     </motion.div>
                   )}

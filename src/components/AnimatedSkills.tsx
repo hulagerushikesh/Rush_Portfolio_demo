@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Code, Database, Cloud, Brain, Git, Server } from 'lucide-react'
+import { Code, Database, Cloud, Brain, GitBranch, Server } from 'lucide-react'
 
 const skills = [
   {
@@ -62,7 +62,7 @@ const skills = [
   },
   {
     category: 'Version Control & Collaboration',
-    iconName: 'Git',
+    iconName: 'GitBranch',
     skills: [
       { name: 'Git', level: 95, color: 'bg-orange-600' },
       { name: 'GitHub', level: 92, color: 'bg-gray-800' },
@@ -79,7 +79,7 @@ const iconMap = {
   Cloud,
   Database,
   Server,
-  Git
+  GitBranch
 }
 
 interface SkillBarProps {

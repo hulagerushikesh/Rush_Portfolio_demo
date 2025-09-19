@@ -106,7 +106,7 @@ export default function TestimonialsCarousel() {
                 transition={{ delay: 0.3 }}
                 className="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed mb-8 italic"
               >
-                "{testimonials[currentIndex].content}"
+                &ldquo;{testimonials[currentIndex].content}&rdquo;
               </motion.blockquote>
 
               {/* Rating */}
