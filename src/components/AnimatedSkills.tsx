@@ -46,11 +46,11 @@ const skills = [
     iconName: 'Code',
     description: 'Multi-language expertise',
     technologies: [
-      'Python (Expert)',
-      'Java (Advanced)',
-      'JavaScript/TypeScript (Advanced)',
-      'C++ (Intermediate)',
-      'SQL (Advanced)'
+      'Python',
+      'Java',
+      'JavaScript/TypeScript',
+      'C++',
+      'SQL '
     ]
   }
 ]

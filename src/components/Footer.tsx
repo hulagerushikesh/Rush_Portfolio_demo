@@ -7,12 +7,12 @@ import { motion } from 'framer-motion'
 const socialLinks = [
   {
     name: 'GitHub',
-    href: 'https://github.com/rushikeshhulage',
+    href: 'https://github.com/hulagerushikesh',
     icon: Github,
   },
   {
     name: 'LinkedIn',
-    href: 'https://linkedin.com/in/rushikeshhulage',
+    href: 'https://www.linkedin.com/in/rushikesh-hulage-46018522b',
     icon: Linkedin,
   },
   {

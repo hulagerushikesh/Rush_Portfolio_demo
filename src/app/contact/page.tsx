@@ -31,13 +31,13 @@ const contactInfo = [
 const socialLinks = [
   {
     name: 'GitHub',
-    href: 'https://github.com/rushikeshhulage',
+    href: 'https://github.com/hulagerushikesh',
     icon: Github,
     description: 'Check out my code and projects'
   },
   {
     name: 'LinkedIn',
-    href: 'https://linkedin.com/in/rushikeshhulage',
+    href: 'https://www.linkedin.com/in/rushikesh-hulage-46018522b',
     icon: Linkedin,
     description: 'Connect with me professionally'
   },

@@ -146,8 +146,8 @@ export default function HomePage() {
               className="flex justify-center space-x-6 pt-8"
             >
               {[
-                { icon: Github, href: 'https://github.com/rushikeshhulage', label: 'GitHub' },
-                { icon: Linkedin, href: 'https://linkedin.com/in/rushikeshhulage', label: 'LinkedIn' },
+                { icon: Github, href: 'https://github.com/hulagerushikesh', label: 'GitHub' },
+                { icon: Linkedin, href: 'https://www.linkedin.com/in/rushikesh-hulage-46018522b', label: 'LinkedIn' },
                 { icon: Mail, href: 'mailto:hulagerushikesh@gmail.com', label: 'Email' },
               ].map((social) => (
                 <motion.a

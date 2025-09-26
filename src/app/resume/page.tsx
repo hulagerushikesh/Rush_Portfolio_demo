@@ -10,8 +10,8 @@ const personalInfo = {
   location: 'Pune, Maharashtra',
   email: 'hulagerushikesh@gmail.com',
   phone: '+91-8975173649',
-  linkedin: 'https://linkedin.com/in/rushikeshhulage',
-  github: 'https://github.com/rushikeshhulage'
+  linkedin: 'https://www.linkedin.com/in/rushikesh-hulage-46018522b',
+  github: 'https://github.com/hulagerushikesh'
 }
 
 const experience = [
