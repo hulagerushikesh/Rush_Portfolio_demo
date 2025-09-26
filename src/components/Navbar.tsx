@@ -62,9 +62,41 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="text-2xl font-bold gradient-text"
+              whileHover="hover"
+              whileTap="tap"
+              variants={{
+                hover: { 
+                  scale: 1.1,
+                  rotateY: 10,
+                  rotateX: 5,
+                  transition: { 
+                    type: "spring", 
+                    stiffness: 400, 
+                    damping: 10,
+                    duration: 0.3 
+                  }
+                },
+                tap: { 
+                  scale: 0.95,
+                  transition: { duration: 0.1 }
+                }
+              }}
+              className="relative text-2xl font-bold gradient-text"
             >
+              <motion.div
+                className="absolute inset-0 rounded-lg bg-primary-50 dark:bg-primary-900/20 opacity-0"
+                variants={{
+                  hover: { 
+                    opacity: 0.3,
+                    scale: 1.2,
+                    transition: { duration: 0.2 }
+                  }
+                }}
+                style={{ 
+                  transformOrigin: "center",
+                  zIndex: -1
+                }}
+              />
               RH
             </motion.div>
           </Link>
@@ -81,34 +113,94 @@ export default function Navbar() {
                   duration: 0.5, 
                   ease: "easeOut" 
                 }}
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="relative"
               >
-                <Link
-                  href={item.href}
-                  className={`relative px-3 py-2 text-sm font-medium transition-colors duration-300 ${
-                    pathname === item.href
-                      ? 'text-primary-600 dark:text-primary-400'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400'
-                  }`}
+                <motion.div
+                  whileHover="hover"
+                  whileTap="tap"
+                  variants={{
+                    hover: { 
+                      scale: 1.1,
+                      rotateY: 5,
+                      rotateX: 5,
+                      transition: { 
+                        type: "spring", 
+                        stiffness: 400, 
+                        damping: 10,
+                        duration: 0.3 
+                      }
+                    },
+                    tap: { 
+                      scale: 0.95,
+                      transition: { duration: 0.1 }
+                    }
+                  }}
+                  className="relative"
                 >
-                  {item.name}
-                  
-                  {/* Active page underline with Framer Motion */}
-                  {pathname === item.href && (
+                  <Link
+                    href={item.href}
+                    className={`relative px-3 py-2 text-sm font-medium transition-colors duration-300 block ${
+                      pathname === item.href
+                        ? 'text-primary-600 dark:text-primary-400'
+                        : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400'
+                    }`}
+                  >
+                    {item.name}
+                    
+                    {/* Magnetic hover effect background */}
                     <motion.div
-                      layoutId="activeTab"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-600 dark:bg-primary-400"
-                      initial={false}
-                      transition={{ 
-                        type: 'spring', 
-                        stiffness: 300, 
-                        damping: 30,
-                        duration: 0.4
+                      className="absolute inset-0 rounded-lg bg-primary-50 dark:bg-primary-900/20 opacity-0"
+                      variants={{
+                        hover: { 
+                          opacity: 1,
+                          scale: 1.1,
+                          transition: { duration: 0.2 }
+                        }
+                      }}
+                      style={{ 
+                        transformOrigin: "center",
+                        zIndex: -1
                       }}
                     />
-                  )}
-                </Link>
+                    
+                    {/* Active page underline with morphing effect */}
+                    {pathname === item.href && (
+                      <motion.div
+                        layoutId="activeTab"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-600 dark:bg-primary-400 rounded-full"
+                        initial={false}
+                        transition={{ 
+                          type: 'spring', 
+                          stiffness: 300, 
+                          damping: 30,
+                          duration: 0.4
+                        }}
+                      />
+                    )}
+                    
+                    {/* Hover underline with magnetic effect */}
+                    {pathname !== item.href && (
+                      <motion.div
+                        className="absolute bottom-0 left-1/2 h-0.5 bg-primary-600 dark:bg-primary-400 rounded-full"
+                        variants={{
+                          hover: {
+                            width: "80%",
+                            x: "-40%",
+                            opacity: 1,
+                            transition: { 
+                              type: "spring", 
+                              stiffness: 400, 
+                              damping: 25,
+                              duration: 0.3 
+                            }
+                          }
+                        }}
+                        initial={{ width: 0, x: "-50%", opacity: 0 }}
+                        style={{ transformOrigin: "center" }}
+                      />
+                    )}
+                  </Link>
+                </motion.div>
               </motion.div>
             ))}
           </div>
@@ -182,19 +274,52 @@ export default function Navbar() {
                     duration: 0.5, 
                     ease: "easeOut" 
                   }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover="hover"
+                  whileTap="tap"
+                  variants={{
+                    hover: { 
+                      scale: 1.05,
+                      rotateY: 3,
+                      transition: { 
+                        type: "spring", 
+                        stiffness: 400, 
+                        damping: 15,
+                        duration: 0.3 
+                      }
+                    },
+                    tap: { 
+                      scale: 0.95,
+                      transition: { duration: 0.1 }
+                    }
+                  }}
+                  className="relative"
                 >
                   <Link
                     href={item.href}
                     onClick={() => setIsOpen(false)}
-                    className={`block px-3 py-2 text-base font-medium rounded-md transition-colors duration-300 ${
+                    className={`block px-3 py-2 text-base font-medium rounded-md transition-colors duration-300 relative ${
                       pathname === item.href
                         ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20'
                         : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-dark-800'
                     }`}
                   >
                     {item.name}
+                    
+                    {/* Magnetic hover effect for mobile */}
+                    <motion.div
+                      className="absolute inset-0 rounded-md bg-primary-100 dark:bg-primary-800/30 opacity-0"
+                      variants={{
+                        hover: { 
+                          opacity: 1,
+                          scale: 1.05,
+                          transition: { duration: 0.2 }
+                        }
+                      }}
+                      style={{ 
+                        transformOrigin: "center",
+                        zIndex: -1
+                      }}
+                    />
                   </Link>
                 </motion.div>
               ))}
