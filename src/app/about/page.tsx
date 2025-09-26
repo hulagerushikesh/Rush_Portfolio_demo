@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { Award, GraduationCap, Briefcase, Users, Code, Database, Cloud, Brain, Star } from 'lucide-react'
-import TestimonialsCarousel from '@/components/TestimonialsCarousel'
 import AnimatedSkills from '@/components/AnimatedSkills'
 
 const experience = [
@@ -95,18 +94,6 @@ const skills = [
   }
 ]
 
-const testimonials = [
-  {
-    quote: "Rushikesh's expertise in AI/ML and cloud architecture has been instrumental in our platform's success. His ability to design scalable solutions is exceptional.",
-    author: "Senior Engineering Manager",
-    company: "Telstra"
-  },
-  {
-    quote: "Working with Rushikesh on the enterprise AI platform was a great experience. His deep understanding of MLOps and RAG systems is impressive.",
-    author: "Data Science Lead",
-    company: "Previous Project"
-  }
-]
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -158,7 +145,7 @@ export default function AboutPage() {
             <div className="space-y-6">
               <div className="relative w-80 h-80 mx-auto">
                 <Image
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
+                  src="/images/Generated Image September 26, 2025 - 8_08PM.png"
                   alt="Rushikesh Hulage"
                   fill
                   className="rounded-full object-cover shadow-2xl"
@@ -436,26 +423,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Animated Testimonials Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              What People Say
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">
-              Feedback from colleagues and collaborators
-            </p>
-          </motion.div>
-
-          <TestimonialsCarousel />
-        </div>
-      </section>
     </div>
   )
 }

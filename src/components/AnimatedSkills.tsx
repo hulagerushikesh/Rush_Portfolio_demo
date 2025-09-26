@@ -6,69 +6,51 @@ import { Code, Database, Cloud, Brain, GitBranch, Server } from 'lucide-react'
 
 const skills = [
   {
-    category: 'Programming Languages',
-    iconName: 'Code',
-    skills: [
-      { name: 'Python', level: 95, color: 'bg-blue-500' },
-      { name: 'Java', level: 90, color: 'bg-orange-500' },
-      { name: 'JavaScript/TypeScript', level: 85, color: 'bg-yellow-500' },
-      { name: 'C++', level: 80, color: 'bg-purple-500' },
-      { name: 'SQL', level: 88, color: 'bg-green-500' }
+    category: 'Backend Development',
+    iconName: 'Database',
+    description: 'Enterprise-grade backend solutions',
+    technologies: [
+      'Java & Spring Boot',
+      'Python & FastAPI',
+      'Microservices Architecture',
+      'RESTful API Design',
+      'Database Design & Optimization'
     ]
   },
   {
     category: 'AI/ML & Data Science',
     iconName: 'Brain',
-    skills: [
-      { name: 'Machine Learning', level: 92, color: 'bg-pink-500' },
-      { name: 'Deep Learning', level: 88, color: 'bg-indigo-500' },
-      { name: 'NLP', level: 85, color: 'bg-teal-500' },
-      { name: 'Computer Vision', level: 82, color: 'bg-cyan-500' },
-      { name: 'RAG Systems', level: 90, color: 'bg-emerald-500' }
+    description: 'Advanced machine learning solutions',
+    technologies: [
+      'Machine Learning & Deep Learning',
+      'NLP & Computer Vision',
+      'RAG Systems & LLMs',
+      'PyTorch & TensorFlow',
+      'MLOps & Model Deployment'
     ]
   },
   {
     category: 'Cloud & DevOps',
     iconName: 'Cloud',
-    skills: [
-      { name: 'AWS', level: 90, color: 'bg-orange-600' },
-      { name: 'GCP', level: 85, color: 'bg-blue-600' },
-      { name: 'Docker', level: 88, color: 'bg-blue-500' },
-      { name: 'Kubernetes', level: 82, color: 'bg-blue-700' },
-      { name: 'CI/CD', level: 87, color: 'bg-green-600' }
+    description: 'Scalable cloud infrastructure',
+    technologies: [
+      'AWS (EC2, S3, Lambda, SageMaker)',
+      'GCP (Vertex AI, BigQuery)',
+      'Docker & Kubernetes',
+      'CI/CD Pipelines',
+      'Infrastructure as Code'
     ]
   },
   {
-    category: 'Backend & Databases',
-    iconName: 'Database',
-    skills: [
-      { name: 'Spring Boot', level: 88, color: 'bg-green-500' },
-      { name: 'Microservices', level: 85, color: 'bg-purple-600' },
-      { name: 'PostgreSQL', level: 90, color: 'bg-blue-500' },
-      { name: 'MongoDB', level: 82, color: 'bg-green-600' },
-      { name: 'Redis', level: 80, color: 'bg-red-500' }
-    ]
-  },
-  {
-    category: 'MLOps & Tools',
-    iconName: 'Server',
-    skills: [
-      { name: 'MLflow', level: 88, color: 'bg-purple-500' },
-      { name: 'Kubeflow', level: 85, color: 'bg-blue-600' },
-      { name: 'Airflow', level: 82, color: 'bg-cyan-500' },
-      { name: 'Spark', level: 80, color: 'bg-orange-500' },
-      { name: 'Kafka', level: 78, color: 'bg-gray-600' }
-    ]
-  },
-  {
-    category: 'Version Control & Collaboration',
-    iconName: 'GitBranch',
-    skills: [
-      { name: 'Git', level: 95, color: 'bg-orange-600' },
-      { name: 'GitHub', level: 92, color: 'bg-gray-800' },
-      { name: 'GitLab', level: 85, color: 'bg-orange-500' },
-      { name: 'Agile/Scrum', level: 88, color: 'bg-blue-500' },
-      { name: 'Code Review', level: 90, color: 'bg-green-500' }
+    category: 'Programming Languages',
+    iconName: 'Code',
+    description: 'Multi-language expertise',
+    technologies: [
+      'Python (Expert)',
+      'Java (Advanced)',
+      'JavaScript/TypeScript (Advanced)',
+      'C++ (Intermediate)',
+      'SQL (Advanced)'
     ]
   }
 ]
@@ -82,45 +64,28 @@ const iconMap = {
   GitBranch
 }
 
-interface SkillBarProps {
-  name: string
-  level: number
-  color: string
+interface TechnologyItemProps {
+  technology: string
   delay: number
 }
 
-function SkillBar({ name, level, color, delay }: SkillBarProps) {
+function TechnologyItem({ technology, delay }: TechnologyItemProps) {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const isInView = useInView(ref, { once: true, margin: "-50px" })
 
   return (
-    <div ref={ref} className="mb-4">
-      <div className="flex justify-between items-center mb-2">
-        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-          {name}
-        </span>
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isInView ? 1 : 0 }}
-          transition={{ delay: delay + 0.5 }}
-          className="text-sm font-bold text-primary-600 dark:text-primary-400"
-        >
-          {level}%
-        </motion.span>
-      </div>
-      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
-        <motion.div
-          className={`h-full ${color} rounded-full`}
-          initial={{ width: 0 }}
-          animate={{ width: isInView ? `${level}%` : 0 }}
-          transition={{ 
-            duration: 1.5, 
-            delay: delay,
-            ease: "easeOut"
-          }}
-        />
-      </div>
-    </div>
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: isInView ? 1 : 0, x: isInView ? 0 : -20 }}
+      transition={{ delay, duration: 0.5 }}
+      className="flex items-center space-x-3 py-2"
+    >
+      <div className="w-2 h-2 bg-primary-500 rounded-full flex-shrink-0"></div>
+      <span className="text-gray-700 dark:text-gray-300 font-medium">
+        {technology}
+      </span>
+    </motion.div>
   )
 }
 
@@ -150,14 +115,15 @@ export default function AnimatedSkills() {
             </h3>
           </div>
           
-          <div className="space-y-4">
-            {category.skills.map((skill, skillIndex) => (
-              <SkillBar
-                key={skill.name}
-                name={skill.name}
-                level={skill.level}
-                color={skill.color}
-                delay={categoryIndex * 0.2 + skillIndex * 0.1}
+          <div className="space-y-1">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+              {category.description}
+            </p>
+            {category.technologies.map((technology, techIndex) => (
+              <TechnologyItem
+                key={technology}
+                technology={technology}
+                delay={categoryIndex * 0.2 + techIndex * 0.1}
               />
             ))}
           </div>
