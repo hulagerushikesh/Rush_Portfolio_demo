@@ -71,46 +71,93 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
+            {navItems.map((item, index) => (
+              <motion.div
                 key={item.name}
-                href={item.href}
-                className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-                  pathname === item.href
-                    ? 'text-primary-600 dark:text-primary-400'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400'
-                }`}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  delay: index * 0.1, 
+                  duration: 0.5, 
+                  ease: "easeOut" 
+                }}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
               >
-                {item.name}
-                {pathname === item.href && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-600 dark:bg-primary-400"
-                    initial={false}
-                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                  />
-                )}
-              </Link>
+                <Link
+                  href={item.href}
+                  className={`relative px-3 py-2 text-sm font-medium transition-colors duration-300 ${
+                    pathname === item.href
+                      ? 'text-primary-600 dark:text-primary-400'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400'
+                  }`}
+                >
+                  {item.name}
+                  
+                  {/* Active page underline with Framer Motion */}
+                  {pathname === item.href && (
+                    <motion.div
+                      layoutId="activeTab"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-600 dark:bg-primary-400"
+                      initial={false}
+                      transition={{ 
+                        type: 'spring', 
+                        stiffness: 300, 
+                        damping: 30,
+                        duration: 0.4
+                      }}
+                    />
+                  )}
+                </Link>
+              </motion.div>
             ))}
           </div>
 
           {/* Theme Toggle & Mobile Menu Button */}
           <div className="flex items-center space-x-4">
-            <button
+            <motion.button
               onClick={toggleTheme}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-dark-800 hover:bg-gray-200 dark:hover:bg-dark-700 transition-colors duration-200"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="p-2 rounded-lg bg-gray-100 dark:bg-dark-800 hover:bg-gray-200 dark:hover:bg-dark-700 transition-colors duration-300"
               aria-label="Toggle theme"
             >
-              {getThemeIcon()}
-            </button>
+              <motion.div
+                key={theme}
+                initial={{ scale: 0.8, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 300, 
+                  damping: 20,
+                  duration: 0.5 
+                }}
+              >
+                {getThemeIcon()}
+              </motion.div>
+            </motion.button>
 
-            <button
+            <motion.button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-dark-800 hover:bg-gray-200 dark:hover:bg-dark-700 transition-colors duration-200"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-dark-800 hover:bg-gray-200 dark:hover:bg-dark-700 transition-colors duration-300"
               aria-label="Toggle menu"
             >
-              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
+              <motion.div
+                key={isOpen ? 'close' : 'menu'}
+                initial={{ rotate: -90, scale: 0.8 }}
+                animate={{ rotate: 0, scale: 1 }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 300, 
+                  damping: 20,
+                  duration: 0.4 
+                }}
+              >
+                {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </motion.div>
+            </motion.button>
           </div>
         </div>
       </div>
@@ -125,19 +172,31 @@ export default function Navbar() {
             className="md:hidden bg-white dark:bg-dark-900 border-t border-gray-200 dark:border-dark-700"
           >
             <div className="px-4 py-2 space-y-1">
-              {navItems.map((item) => (
-                <Link
+              {navItems.map((item, index) => (
+                <motion.div
                   key={item.name}
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className={`block px-3 py-2 text-base font-medium rounded-md transition-colors duration-200 ${
-                    pathname === item.href
-                      ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-dark-800'
-                  }`}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ 
+                    delay: index * 0.1, 
+                    duration: 0.5, 
+                    ease: "easeOut" 
+                  }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  {item.name}
-                </Link>
+                  <Link
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`block px-3 py-2 text-base font-medium rounded-md transition-colors duration-300 ${
+                      pathname === item.href
+                        ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20'
+                        : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-dark-800'
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </motion.div>

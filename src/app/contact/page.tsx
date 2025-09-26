@@ -326,64 +326,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-20 bg-gray-50 dark:bg-dark-800">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">
-              Quick answers to common questions
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            {[
-              {
-                question: "What types of projects do you work on?",
-                answer: "I specialize in AI/ML solutions, backend development, and cloud architecture. This includes enterprise AI platforms, recommendation systems, microservices, and cloud migrations."
-              },
-              {
-                question: "Are you available for freelance work?",
-                answer: "Yes, I'm available for freelance projects and consulting opportunities. I prefer projects that align with my expertise in AI/ML and backend development."
-              },
-              {
-                question: "What's your typical response time?",
-                answer: "I typically respond to emails within 24 hours. For urgent matters, feel free to call or WhatsApp me directly."
-              },
-              {
-                question: "Do you work remotely?",
-                answer: "Yes, I'm comfortable working remotely and have experience collaborating with distributed teams. I'm also open to hybrid arrangements."
-              }
-            ].map((faq, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="bg-white dark:bg-dark-700 rounded-xl shadow-lg p-6"
-              >
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-                  {faq.question}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {faq.answer}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
     </div>
   )
 }
