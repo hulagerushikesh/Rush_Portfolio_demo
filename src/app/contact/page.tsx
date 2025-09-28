@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, MessageCircle } from 'lucide-react'
+// Contact form with validation
 
 const contactInfo = [
   {
@@ -88,16 +89,65 @@ export default function ContactPage() {
     }))
   }
 
+  const validateForm = () => {
+    const { name, email, subject, message } = formData
+    
+    if (!name.trim()) {
+      alert('Please enter your name')
+      return false
+    }
+    
+    if (!email.trim()) {
+      alert('Please enter your email')
+      return false
+    }
+    
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert('Please enter a valid email address')
+      return false
+    }
+    
+    if (!subject.trim()) {
+      alert('Please enter a subject')
+      return false
+    }
+    
+    if (!message.trim()) {
+      alert('Please enter a message')
+      return false
+    }
+    
+    if (message.trim().length < 10) {
+      alert('Please enter a message with at least 10 characters')
+      return false
+    }
+    
+    return true
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsSubmitting(true)
     
-    // Simulate form submission
+    // Client-side validation
+    if (!validateForm()) {
+      return
+    }
+    
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+    
     try {
+      // Simulate form submission (replace with actual email service later)
       await new Promise(resolve => setTimeout(resolve, 2000))
+      
+      // For now, just show success message
+      // TODO: Implement actual email sending service
+      console.log('Form submitted:', formData)
+      
       setSubmitStatus('success')
       setFormData({ name: '', email: '', subject: '', message: '' })
     } catch (error) {
+      console.error('Form submission error:', error)
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
