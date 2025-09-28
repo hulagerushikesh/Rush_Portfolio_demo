@@ -19,14 +19,24 @@ const navItems = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [scrollY, setScrollY] = useState(0)
   const pathname = usePathname()
   const { theme, setTheme } = useTheme()
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
+      const currentScrollY = window.scrollY
+      setScrollY(currentScrollY)
+      setIsScrolled(currentScrollY > 10)
     }
-    window.addEventListener('scroll', handleScroll)
+    
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    
+    if (!prefersReducedMotion) {
+      window.addEventListener('scroll', handleScroll, { passive: true })
+    }
+    
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -47,6 +57,19 @@ export default function Navbar() {
     }
   }
 
+  // Calculate scroll-responsive spacing
+  const getScrollProgress = () => {
+    const maxScroll = 200 // Maximum scroll distance for full effect
+    return Math.min(scrollY / maxScroll, 1)
+  }
+
+  const scrollProgress = getScrollProgress()
+  
+  // Calculate spacing for different sections
+  const logoToNavGap = 48 - (scrollProgress * 32) // 48px to 16px (logo to nav)
+  const navItemGap = 24 - (scrollProgress * 12) // 24px to 12px (between nav items)
+  const navToThemeGap = 48 - (scrollProgress * 32) // 48px to 16px (nav to theme)
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -58,9 +81,9 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center">
             <motion.div
               whileHover="hover"
               whileTap="tap"
@@ -102,7 +125,15 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <motion.div 
+            className="hidden md:flex items-center"
+            style={{
+              gap: `${navItemGap}px`,
+              marginLeft: `${logoToNavGap}px`,
+              marginRight: `${navToThemeGap}px`
+            }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+          >
             {navItems.map((item, index) => (
               <motion.div
                 key={item.name}
@@ -178,35 +209,14 @@ export default function Navbar() {
                       />
                     )}
                     
-                    {/* Hover underline with magnetic effect */}
-                    {pathname !== item.href && (
-                      <motion.div
-                        className="absolute bottom-0 left-1/2 h-0.5 bg-primary-600 dark:bg-primary-400 rounded-full"
-                        variants={{
-                          hover: {
-                            width: "80%",
-                            x: "-40%",
-                            opacity: 1,
-                            transition: { 
-                              type: "spring", 
-                              stiffness: 400, 
-                              damping: 25,
-                              duration: 0.3 
-                            }
-                          }
-                        }}
-                        initial={{ width: 0, x: "-50%", opacity: 0 }}
-                        style={{ transformOrigin: "center" }}
-                      />
-                    )}
                   </Link>
                 </motion.div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Theme Toggle & Mobile Menu Button */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center">
             <motion.button
               onClick={toggleTheme}
               whileHover={{ scale: 1.05 }}
