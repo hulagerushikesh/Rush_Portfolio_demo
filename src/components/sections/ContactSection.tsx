@@ -10,8 +10,8 @@ import GradientText from '@/components/ui/GradientText';
 const contactInfo = [
   { icon: '✉️', label: 'Email', value: 'hulagerushikesh@gmail.com', href: 'mailto:hulagerushikesh@gmail.com' },
   { icon: '📍', label: 'Location', value: 'Pune, Maharashtra, India', href: null },
-  { icon: '💼', label: 'LinkedIn', value: 'linkedin.com/in/rushikeshhulage', href: 'https://linkedin.com/in/rushikeshhulage' },
-  { icon: '⌨️', label: 'GitHub', value: 'github.com/rushikeshhulage', href: 'https://github.com/rushikeshhulage' },
+  { icon: '💼', label: 'LinkedIn', value: 'linkedin.com/in/rushikesh-hulage', href: 'https://www.linkedin.com/in/rushikesh-hulage-46018522b/' },
+  { icon: '⌨️', label: 'GitHub', value: 'github.com/hulagerushikesh', href: 'https://github.com/hulagerushikesh' },
 ];
 
 export default function ContactSection() {

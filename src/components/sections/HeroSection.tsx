@@ -177,8 +177,8 @@ export default function HeroSection() {
           }}
         >
           {[
-            { label: 'GitHub', href: 'https://github.com/rushikeshhulage', icon: '⌨️' },
-            { label: 'LinkedIn', href: 'https://linkedin.com/in/rushikeshhulage', icon: '💼' },
+            { label: 'GitHub', href: 'https://github.com/hulagerushikesh', icon: '⌨️' },
+            { label: 'LinkedIn', href: 'https://www.linkedin.com/in/rushikesh-hulage-46018522b/', icon: '💼' },
             { label: 'Email', href: 'mailto:hulagerushikesh@gmail.com', icon: '✉️' },
           ].map((social) => (
             <a
