@@ -1,0 +1,50 @@
+[
+  {
+    "id": "enterprise-ai-platform",
+    "title": "Enterprise Generative AI Platform",
+    "description": "Architected and led the end-to-end development of a scalable enterprise search platform using Retrieval-Augmented Generation (RAG) with LLMs on AWS SageMaker, significantly improving information retrieval accuracy.",
+    "image": "/images/enterprise-ai.jpg",
+    "technologies": ["RAG", "LLMs", "AWS SageMaker", "Kubeflow", "MLflow", "CI/CD"],
+    "status": "coming-soon",
+    "featured": true,
+    "githubUrl": null,
+    "liveUrl": null,
+    "date": "2025"
+  },
+  {
+    "id": "ai-personalization-engine",
+    "title": "AI-Powered Personalization Engine",
+    "description": "Designed and deployed a high-throughput deep learning recommendation system on GCP Vertex AI, serving millions of users with low latency and driving a significant uplift in user engagement.",
+    "image": "/images/ai-personalization.jpg",
+    "technologies": ["Deep Learning", "GCP Vertex AI", "Recommendation Systems", "A/B Testing", "SHAP"],
+    "status": "coming-soon",
+    "featured": false,
+    "githubUrl": null,
+    "liveUrl": null,
+    "date": "2024"
+  },
+  {
+    "id": "waf-migration-platform",
+    "title": "AWS WAF Security Migration Platform",
+    "description": "Led the critical migration from AWS WAF Classic to WAFv2 for all internal applications, architecting integration with CloudFront, S3, and CloudWatch to establish a comprehensive security monitoring system.",
+    "image": "/images/waf-migration.jpg",
+    "technologies": ["AWS WAFv2", "CloudFront", "CloudWatch", "Nginx", "Java", "Spring Boot"],
+    "status": "coming-soon",
+    "featured": true,
+    "githubUrl": null,
+    "liveUrl": null,
+    "date": "2024"
+  },
+  {
+    "id": "nlp-sentiment-pipeline",
+    "title": "NLP Sentiment Analysis Pipeline",
+    "description": "Built an end-to-end NLP pipeline for real-time sentiment analysis using Hugging Face Transformers, processing large-scale text data with custom fine-tuned models for domain-specific accuracy.",
+    "image": "/images/nlp-pipeline.jpg",
+    "technologies": ["Hugging Face", "PyTorch", "NLP", "Docker", "FastAPI", "Redis"],
+    "status": "coming-soon",
+    "featured": false,
+    "githubUrl": null,
+    "liveUrl": null,
+    "date": "2023"
+  }
+]

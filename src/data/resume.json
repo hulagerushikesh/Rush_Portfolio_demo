@@ -1,0 +1,70 @@
+{
+  "personalInfo": {
+    "name": "Rushikesh Hulage",
+    "title": "Software Engineer - Platform Engineering",
+    "email": "hulagerushikesh@gmail.com",
+    "phone": "+91-8975173649",
+    "location": "Pune, Maharashtra",
+    "linkedin": "https://linkedin.com/in/rushikeshhulage",
+    "github": "https://github.com/rushikeshhulage"
+  },
+  "summary": "Software Engineer specializing in AI/ML, Backend Development, and Cloud Technologies. Currently working at Telstra on platform engineering with expertise in Java, Spring Boot, AWS, and machine learning frameworks.",
+  "experience": [
+    {
+      "title": "Software Engineer – Platform Engineering",
+      "company": "Telstra",
+      "location": "Pune, India",
+      "startDate": "July 2023",
+      "endDate": "Present",
+      "description": [
+        "Developed and maintained robust backend services for authentication and authorization using Java, Spring Boot, and AWS (EC2, IAM, API Gateway), ensuring secure and scalable access for internal applications.",
+        "Led the critical migration from AWS WAF Classic to WAFv2 for all internal Telstra applications, significantly enhancing security posture and threat detection capabilities.",
+        "Architected the WAFv2 integration with AWS services including CloudFront, S3, and CloudWatch, and configured Nginx reverse proxies to establish a comprehensive security monitoring and response system."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "B.Tech in Information Technology",
+      "institution": "Veermata Jijabai Technological Institute, Mumbai",
+      "startDate": "Aug 2019",
+      "endDate": "May 2023"
+    },
+    {
+      "degree": "HSC (Maharashtra State Board)",
+      "institution": "Residential Junior College, Ahmednagar",
+      "startDate": "Jun 2017",
+      "endDate": "May 2019"
+    }
+  ],
+  "skills": {
+    "languages": ["Python", "C++", "Java", "SQL", "Bash"],
+    "aiMl": ["NLP", "Computer Vision", "RAG", "VLM", "Agentic Workflows"],
+    "frameworks": ["PyTorch", "TensorFlow", "Hugging Face", "LangChain", "OpenCV", "Scikit-learn"],
+    "cloud": ["AWS SageMaker", "GCP Vertex AI", "Kubeflow", "MLflow", "CI/CD", "Git"]
+  },
+  "achievements": [
+    {
+      "title": "Top 10 Rank",
+      "description": "Google APAC Challenge 2025"
+    },
+    {
+      "title": "Participant",
+      "description": "Agentic AI Hackathon, Bangalore 2025"
+    },
+    {
+      "title": "Open-source contributor",
+      "description": "Hugging Face Transformers"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Machine Learning",
+      "issuer": "Stanford University (Coursera)"
+    },
+    {
+      "name": "Deep Learning Specialization",
+      "issuer": "deeplearning.ai / Coursera"
+    }
+  ]
+}
