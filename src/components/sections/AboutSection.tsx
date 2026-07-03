@@ -1,23 +1,26 @@
-'use client';
-
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import GradientText from '@/components/ui/GradientText';
+import { getResumeData, getYearsOfExperience, getTechnologyCount } from '@/utils/data';
+import { getPublishedProjects } from '@/lib/content';
 
-const stats = [
-  { value: '2+', label: 'Years Experience' },
-  { value: '10+', label: 'Projects Built' },
-  { value: '15+', label: 'Technologies' },
-  { value: '3+', label: 'Certifications' },
-];
+export default async function AboutSection() {
+  const resume = getResumeData();
+  const projects = await getPublishedProjects();
 
-export default function AboutSection() {
+  const stats = [
+    { value: `${getYearsOfExperience(resume.experience[0].startDate)}+`, label: 'Years Experience' },
+    { value: `${projects.length}`, label: 'Projects Shipped' },
+    { value: `${getTechnologyCount(resume.skills)}+`, label: 'Technologies' },
+    { value: `${resume.certifications.length}`, label: 'Certifications' },
+  ];
+
   return (
     <section id="about">
       <div className="section-container">
         <AnimatedSection>
           <span className="section-label">About Me</span>
           <h2 className="section-title">
-            Passionate about building <GradientText>intelligent systems</GradientText>
+            Building <GradientText>intelligent systems</GradientText> at scale
           </h2>
         </AnimatedSection>
 
@@ -40,11 +43,10 @@ export default function AboutSection() {
                   marginBottom: '20px',
                 }}
               >
-                I&apos;m a Software Engineer at <strong style={{ color: 'var(--text-primary)' }}>Telstra</strong>, specializing in
-                platform engineering with a deep passion for AI/ML. I architect and
-                build scalable backend services, lead critical cloud infrastructure
-                migrations, and develop intelligent systems that solve real-world
-                problems.
+                I&apos;m a Software Engineer at <strong style={{ color: 'var(--text-primary)' }}>Telstra</strong>, where I own
+                platform engineering initiatives spanning secure backend services, cloud
+                infrastructure, and applied AI/ML — taking systems from design through
+                production, not just the parts that are interesting.
               </p>
               <p
                 style={{
@@ -54,11 +56,12 @@ export default function AboutSection() {
                   marginBottom: '20px',
                 }}
               >
-                My expertise spans across the full stack of modern engineering — from
-                designing secure authentication systems with <strong style={{ color: 'var(--text-primary)' }}>Java &amp; Spring Boot</strong> to
-                building enterprise AI platforms with <strong style={{ color: 'var(--text-primary)' }}>RAG, LLMs, and cloud-native ML
-                pipelines</strong>. I thrive at the intersection of software engineering and
-                artificial intelligence.
+                That&apos;s meant designing secure authentication systems with{' '}
+                <strong style={{ color: 'var(--text-primary)' }}>Java &amp; Spring Boot</strong>, leading a
+                critical security migration end-to-end, and building enterprise AI
+                platforms on <strong style={{ color: 'var(--text-primary)' }}>RAG, LLMs, and cloud-native ML
+                pipelines</strong> — the kind of ownership that comes with a few years of
+                shipping systems other teams depend on.
               </p>
               <p
                 style={{
@@ -67,9 +70,9 @@ export default function AboutSection() {
                   lineHeight: 1.8,
                 }}
               >
-                A proud B.Tech graduate from <strong style={{ color: 'var(--text-primary)' }}>VJTI Mumbai</strong>, I&apos;m also an active
-                open-source contributor to <strong style={{ color: 'var(--text-primary)' }}>Hugging Face Transformers</strong> and a
-                competitive programmer with a Top 10 rank at Google APAC Challenge 2025.
+                A B.Tech graduate from <strong style={{ color: 'var(--text-primary)' }}>VJTI Mumbai</strong>, I stay
+                sharp outside work too — contributing to <strong style={{ color: 'var(--text-primary)' }}>Hugging Face
+                Transformers</strong> and placing Top 10 at the Google APAC Challenge 2025.
               </p>
             </div>
           </AnimatedSection>

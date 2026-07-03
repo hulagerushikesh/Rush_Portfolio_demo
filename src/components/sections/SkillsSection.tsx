@@ -21,17 +21,17 @@ const skillLabels: Record<string, string> = {
 
 // Alternate between the two brand accents rather than a distinct hue per card.
 const skillColors: Record<string, string> = {
-  languages: 'rgba(99, 102, 241, 0.12)',
-  aiMl: 'rgba(139, 92, 246, 0.12)',
-  frameworks: 'rgba(99, 102, 241, 0.12)',
-  cloud: 'rgba(139, 92, 246, 0.12)',
+  languages: 'rgba(217, 119, 6, 0.12)',
+  aiMl: 'rgba(245, 158, 11, 0.12)',
+  frameworks: 'rgba(217, 119, 6, 0.12)',
+  cloud: 'rgba(245, 158, 11, 0.12)',
 };
 
 const skillBorderColors: Record<string, string> = {
-  languages: 'rgba(99, 102, 241, 0.25)',
-  aiMl: 'rgba(139, 92, 246, 0.25)',
-  frameworks: 'rgba(99, 102, 241, 0.25)',
-  cloud: 'rgba(139, 92, 246, 0.25)',
+  languages: 'rgba(217, 119, 6, 0.25)',
+  aiMl: 'rgba(245, 158, 11, 0.25)',
+  frameworks: 'rgba(217, 119, 6, 0.25)',
+  cloud: 'rgba(245, 158, 11, 0.25)',
 };
 
 const skillIconColors: Record<string, string> = {
@@ -54,7 +54,7 @@ export default function SkillsSection() {
             Technologies I <GradientText>work with</GradientText>
           </h2>
           <p className="section-subtitle">
-            A curated toolkit forged through real-world projects and continuous learning.
+            Tools I rely on daily to design, build, and ship production systems.
           </p>
         </AnimatedSection>
 
@@ -69,7 +69,7 @@ export default function SkillsSection() {
           {skillCategories.map(([key, skills], catIndex) => {
             const Icon = skillIcons[key];
             return (
-            <AnimatedSection key={key} delay={0.1 * catIndex} variant="scaleIn">
+            <AnimatedSection key={key} delay={0.1 * catIndex} variant="blurIn">
               <div
                 className="glass-card"
                 style={{

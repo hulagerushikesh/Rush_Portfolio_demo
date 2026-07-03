@@ -3,7 +3,7 @@
 import { useRef } from 'react';
 import { motion, useInView, type Variants } from 'framer-motion';
 
-type AnimationVariant = 'fadeUp' | 'fadeDown' | 'fadeLeft' | 'fadeRight' | 'scaleIn' | 'fadeIn';
+type AnimationVariant = 'fadeUp' | 'fadeDown' | 'fadeLeft' | 'fadeRight' | 'scaleIn' | 'fadeIn' | 'blurIn';
 
 interface AnimatedSectionProps {
   children: React.ReactNode;
@@ -38,6 +38,10 @@ const variants: Record<AnimationVariant, Variants> = {
   fadeIn: {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
+  },
+  blurIn: {
+    hidden: { opacity: 0, filter: 'blur(8px)', y: 12 },
+    visible: { opacity: 1, filter: 'blur(0px)', y: 0 },
   },
 };
 

@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Mail } from 'lucide-react';
 import ParticleBackground from '@/components/ui/ParticleBackground';
 import GradientText from '@/components/ui/GradientText';
@@ -24,6 +24,14 @@ export default function HeroSection() {
   const [currentRole, setCurrentRole] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+  const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
   useEffect(() => {
     const role = roles[currentRole];
@@ -52,6 +60,7 @@ export default function HeroSection() {
   return (
     <section
       id="home"
+      ref={sectionRef}
       style={{
         position: 'relative',
         minHeight: '100vh',
@@ -63,13 +72,15 @@ export default function HeroSection() {
     >
       <ParticleBackground />
 
-      <div
+      <motion.div
         style={{
           position: 'relative',
           zIndex: 1,
           textAlign: 'center',
           maxWidth: '800px',
           padding: '0 24px',
+          opacity: heroOpacity,
+          y: heroY,
         }}
       >
         {/* Greeting */}
@@ -82,8 +93,8 @@ export default function HeroSection() {
             alignItems: 'center',
             gap: '8px',
             padding: '8px 20px',
-            background: 'rgba(99, 102, 241, 0.1)',
-            border: '1px solid rgba(99, 102, 241, 0.2)',
+            background: 'rgba(217, 119, 6, 0.1)',
+            border: '1px solid rgba(217, 119, 6, 0.2)',
             borderRadius: '9999px',
             marginBottom: '24px',
             fontSize: '0.9rem',
@@ -109,29 +120,68 @@ export default function HeroSection() {
           <GradientText>Rushikesh Hulage</GradientText>
         </motion.h1>
 
-        {/* Typewriter Role */}
+        {/* Typewriter Role — terminal-window chrome */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
           style={{
-            fontSize: 'clamp(1.2rem, 3vw, 1.75rem)',
-            color: 'var(--text-secondary)',
+            display: 'inline-block',
+            textAlign: 'left',
             marginBottom: '24px',
-            minHeight: '2.5rem',
-            fontWeight: 500,
+            minWidth: '300px',
+            borderRadius: 'var(--radius-md)',
+            border: '1px solid var(--border-subtle)',
+            background: 'var(--bg-glass)',
+            overflow: 'hidden',
+            boxShadow: 'var(--shadow-card)',
           }}
         >
-          <span style={{ color: 'var(--text-primary)' }}>{displayText}</span>
-          <span
+          <div
             style={{
-              color: 'var(--accent-primary)',
-              marginLeft: '2px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '8px 14px',
+              borderBottom: '1px solid var(--border-subtle)',
+              background: 'rgba(255, 247, 237, 0.02)',
             }}
-            className="animate-typewriter-cursor"
           >
-            |
-          </span>
+            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#f87171' }} />
+            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#fbbf24' }} />
+            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#34d399' }} />
+            <span
+              style={{
+                marginLeft: '8px',
+                fontSize: '0.7rem',
+                color: 'var(--text-muted)',
+                fontFamily: 'var(--font-geist-mono)',
+              }}
+            >
+              whoami.sh
+            </span>
+          </div>
+          <div
+            style={{
+              padding: '14px 18px',
+              fontFamily: 'var(--font-geist-mono)',
+              fontSize: 'clamp(1rem, 2.8vw, 1.4rem)',
+              minHeight: '2.5rem',
+              fontWeight: 500,
+            }}
+          >
+            <span style={{ color: 'var(--accent-primary)' }}>$</span>{' '}
+            <span style={{ color: 'var(--text-primary)' }}>{displayText}</span>
+            <span
+              style={{
+                color: 'var(--accent-primary)',
+                marginLeft: '2px',
+              }}
+              className="animate-typewriter-cursor"
+            >
+              |
+            </span>
+          </div>
         </motion.div>
 
         {/* Summary */}
@@ -148,8 +198,8 @@ export default function HeroSection() {
             margin: '0 auto 40px',
           }}
         >
-          Specializing in AI/ML, Backend Development & Cloud Technologies.
-          Building intelligent systems at scale.
+          I build and ship production systems — from secure cloud infrastructure
+          to AI pipelines that solve problems other teams rely on.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -210,7 +260,7 @@ export default function HeroSection() {
             </a>
           ))}
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Scroll indicator */}
       <motion.div

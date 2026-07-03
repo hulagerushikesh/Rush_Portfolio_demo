@@ -151,7 +151,8 @@ export default function Navbar() {
               .map((item) => {
                 const isActive = activeSection === item.id;
                 const style: React.CSSProperties = {
-                  background: isActive ? 'rgba(99, 102, 241, 0.15)' : 'transparent',
+                  position: 'relative',
+                  background: 'transparent',
                   border: 'none',
                   cursor: 'pointer',
                   padding: '10px 18px',
@@ -159,24 +160,31 @@ export default function Navbar() {
                   color: isActive ? 'var(--accent-tertiary)' : 'var(--text-secondary)',
                   fontSize: '0.95rem',
                   fontWeight: 500,
-                  transition: 'all 0.2s',
+                  transition: 'color 0.2s',
                   fontFamily: 'inherit',
                   whiteSpace: 'nowrap',
                   letterSpacing: '0.01em',
                   textDecoration: 'none',
                 };
                 const onMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
-                  if (!isActive) {
-                    e.currentTarget.style.color = 'var(--text-primary)';
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
-                  }
+                  if (!isActive) e.currentTarget.style.color = 'var(--text-primary)';
                 };
                 const onMouseLeave = (e: React.MouseEvent<HTMLElement>) => {
-                  if (!isActive) {
-                    e.currentTarget.style.color = 'var(--text-secondary)';
-                    e.currentTarget.style.background = 'transparent';
-                  }
+                  if (!isActive) e.currentTarget.style.color = 'var(--text-secondary)';
                 };
+                const pill = isActive && (
+                  <motion.div
+                    layoutId="nav-active-pill"
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      borderRadius: 'var(--radius-full)',
+                      background: 'rgba(217, 119, 6, 0.15)',
+                      zIndex: -1,
+                    }}
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                );
 
                 if (item.href.startsWith('#')) {
                   return (
@@ -187,6 +195,7 @@ export default function Navbar() {
                       onMouseEnter={onMouseEnter}
                       onMouseLeave={onMouseLeave}
                     >
+                      {pill}
                       {item.name}
                     </button>
                   );
@@ -201,6 +210,7 @@ export default function Navbar() {
                     onMouseEnter={onMouseEnter}
                     onMouseLeave={onMouseLeave}
                   >
+                    {pill}
                     {item.name}
                   </Link>
                 );

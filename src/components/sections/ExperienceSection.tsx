@@ -62,7 +62,7 @@ export default function ExperienceSection() {
                     borderRadius: '50%',
                     background: 'var(--accent-primary)',
                     border: '3px solid var(--bg-primary)',
-                    boxShadow: '0 0 12px rgba(99, 102, 241, 0.4)',
+                    boxShadow: '0 0 12px rgba(217, 119, 6, 0.4)',
                   }}
                 />
 

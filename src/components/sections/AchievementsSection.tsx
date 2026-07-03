@@ -46,7 +46,7 @@ export default function AchievementsSection() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: 'var(--accent-award)',
+                    color: 'var(--accent-secondary)',
                     margin: '0 auto 16px',
                   }}
                 >
@@ -103,12 +103,12 @@ export default function AchievementsSection() {
                       width: '44px',
                       height: '44px',
                       borderRadius: '12px',
-                      background: 'rgba(139, 92, 246, 0.1)',
-                      border: '1px solid rgba(139, 92, 246, 0.2)',
+                      background: 'rgba(217, 119, 6, 0.1)',
+                      border: '1px solid rgba(217, 119, 6, 0.2)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: 'var(--accent-secondary)',
+                      color: 'var(--accent-primary)',
                       flexShrink: 0,
                     }}
                   >

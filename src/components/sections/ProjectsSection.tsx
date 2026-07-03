@@ -17,7 +17,7 @@ export default async function ProjectsSection() {
             What I&apos;ve <GradientText>built</GradientText>
           </h2>
           <p className="section-subtitle">
-            A showcase of projects spanning AI/ML, cloud platforms, and full-stack engineering.
+            Selected work across AI/ML, cloud infrastructure, and full-stack engineering.
           </p>
         </AnimatedSection>
 
@@ -57,7 +57,7 @@ export default async function ProjectsSection() {
                       fontWeight: 600,
                       textTransform: 'uppercase',
                       letterSpacing: '0.05em',
-                      color: 'var(--accent-award)',
+                      color: 'var(--accent-secondary)',
                       background: 'rgba(245, 158, 11, 0.1)',
                       border: '1px solid rgba(245, 158, 11, 0.2)',
                       borderRadius: 'var(--radius-full)',
@@ -83,8 +83,8 @@ export default async function ProjectsSection() {
                       textTransform: 'uppercase',
                       letterSpacing: '0.05em',
                       color: 'var(--accent-tertiary)',
-                      background: 'rgba(99, 102, 241, 0.1)',
-                      border: '1px solid rgba(99, 102, 241, 0.2)',
+                      background: 'rgba(217, 119, 6, 0.1)',
+                      border: '1px solid rgba(217, 119, 6, 0.2)',
                       borderRadius: 'var(--radius-full)',
                     }}
                   >
@@ -100,8 +100,8 @@ export default async function ProjectsSection() {
                     height: '56px',
                     borderRadius: '16px',
                     background:
-                      'linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.15))',
-                    border: '1px solid rgba(99,102,241,0.2)',
+                      'linear-gradient(135deg, rgba(217,119,6,0.15), rgba(245,158,11,0.15))',
+                    border: '1px solid rgba(217,119,6,0.2)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
