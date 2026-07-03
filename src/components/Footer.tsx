@@ -1,20 +1,24 @@
 'use client';
 
+import { Mail } from 'lucide-react';
+import { GithubIcon, LinkedinIcon } from '@/components/ui/BrandIcons';
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { label: 'About', href: '#about' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Experience', href: '#experience' },
     { label: 'Projects', href: '#projects' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'Experience', href: '#experience' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'About', href: '#about' },
     { label: 'Contact', href: '#contact' },
   ];
 
   const socialLinks = [
-    { label: 'GitHub', href: 'https://github.com/hulagerushikesh', icon: '⌨️' },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/rushikesh-hulage-46018522b/', icon: '💼' },
-    { label: 'Email', href: 'mailto:hulagerushikesh@gmail.com', icon: '✉️' },
+    { label: 'GitHub', href: 'https://github.com/hulagerushikesh', Icon: GithubIcon },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/rushikesh-hulage-46018522b/', Icon: LinkedinIcon },
+    { label: 'Email', href: 'mailto:hulagerushikesh@gmail.com', Icon: Mail },
   ];
 
   return (
@@ -45,8 +49,9 @@ export default function Footer() {
           <div>
             <div
               style={{
+                fontFamily: 'var(--font-display)',
                 fontSize: '1.5rem',
-                fontWeight: 800,
+                fontWeight: 700,
                 marginBottom: '12px',
               }}
               className="gradient-text"
@@ -120,13 +125,13 @@ export default function Footer() {
               Connect
             </h4>
             <div style={{ display: 'flex', gap: '12px' }}>
-              {socialLinks.map((social) => (
+              {socialLinks.map(({ label, href, Icon }) => (
                 <a
-                  key={social.label}
-                  href={social.href}
-                  target={social.href.startsWith('mailto') ? undefined : '_blank'}
+                  key={label}
+                  href={href}
+                  target={href.startsWith('mailto') ? undefined : '_blank'}
                   rel="noopener noreferrer"
-                  title={social.label}
+                  title={label}
                   style={{
                     width: '40px',
                     height: '40px',
@@ -136,13 +141,13 @@ export default function Footer() {
                     borderRadius: '10px',
                     border: '1px solid var(--border-subtle)',
                     background: 'var(--bg-glass)',
-                    fontSize: '1.1rem',
+                    color: 'var(--text-secondary)',
                     transition: 'all 0.3s',
                     textDecoration: 'none',
                   }}
                   className="glow-hover"
                 >
-                  {social.icon}
+                  <Icon size={18} />
                 </a>
               ))}
             </div>

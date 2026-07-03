@@ -1,14 +1,15 @@
 'use client';
 
+import { Terminal, Brain, Layers, Cloud } from 'lucide-react';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import GradientText from '@/components/ui/GradientText';
 import { getResumeData } from '@/utils/data';
 
-const skillIcons: Record<string, string> = {
-  languages: '💻',
-  aiMl: '🧠',
-  frameworks: '⚙️',
-  cloud: '☁️',
+const skillIcons: Record<string, typeof Terminal> = {
+  languages: Terminal,
+  aiMl: Brain,
+  frameworks: Layers,
+  cloud: Cloud,
 };
 
 const skillLabels: Record<string, string> = {
@@ -18,18 +19,26 @@ const skillLabels: Record<string, string> = {
   cloud: 'Cloud & DevOps',
 };
 
+// Alternate between the two brand accents rather than a distinct hue per card.
 const skillColors: Record<string, string> = {
-  languages: 'rgba(99, 102, 241, 0.15)',
-  aiMl: 'rgba(139, 92, 246, 0.15)',
-  frameworks: 'rgba(34, 211, 238, 0.15)',
-  cloud: 'rgba(16, 185, 129, 0.15)',
+  languages: 'rgba(99, 102, 241, 0.12)',
+  aiMl: 'rgba(139, 92, 246, 0.12)',
+  frameworks: 'rgba(99, 102, 241, 0.12)',
+  cloud: 'rgba(139, 92, 246, 0.12)',
 };
 
 const skillBorderColors: Record<string, string> = {
-  languages: 'rgba(99, 102, 241, 0.3)',
-  aiMl: 'rgba(139, 92, 246, 0.3)',
-  frameworks: 'rgba(34, 211, 238, 0.3)',
-  cloud: 'rgba(16, 185, 129, 0.3)',
+  languages: 'rgba(99, 102, 241, 0.25)',
+  aiMl: 'rgba(139, 92, 246, 0.25)',
+  frameworks: 'rgba(99, 102, 241, 0.25)',
+  cloud: 'rgba(139, 92, 246, 0.25)',
+};
+
+const skillIconColors: Record<string, string> = {
+  languages: 'var(--accent-primary)',
+  aiMl: 'var(--accent-secondary)',
+  frameworks: 'var(--accent-primary)',
+  cloud: 'var(--accent-secondary)',
 };
 
 export default function SkillsSection() {
@@ -37,7 +46,7 @@ export default function SkillsSection() {
   const skillCategories = Object.entries(resume.skills);
 
   return (
-    <section id="skills">
+    <section id="skills" style={{ background: 'var(--bg-secondary)' }}>
       <div className="section-container">
         <AnimatedSection>
           <span className="section-label">Skills</span>
@@ -57,7 +66,9 @@ export default function SkillsSection() {
             marginTop: '48px',
           }}
         >
-          {skillCategories.map(([key, skills], catIndex) => (
+          {skillCategories.map(([key, skills], catIndex) => {
+            const Icon = skillIcons[key];
+            return (
             <AnimatedSection key={key} delay={0.1 * catIndex} variant="scaleIn">
               <div
                 className="glass-card"
@@ -85,10 +96,10 @@ export default function SkillsSection() {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      fontSize: '1.3rem',
+                      color: skillIconColors[key],
                     }}
                   >
-                    {skillIcons[key]}
+                    <Icon size={20} strokeWidth={1.75} />
                   </div>
                   <h3
                     style={{
@@ -117,7 +128,8 @@ export default function SkillsSection() {
                 </div>
               </div>
             </AnimatedSection>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

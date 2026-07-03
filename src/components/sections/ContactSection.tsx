@@ -4,18 +4,22 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { contactFormSchema, type ContactFormData } from '@/lib/validations';
 import { useState } from 'react';
+import { Mail, MapPin, CheckCircle2 } from 'lucide-react';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import GradientText from '@/components/ui/GradientText';
+import { submitContactMessage } from '@/app/actions/messages';
+import { GithubIcon, LinkedinIcon } from '@/components/ui/BrandIcons';
 
 const contactInfo = [
-  { icon: '✉️', label: 'Email', value: 'hulagerushikesh@gmail.com', href: 'mailto:hulagerushikesh@gmail.com' },
-  { icon: '📍', label: 'Location', value: 'Pune, Maharashtra, India', href: null },
-  { icon: '💼', label: 'LinkedIn', value: 'linkedin.com/in/rushikesh-hulage', href: 'https://www.linkedin.com/in/rushikesh-hulage-46018522b/' },
-  { icon: '⌨️', label: 'GitHub', value: 'github.com/hulagerushikesh', href: 'https://github.com/hulagerushikesh' },
+  { Icon: Mail, label: 'Email', value: 'hulagerushikesh@gmail.com', href: 'mailto:hulagerushikesh@gmail.com' },
+  { Icon: MapPin, label: 'Location', value: 'Pune, Maharashtra, India', href: null },
+  { Icon: LinkedinIcon, label: 'LinkedIn', value: 'linkedin.com/in/rushikesh-hulage', href: 'https://www.linkedin.com/in/rushikesh-hulage-46018522b/' },
+  { Icon: GithubIcon, label: 'GitHub', value: 'github.com/hulagerushikesh', href: 'https://github.com/hulagerushikesh' },
 ];
 
 export default function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -27,9 +31,14 @@ export default function ContactSection() {
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    // Simulate form submission
-    console.log('Contact form data:', data);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setSubmitError(null);
+    const result = await submitContactMessage(data);
+
+    if (!result.success) {
+      setSubmitError(result.error);
+      return;
+    }
+
     setSubmitted(true);
     reset();
     setTimeout(() => setSubmitted(false), 5000);
@@ -87,11 +96,11 @@ export default function ContactSection() {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      fontSize: '1.2rem',
+                      color: 'var(--accent-primary)',
                       flexShrink: 0,
                     }}
                   >
-                    {info.icon}
+                    <info.Icon size={20} />
                   </div>
                   <div>
                     <div
@@ -148,13 +157,34 @@ export default function ContactSection() {
                     background: 'rgba(16, 185, 129, 0.1)',
                     border: '1px solid rgba(16, 185, 129, 0.2)',
                     borderRadius: 'var(--radius-md)',
-                    color: '#34d399',
+                    color: 'var(--accent-success)',
+                    fontSize: '0.9rem',
+                    marginBottom: '20px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                  }}
+                >
+                  <CheckCircle2 size={18} strokeWidth={1.75} />
+                  Message sent successfully! I&apos;ll get back to you soon.
+                </div>
+              )}
+
+              {submitError && (
+                <div
+                  style={{
+                    padding: '14px 20px',
+                    background: 'rgba(239, 68, 68, 0.1)',
+                    border: '1px solid rgba(239, 68, 68, 0.2)',
+                    borderRadius: 'var(--radius-md)',
+                    color: '#f87171',
                     fontSize: '0.9rem',
                     marginBottom: '20px',
                     textAlign: 'center',
                   }}
                 >
-                  ✅ Message sent successfully! I&apos;ll get back to you soon.
+                  {submitError}
                 </div>
               )}
 

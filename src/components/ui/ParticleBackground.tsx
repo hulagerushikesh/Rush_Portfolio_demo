@@ -12,69 +12,36 @@ export default function ParticleBackground() {
       }}
       aria-hidden="true"
     >
-      {/* Large gradient orbs */}
+      {/* Two restrained gradient orbs — indigo + violet only */}
       <div
         style={{
           position: 'absolute',
-          top: '10%',
-          left: '15%',
-          width: '400px',
-          height: '400px',
+          top: '12%',
+          left: '18%',
+          width: '380px',
+          height: '380px',
           borderRadius: '50%',
           background:
-            'radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%)',
-          filter: 'blur(60px)',
-          animation: 'floatSlow 8s ease-in-out infinite',
+            'radial-gradient(circle, rgba(99,102,241,0.10) 0%, transparent 70%)',
+          filter: 'blur(70px)',
+          animation: 'floatSlow 14s ease-in-out infinite',
         }}
       />
       <div
         style={{
           position: 'absolute',
-          top: '50%',
-          right: '10%',
-          width: '350px',
-          height: '350px',
+          top: '45%',
+          right: '12%',
+          width: '320px',
+          height: '320px',
           borderRadius: '50%',
           background:
-            'radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 70%)',
-          filter: 'blur(60px)',
-          animation: 'floatSlow 10s ease-in-out infinite',
-          animationDelay: '-3s',
+            'radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%)',
+          filter: 'blur(70px)',
+          animation: 'floatSlow 16s ease-in-out infinite',
+          animationDelay: '-5s',
         }}
       />
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '20%',
-          left: '40%',
-          width: '300px',
-          height: '300px',
-          borderRadius: '50%',
-          background:
-            'radial-gradient(circle, rgba(34,211,238,0.08) 0%, transparent 70%)',
-          filter: 'blur(60px)',
-          animation: 'floatSlow 12s ease-in-out infinite',
-          animationDelay: '-6s',
-        }}
-      />
-
-      {/* Small floating particles */}
-      {[...Array(6)].map((_, i) => (
-        <div
-          key={i}
-          style={{
-            position: 'absolute',
-            width: `${4 + i * 2}px`,
-            height: `${4 + i * 2}px`,
-            borderRadius: '50%',
-            background: `rgba(${99 + i * 10}, ${102 + i * 5}, 241, ${0.3 - i * 0.03})`,
-            top: `${15 + i * 14}%`,
-            left: `${10 + i * 15}%`,
-            animation: `float ${5 + i * 1.5}s ease-in-out infinite`,
-            animationDelay: `${i * -1.2}s`,
-          }}
-        />
-      ))}
 
       {/* Grid overlay */}
       <div

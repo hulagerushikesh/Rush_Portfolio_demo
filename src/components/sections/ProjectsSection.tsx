@@ -1,14 +1,15 @@
-'use client';
-
+import Link from 'next/link';
+import { Star, Clock, Rocket, ExternalLink, ArrowRight } from 'lucide-react';
+import { GithubIcon } from '@/components/ui/BrandIcons';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import GradientText from '@/components/ui/GradientText';
-import { getAllProjects } from '@/utils/data';
+import { getPublishedProjects } from '@/lib/content';
 
-export default function ProjectsSection() {
-  const projects = getAllProjects();
+export default async function ProjectsSection() {
+  const projects = await getPublishedProjects();
 
   return (
-    <section id="projects">
+    <section id="projects" style={{ background: 'var(--bg-secondary)' }}>
       <div className="section-container">
         <AnimatedSection>
           <span className="section-label">Projects</span>
@@ -49,16 +50,20 @@ export default function ProjectsSection() {
                       top: '16px',
                       right: '16px',
                       padding: '4px 12px',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
                       fontSize: '0.7rem',
                       fontWeight: 600,
                       textTransform: 'uppercase',
                       letterSpacing: '0.05em',
-                      color: '#fbbf24',
-                      background: 'rgba(251, 191, 36, 0.1)',
-                      border: '1px solid rgba(251, 191, 36, 0.2)',
+                      color: 'var(--accent-award)',
+                      background: 'rgba(245, 158, 11, 0.1)',
+                      border: '1px solid rgba(245, 158, 11, 0.2)',
                       borderRadius: 'var(--radius-full)',
                     }}
                   >
+                    <Clock size={12} strokeWidth={2} />
                     Coming Soon
                   </div>
                 )}
@@ -70,6 +75,9 @@ export default function ProjectsSection() {
                       top: '16px',
                       left: '16px',
                       padding: '4px 12px',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
                       fontSize: '0.7rem',
                       fontWeight: 600,
                       textTransform: 'uppercase',
@@ -80,7 +88,8 @@ export default function ProjectsSection() {
                       borderRadius: 'var(--radius-full)',
                     }}
                   >
-                    ⭐ Featured
+                    <Star size={12} strokeWidth={2} />
+                    Featured
                   </div>
                 )}
 
@@ -96,12 +105,12 @@ export default function ProjectsSection() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: '1.5rem',
+                    color: 'var(--accent-primary)',
                     marginBottom: '20px',
                     marginTop: project.featured || project.status === 'coming-soon' ? '20px' : '0',
                   }}
                 >
-                  🚀
+                  <Rocket size={24} strokeWidth={1.75} />
                 </div>
 
                 {/* Title */}
@@ -114,7 +123,12 @@ export default function ProjectsSection() {
                     lineHeight: 1.3,
                   }}
                 >
-                  {project.title}
+                  <Link
+                    href={`/projects/${project.slug}`}
+                    style={{ color: 'inherit', textDecoration: 'none' }}
+                  >
+                    {project.title}
+                  </Link>
                 </h3>
 
                 {/* Description */}
@@ -151,34 +165,38 @@ export default function ProjectsSection() {
                   style={{
                     display: 'flex',
                     gap: '12px',
+                    flexWrap: 'wrap',
+                    alignItems: 'center',
                     marginTop: 'auto',
                     paddingTop: '16px',
                     borderTop: '1px solid var(--border-subtle)',
                   }}
                 >
-                  {project.githubUrl && (
+                  {project.github_url && (
                     <a
-                      href={project.githubUrl}
+                      href={project.github_url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-secondary"
                       style={{ padding: '8px 16px', fontSize: '0.85rem' }}
                     >
-                      ⌨️ Code
+                      <GithubIcon size={16} />
+                      Code
                     </a>
                   )}
-                  {project.liveUrl && (
+                  {project.live_url && (
                     <a
-                      href={project.liveUrl}
+                      href={project.live_url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-primary"
                       style={{ padding: '8px 16px', fontSize: '0.85rem' }}
                     >
-                      <span>🔗 Live Demo</span>
+                      <ExternalLink size={16} strokeWidth={1.75} />
+                      <span>Live Demo</span>
                     </a>
                   )}
-                  {!project.githubUrl && !project.liveUrl && (
+                  {!project.github_url && !project.live_url && (
                     <span
                       style={{
                         fontSize: '0.85rem',
@@ -189,10 +207,28 @@ export default function ProjectsSection() {
                       Links coming soon...
                     </span>
                   )}
+                  <Link
+                    href={`/projects/${project.slug}`}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      marginLeft: 'auto',
+                      fontSize: '0.85rem',
+                      color: 'var(--text-secondary)',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Details
+                    <ArrowRight size={14} strokeWidth={1.75} />
+                  </Link>
                 </div>
               </div>
             </AnimatedSection>
           ))}
+          {projects.length === 0 && (
+            <p style={{ color: 'var(--text-muted)' }}>No projects published yet — check back soon.</p>
+          )}
         </div>
       </div>
     </section>

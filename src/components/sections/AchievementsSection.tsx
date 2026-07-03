@@ -1,5 +1,6 @@
 'use client';
 
+import { Trophy, Award } from 'lucide-react';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import GradientText from '@/components/ui/GradientText';
 import { getResumeData } from '@/utils/data';
@@ -40,16 +41,16 @@ export default function AchievementsSection() {
                     width: '52px',
                     height: '52px',
                     borderRadius: '50%',
-                    background: 'rgba(251, 191, 36, 0.1)',
-                    border: '1px solid rgba(251, 191, 36, 0.2)',
+                    background: 'rgba(245, 158, 11, 0.1)',
+                    border: '1px solid rgba(245, 158, 11, 0.2)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: '1.4rem',
+                    color: 'var(--accent-award)',
                     margin: '0 auto 16px',
                   }}
                 >
-                  🏆
+                  <Trophy size={22} strokeWidth={1.75} />
                 </div>
                 <h3
                   style={{
@@ -102,16 +103,16 @@ export default function AchievementsSection() {
                       width: '44px',
                       height: '44px',
                       borderRadius: '12px',
-                      background: 'rgba(34, 211, 238, 0.1)',
-                      border: '1px solid rgba(34, 211, 238, 0.2)',
+                      background: 'rgba(139, 92, 246, 0.1)',
+                      border: '1px solid rgba(139, 92, 246, 0.2)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      fontSize: '1.2rem',
+                      color: 'var(--accent-secondary)',
                       flexShrink: 0,
                     }}
                   >
-                    📜
+                    <Award size={20} strokeWidth={1.75} />
                   </div>
                   <div>
                     <h3

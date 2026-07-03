@@ -1,22 +1,35 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
+
+const MotionLink = motion.create(Link);
 
 const navItems = [
   { id: 'home', name: 'Home', href: '#home' },
-  { id: 'about', name: 'About', href: '#about' },
-  { id: 'skills', name: 'Skills', href: '#skills' },
-  { id: 'experience', name: 'Experience', href: '#experience' },
   { id: 'projects', name: 'Projects', href: '#projects' },
+  { id: 'blog', name: 'Blog', href: '/blog' },
+  { id: 'experience', name: 'Experience', href: '#experience' },
+  { id: 'skills', name: 'Skills', href: '#skills' },
+  { id: 'about', name: 'About', href: '#about' },
   { id: 'achievements', name: 'Achievements', href: '#achievements' },
   { id: 'contact', name: 'Contact', href: '#contact' },
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+
+  useEffect(() => {
+    if (pathname.startsWith('/blog')) {
+      setActiveSection('blog');
+    }
+  }, [pathname]);
 
   // Track scroll position for navbar style
   useEffect(() => {
@@ -27,10 +40,15 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Track active section with Intersection Observer
+  // Track active section with Intersection Observer (re-attach when the
+  // route changes, since section elements only exist on the home page).
   useEffect(() => {
+    if (pathname !== '/') return;
+
     const observers: IntersectionObserver[] = [];
-    const sections = navItems.map((item) => document.getElementById(item.id));
+    const sections = navItems
+      .filter((item) => item.href.startsWith('#'))
+      .map((item) => document.getElementById(item.id));
 
     sections.forEach((section) => {
       if (!section) return;
@@ -47,11 +65,17 @@ export default function Navbar() {
     });
 
     return () => observers.forEach((obs) => obs.disconnect());
-  }, []);
+  }, [pathname]);
 
   const handleNavClick = (href: string) => {
     setIsMenuOpen(false);
     const id = href.replace('#', '');
+
+    if (pathname !== '/') {
+      router.push(`/${href}`);
+      return;
+    }
+
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
@@ -124,46 +148,63 @@ export default function Navbar() {
           >
             {navItems
               .filter((item) => item.id !== 'home')
-              .map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => handleNavClick(item.href)}
-                  style={{
-                    background:
-                      activeSection === item.id
-                        ? 'rgba(99, 102, 241, 0.15)'
-                        : 'transparent',
-                    border: 'none',
-                    cursor: 'pointer',
-                    padding: '10px 18px',
-                    borderRadius: 'var(--radius-full)',
-                    color:
-                      activeSection === item.id
-                        ? 'var(--accent-tertiary)'
-                        : 'var(--text-secondary)',
-                    fontSize: '0.95rem',
-                    fontWeight: 500,
-                    transition: 'all 0.2s',
-                    fontFamily: 'inherit',
-                    whiteSpace: 'nowrap',
-                    letterSpacing: '0.01em',
-                  }}
-                  onMouseEnter={(e) => {
-                    if (activeSection !== item.id) {
-                      e.currentTarget.style.color = 'var(--text-primary)';
-                      e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (activeSection !== item.id) {
-                      e.currentTarget.style.color = 'var(--text-secondary)';
-                      e.currentTarget.style.background = 'transparent';
-                    }
-                  }}
-                >
-                  {item.name}
-                </button>
-              ))}
+              .map((item) => {
+                const isActive = activeSection === item.id;
+                const style: React.CSSProperties = {
+                  background: isActive ? 'rgba(99, 102, 241, 0.15)' : 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: '10px 18px',
+                  borderRadius: 'var(--radius-full)',
+                  color: isActive ? 'var(--accent-tertiary)' : 'var(--text-secondary)',
+                  fontSize: '0.95rem',
+                  fontWeight: 500,
+                  transition: 'all 0.2s',
+                  fontFamily: 'inherit',
+                  whiteSpace: 'nowrap',
+                  letterSpacing: '0.01em',
+                  textDecoration: 'none',
+                };
+                const onMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
+                  if (!isActive) {
+                    e.currentTarget.style.color = 'var(--text-primary)';
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+                  }
+                };
+                const onMouseLeave = (e: React.MouseEvent<HTMLElement>) => {
+                  if (!isActive) {
+                    e.currentTarget.style.color = 'var(--text-secondary)';
+                    e.currentTarget.style.background = 'transparent';
+                  }
+                };
+
+                if (item.href.startsWith('#')) {
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => handleNavClick(item.href)}
+                      style={style}
+                      onMouseEnter={onMouseEnter}
+                      onMouseLeave={onMouseLeave}
+                    >
+                      {item.name}
+                    </button>
+                  );
+                }
+
+                return (
+                  <Link
+                    key={item.id}
+                    href={item.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    style={style}
+                    onMouseEnter={onMouseEnter}
+                    onMouseLeave={onMouseLeave}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
           </div>
 
           {/* Right spacer for desktop — balances the grid */}
@@ -261,31 +302,50 @@ export default function Navbar() {
                 gap: '16px',
               }}
             >
-              {navItems.map((item, i) => (
-                <motion.button
-                  key={item.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + i * 0.05 }}
-                  onClick={() => handleNavClick(item.href)}
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    cursor: 'pointer',
-                    fontSize: '1.5rem',
-                    fontWeight: activeSection === item.id ? 700 : 400,
-                    color:
-                      activeSection === item.id
-                        ? 'var(--accent-primary)'
-                        : 'var(--text-secondary)',
-                    padding: '10px 20px',
-                    transition: 'color 0.2s',
-                    fontFamily: 'inherit',
-                  }}
-                >
-                  {item.name}
-                </motion.button>
-              ))}
+              {navItems.map((item, i) => {
+                const isActive = activeSection === item.id;
+                const style: React.CSSProperties = {
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontSize: '1.5rem',
+                  fontWeight: isActive ? 700 : 400,
+                  color: isActive ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                  padding: '10px 20px',
+                  transition: 'color 0.2s',
+                  fontFamily: 'inherit',
+                  textDecoration: 'none',
+                };
+
+                if (item.href.startsWith('#')) {
+                  return (
+                    <motion.button
+                      key={item.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 + i * 0.05 }}
+                      onClick={() => handleNavClick(item.href)}
+                      style={style}
+                    >
+                      {item.name}
+                    </motion.button>
+                  );
+                }
+
+                return (
+                  <MotionLink
+                    key={item.id}
+                    href={item.href}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 + i * 0.05 }}
+                    onClick={() => setIsMenuOpen(false)}
+                    style={style}
+                  >
+                    {item.name}
+                  </MotionLink>
+                );
+              })}
             </motion.div>
           </motion.div>
         )}

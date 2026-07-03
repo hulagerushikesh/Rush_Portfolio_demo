@@ -1,5 +1,6 @@
 'use client';
 
+import { GraduationCap } from 'lucide-react';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import GradientText from '@/components/ui/GradientText';
 import { getResumeData } from '@/utils/data';
@@ -8,7 +9,7 @@ export default function ExperienceSection() {
   const resume = getResumeData();
 
   return (
-    <section id="experience" style={{ background: 'var(--bg-secondary)' }}>
+    <section id="experience">
       <div className="section-container">
         <AnimatedSection>
           <span className="section-label">Experience</span>
@@ -60,7 +61,7 @@ export default function ExperienceSection() {
                     height: '16px',
                     borderRadius: '50%',
                     background: 'var(--accent-primary)',
-                    border: '3px solid var(--bg-secondary)',
+                    border: '3px solid var(--bg-primary)',
                     boxShadow: '0 0 12px rgba(99, 102, 241, 0.4)',
                   }}
                 />
@@ -172,11 +173,11 @@ export default function ExperienceSection() {
                 <div key={i} className="glass-card" style={{ padding: '28px' }}>
                   <div
                     style={{
-                      fontSize: '1.5rem',
+                      color: 'var(--accent-primary)',
                       marginBottom: '12px',
                     }}
                   >
-                    🎓
+                    <GraduationCap size={24} strokeWidth={1.75} />
                   </div>
                   <h3
                     style={{

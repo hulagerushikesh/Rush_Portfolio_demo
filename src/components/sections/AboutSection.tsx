@@ -12,7 +12,7 @@ const stats = [
 
 export default function AboutSection() {
   return (
-    <section id="about" style={{ background: 'var(--bg-secondary)' }}>
+    <section id="about">
       <div className="section-container">
         <AnimatedSection>
           <span className="section-label">About Me</span>

@@ -16,23 +16,23 @@ interface AnimatedSectionProps {
 
 const variants: Record<AnimationVariant, Variants> = {
   fadeUp: {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
   },
   fadeDown: {
-    hidden: { opacity: 0, y: -40 },
+    hidden: { opacity: 0, y: -20 },
     visible: { opacity: 1, y: 0 },
   },
   fadeLeft: {
-    hidden: { opacity: 0, x: -40 },
+    hidden: { opacity: 0, x: -20 },
     visible: { opacity: 1, x: 0 },
   },
   fadeRight: {
-    hidden: { opacity: 0, x: 40 },
+    hidden: { opacity: 0, x: 20 },
     visible: { opacity: 1, x: 0 },
   },
   scaleIn: {
-    hidden: { opacity: 0, scale: 0.9 },
+    hidden: { opacity: 0, scale: 0.96 },
     visible: { opacity: 1, scale: 1 },
   },
   fadeIn: {
@@ -45,7 +45,7 @@ export default function AnimatedSection({
   children,
   variant = 'fadeUp',
   delay = 0,
-  duration = 0.6,
+  duration = 0.45,
   className = '',
   once = true,
 }: AnimatedSectionProps) {

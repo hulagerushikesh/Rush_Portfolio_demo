@@ -2,8 +2,16 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Mail } from 'lucide-react';
 import ParticleBackground from '@/components/ui/ParticleBackground';
 import GradientText from '@/components/ui/GradientText';
+import { GithubIcon, LinkedinIcon } from '@/components/ui/BrandIcons';
+
+const socialLinks = [
+  { label: 'GitHub', href: 'https://github.com/hulagerushikesh', Icon: GithubIcon },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/rushikesh-hulage-46018522b/', Icon: LinkedinIcon },
+  { label: 'Email', href: 'mailto:hulagerushikesh@gmail.com', Icon: Mail },
+];
 
 const roles = [
   'Software Engineer',
@@ -82,7 +90,7 @@ export default function HeroSection() {
             color: 'var(--accent-tertiary)',
           }}
         >
-          <span>👋</span> Hey there, I&apos;m
+          Hey there, I&apos;m
         </motion.div>
 
         {/* Name */}
@@ -176,17 +184,13 @@ export default function HeroSection() {
             justifyContent: 'center',
           }}
         >
-          {[
-            { label: 'GitHub', href: 'https://github.com/hulagerushikesh', icon: '⌨️' },
-            { label: 'LinkedIn', href: 'https://www.linkedin.com/in/rushikesh-hulage-46018522b/', icon: '💼' },
-            { label: 'Email', href: 'mailto:hulagerushikesh@gmail.com', icon: '✉️' },
-          ].map((social) => (
+          {socialLinks.map(({ label, href, Icon }) => (
             <a
-              key={social.label}
-              href={social.href}
-              target={social.href.startsWith('mailto') ? undefined : '_blank'}
+              key={label}
+              href={href}
+              target={href.startsWith('mailto') ? undefined : '_blank'}
               rel="noopener noreferrer"
-              title={social.label}
+              title={label}
               style={{
                 width: '48px',
                 height: '48px',
@@ -196,13 +200,13 @@ export default function HeroSection() {
                 borderRadius: '50%',
                 border: '1px solid var(--border-subtle)',
                 background: 'var(--bg-glass)',
-                fontSize: '1.2rem',
+                color: 'var(--text-secondary)',
                 transition: 'all 0.3s',
                 textDecoration: 'none',
               }}
               className="glow-hover"
             >
-              {social.icon}
+              <Icon size={20} />
             </a>
           ))}
         </motion.div>

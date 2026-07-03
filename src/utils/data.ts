@@ -1,18 +1,4 @@
-import projectsData from '@/data/projects.json';
 import resumeData from '@/data/resume.json';
-
-export interface Project {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  technologies: string[];
-  status: 'active' | 'coming-soon' | 'archived';
-  featured: boolean;
-  githubUrl: string | null;
-  liveUrl: string | null;
-  date: string;
-}
 
 export interface ResumeData {
   personalInfo: {
@@ -53,18 +39,6 @@ export interface ResumeData {
     name: string;
     issuer: string;
   }>;
-}
-
-export function getAllProjects(): Project[] {
-  return projectsData as Project[];
-}
-
-export function getFeaturedProjects(): Project[] {
-  return projectsData.filter(project => project.featured) as Project[];
-}
-
-export function getProjectById(id: string): Project | undefined {
-  return projectsData.find(project => project.id === id) as Project;
 }
 
 export function getResumeData(): ResumeData {
