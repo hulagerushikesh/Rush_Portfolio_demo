@@ -1,0 +1,38 @@
+# Animation & Polish Upgrade — Changelog
+
+Working log for the phased upgrade in [upgrade-plan.md](./upgrade-plan.md).
+
+## Phase 0 — Audit & Baseline (2026-07-05)
+
+### Baseline checks
+- `npm run lint` — clean
+- `npx tsc --noEmit` — clean (no `typecheck` script exists; this is the equivalent)
+- `npm run build` — clean (Next 16 / Turbopack)
+
+### Lighthouse baseline (production build, `next start`, headless Chrome, Lighthouse 13.4)
+| Page | Perf | A11y | FCP | LCP | TBT | CLS |
+|---|---|---|---|---|---|---|
+| `/` | 77 | 94 | 2.4 s | 3.6 s | 280 ms | 0.004 |
+| `/projects/enterprise-ai-platform` | 90 | 95 | 0.8 s | 3.3 s | 180 ms | 0 |
+| `/blog/designing-motion-for-dev-portfolios` | 89 | 100 | 1.3 s | 3.3 s | 110 ms | 0 |
+
+Phase 10 must compare against these; flag any regression > 5 points.
+
+### Bundle baseline
+- `.next/static` total: **1764 KB** (largest JS chunks: 304 / 240 / 224 / 140 KB)
+
+### Framer Motion inventory (pre-upgrade)
+- `src/components/ui/AnimatedSection.tsx` — 7 whileInView-style variants, ease `[0.25, 0.4, 0.25, 1]`
+- `src/components/ui/ParticleBackground.tsx` — cursor-parallax orbs (`useSpring` 40/20)
+- `src/components/sections/HeroSection.tsx` — entrance stagger, scroll-linked fade (`useScroll`/`useTransform`)
+- `src/components/Navbar.tsx` — `layoutId` active pill (spring 380/30), mobile overlay stagger
+- `src/app/(site)/template.tsx` — per-navigation fade+slide enter
+
+### Changes
+- **New `src/lib/motion.ts`** — shared easing curves (`EASE_PREMIUM`, `EASE_STANDARD`, `EASE_IN_OUT`), duration tokens (fast/base/slow), spring presets (snappy/gentle/soft — values codify what components already used inline), and reduced-motion helpers (`usePrefersReducedMotion`, `useMotionSafeVariants`). No component consumes it yet — foundation only, zero visual change.
+- Moved the plan file from repo root to `docs/upgrade-plan.md` (its intended location).
+
+### Deviations from plan
+- No `npm run typecheck` script exists → using `npx tsc --noEmit`.
+- No blog posts existed in local Supabase → seeded one local test post so `/blog/[slug]` could be baselined (local DB only, not committed data).
+- Docker Desktop was paused → resumed it and restarted the local Supabase stack.
