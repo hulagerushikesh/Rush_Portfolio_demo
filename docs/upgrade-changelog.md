@@ -36,3 +36,20 @@ Phase 10 must compare against these; flag any regression > 5 points.
 - No `npm run typecheck` script exists → using `npx tsc --noEmit`.
 - No blog posts existed in local Supabase → seeded one local test post so `/blog/[slug]` could be baselined (local DB only, not committed data).
 - Docker Desktop was paused → resumed it and restarted the local Supabase stack.
+
+## Phase 1 — Motion design tokens + MotionProvider (2026-07-05)
+- `globals.css`: `--ease-premium/standard/in-out/spring`, `--duration-fast/base/slow`; `--transition-*` now derive from them (base 0.25→0.3s, slow 0.4→0.45s). Global `prefers-reduced-motion` CSS kill switch.
+- New `MotionProvider` (`MotionConfig reducedMotion="user"`) wrapping the app in `layout.tsx`; removed the inline `scroll-behavior` style that would have blocked the reduced-motion override.
+
+## Phase 2 — Hero (2026-07-05)
+- Typewriter: variable keystroke timing, cursor solid while typing / blinking at rest, last word of the role in accent color, static first role under reduced motion.
+- New `ui/Magnetic.tsx` on the primary CTA (spring pull, pointer-only, reduced-motion disabled).
+- Hero scroll exit now scales to 0.96 in addition to fade/translate.
+- ParticleBackground: parallax disabled under reduced motion; springs from `SPRING_OPTS.soft`.
+
+## Phase 3 — Navigation (2026-07-06)
+- Direction-aware compact navbar: padding compacts past 120px when scrolling down, restores on any scroll up (discrete state change on a fixed element — self-contained layout, transitioned via motion tokens).
+- Mobile menu: parent-driven stagger variants; close reverses the item order (`staggerDirection: -1`).
+- New `ui/RouteProgress.tsx`: 2px top progress bar, starts on internal link click (App Router has no nav-start event), completes on pathname change, 4s stuck-bar safety. Mounted in `(site)/layout.tsx`.
+- Nav active pill spring now `SPRING.snappy` from lib/motion.
+- Verification note: this preview harness suspends rendering (rAF + render-aligned scroll events) in its backgrounded tab, so scroll-driven behavior can't be observed here; verified mobile menu (8 items mount, variants wired) and progress bar (mounts on navigation) via direct DOM interaction.

@@ -1,11 +1,23 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
+import { SPRING, DURATION } from '@/lib/motion';
 
 const MotionLink = motion.create(Link);
+
+// Mobile menu: children stagger in on open, reverse out on close.
+const menuListVariants: Variants = {
+  hidden: { transition: { staggerChildren: 0.04, staggerDirection: -1 } },
+  visible: { transition: { staggerChildren: 0.06, delayChildren: 0.08 } },
+};
+
+const menuItemVariants: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0 },
+};
 
 const navItems = [
   { id: 'home', name: 'Home', href: '#home' },
@@ -23,7 +35,9 @@ export default function Navbar() {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [compact, setCompact] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     if (pathname.startsWith('/blog')) {
@@ -31,10 +45,18 @@ export default function Navbar() {
     }
   }, [pathname]);
 
-  // Track scroll position for navbar style
+  // Track scroll position + direction: compact while scrolling down,
+  // restore as soon as the user scrolls back up.
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      const y = window.scrollY;
+      setScrolled(y > 50);
+      if (y > lastScrollY.current && y > 120) {
+        setCompact(true);
+      } else if (y < lastScrollY.current) {
+        setCompact(false);
+      }
+      lastScrollY.current = y;
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -97,7 +119,7 @@ export default function Navbar() {
           zIndex: 100,
           width: 'calc(100% - 48px)',
           maxWidth: '1100px',
-          padding: '14px 32px',
+          padding: compact ? '8px 24px' : '14px 32px',
           borderRadius: 'var(--radius-xl)',
           background: scrolled
             ? 'rgba(10, 10, 15, 0.88)'
@@ -106,7 +128,7 @@ export default function Navbar() {
           WebkitBackdropFilter: 'blur(20px)',
           border: `1px solid ${scrolled ? 'var(--border-accent)' : 'var(--border-subtle)'}`,
           boxShadow: scrolled ? 'var(--shadow-glow)' : 'none',
-          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+          transition: 'all var(--duration-slow) var(--ease-in-out)',
         }}
       >
         <div
@@ -182,7 +204,7 @@ export default function Navbar() {
                       background: 'rgba(217, 119, 6, 0.15)',
                       zIndex: -1,
                     }}
-                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    transition={SPRING.snappy}
                   />
                 );
 
@@ -301,10 +323,10 @@ export default function Navbar() {
             }}
           >
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={menuListVariants}
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -312,7 +334,7 @@ export default function Navbar() {
                 gap: '16px',
               }}
             >
-              {navItems.map((item, i) => {
+              {navItems.map((item) => {
                 const isActive = activeSection === item.id;
                 const style: React.CSSProperties = {
                   background: 'none',
@@ -331,9 +353,8 @@ export default function Navbar() {
                   return (
                     <motion.button
                       key={item.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 + i * 0.05 }}
+                      variants={menuItemVariants}
+                      transition={{ duration: DURATION.base }}
                       onClick={() => handleNavClick(item.href)}
                       style={style}
                     >
@@ -346,9 +367,8 @@ export default function Navbar() {
                   <MotionLink
                     key={item.id}
                     href={item.href}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 + i * 0.05 }}
+                    variants={menuItemVariants}
+                    transition={{ duration: DURATION.base }}
                     onClick={() => setIsMenuOpen(false)}
                     style={style}
                   >
