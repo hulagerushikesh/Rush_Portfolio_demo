@@ -34,10 +34,19 @@
   --radius-xl: 24px;
   --radius-full: 9999px;
 
-  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-spring: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Motion tokens — keep in sync with src/lib/motion.ts */
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-standard: cubic-bezier(0.25, 0.4, 0.25, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 0.15s;
+  --duration-base: 0.3s;
+  --duration-slow: 0.45s;
+
+  --transition-fast: var(--duration-fast) var(--ease-in-out);
+  --transition-base: var(--duration-base) var(--ease-in-out);
+  --transition-slow: var(--duration-slow) var(--ease-in-out);
+  --transition-spring: var(--duration-base) var(--ease-spring);
 
   --font-geist-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-geist-mono: 'Geist Mono', 'JetBrains Mono', monospace;
@@ -58,6 +67,23 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
+}
+
+/* ===== REDUCED MOTION =====
+   CSS-side kill switch; Framer Motion is handled by <MotionConfig
+   reducedMotion="user"> in MotionProvider. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 body {
