@@ -33,13 +33,21 @@ export const DURATION = {
 
 /* ===== SPRING PRESETS ===== */
 
-export const SPRING: Record<'snappy' | 'gentle' | 'soft', Transition> = {
+/** Bare spring options — pass these to `useSpring(value, ...)`. */
+export const SPRING_OPTS = {
   /** Matches the nav active-pill spring — crisp UI state changes. */
-  snappy: { type: 'spring', stiffness: 380, damping: 30 },
+  snappy: { stiffness: 380, damping: 30 },
   /** Follow-through for hover releases, magnetic effects. */
-  gentle: { type: 'spring', stiffness: 150, damping: 18 },
+  gentle: { stiffness: 150, damping: 18 },
   /** Slow, heavily damped — ambient/parallax movement. */
-  soft: { type: 'spring', stiffness: 40, damping: 20 },
+  soft: { stiffness: 40, damping: 20 },
+} as const;
+
+/** The same presets as `transition` props for motion components. */
+export const SPRING: Record<keyof typeof SPRING_OPTS, Transition> = {
+  snappy: { type: 'spring', ...SPRING_OPTS.snappy },
+  gentle: { type: 'spring', ...SPRING_OPTS.gentle },
+  soft: { type: 'spring', ...SPRING_OPTS.soft },
 };
 
 /* ===== TRANSITION SHORTHANDS ===== */

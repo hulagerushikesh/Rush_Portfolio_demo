@@ -5,7 +5,9 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Mail } from 'lucide-react';
 import ParticleBackground from '@/components/ui/ParticleBackground';
 import GradientText from '@/components/ui/GradientText';
+import Magnetic from '@/components/ui/Magnetic';
 import { GithubIcon, LinkedinIcon } from '@/components/ui/BrandIcons';
+import { usePrefersReducedMotion } from '@/lib/motion';
 
 const socialLinks = [
   { label: 'GitHub', href: 'https://github.com/hulagerushikesh', Icon: GithubIcon },
@@ -24,7 +26,9 @@ export default function HeroSection() {
   const [currentRole, setCurrentRole] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isIdle, setIsIdle] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const reducedMotion = usePrefersReducedMotion();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -32,30 +36,45 @@ export default function HeroSection() {
   });
   const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.96]);
 
   useEffect(() => {
+    if (reducedMotion) return;
     const role = roles[currentRole];
-    const timeout = setTimeout(
-      () => {
-        if (!isDeleting) {
-          if (displayText.length < role.length) {
-            setDisplayText(role.slice(0, displayText.length + 1));
-          } else {
-            setTimeout(() => setIsDeleting(true), 2000);
-          }
-        } else {
-          if (displayText.length > 0) {
-            setDisplayText(displayText.slice(0, -1));
-          } else {
-            setIsDeleting(false);
-            setCurrentRole((prev) => (prev + 1) % roles.length);
-          }
-        }
-      },
-      isDeleting ? 40 : 80
-    );
+
+    // Full word typed: rest with a blinking cursor, then start deleting.
+    if (!isDeleting && displayText === role) {
+      setIsIdle(true);
+      const timeout = setTimeout(() => {
+        setIsIdle(false);
+        setIsDeleting(true);
+      }, 2200);
+      return () => clearTimeout(timeout);
+    }
+
+    // Fully deleted: move on to the next role.
+    if (isDeleting && displayText === '') {
+      setIsDeleting(false);
+      setCurrentRole((prev) => (prev + 1) % roles.length);
+      return;
+    }
+
+    // Human-ish variable keystroke timing.
+    const delay = isDeleting ? 35 + Math.random() * 25 : 55 + Math.random() * 60;
+    const timeout = setTimeout(() => {
+      setDisplayText(
+        isDeleting ? displayText.slice(0, -1) : role.slice(0, displayText.length + 1)
+      );
+    }, delay);
     return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentRole]);
+  }, [displayText, isDeleting, currentRole, reducedMotion]);
+
+  // Reduced motion: show the first role statically, no typing loop.
+  const typedText = reducedMotion ? roles[0] : displayText;
+  // Terminal-style syntax pass: the role's last word gets the accent color.
+  const typedWords = typedText.split(' ');
+  const typedHead = typedWords.slice(0, -1).join(' ');
+  const typedTail = typedWords[typedWords.length - 1] ?? '';
 
   return (
     <section
@@ -81,6 +100,7 @@ export default function HeroSection() {
           padding: '0 24px',
           opacity: heroOpacity,
           y: heroY,
+          scale: heroScale,
         }}
       >
         {/* Greeting */}
@@ -171,16 +191,23 @@ export default function HeroSection() {
             }}
           >
             <span style={{ color: 'var(--accent-primary)' }}>$</span>{' '}
-            <span style={{ color: 'var(--text-primary)' }}>{displayText}</span>
-            <span
-              style={{
-                color: 'var(--accent-primary)',
-                marginLeft: '2px',
-              }}
-              className="animate-typewriter-cursor"
-            >
-              |
+            <span style={{ color: 'var(--text-primary)' }}>
+              {typedHead}
+              {typedHead && ' '}
             </span>
+            <span style={{ color: 'var(--accent-tertiary)' }}>{typedTail}</span>
+            {/* Cursor: solid while typing, blinks only while resting — like a real terminal. */}
+            {!reducedMotion && (
+              <span
+                style={{
+                  color: 'var(--accent-primary)',
+                  marginLeft: '2px',
+                }}
+                className={isIdle ? 'animate-typewriter-cursor' : undefined}
+              >
+                |
+              </span>
+            )}
           </div>
         </motion.div>
 
@@ -215,9 +242,11 @@ export default function HeroSection() {
             marginBottom: '48px',
           }}
         >
-          <a href="#projects" className="btn-primary">
-            <span>View My Work ↓</span>
-          </a>
+          <Magnetic>
+            <a href="#projects" className="btn-primary">
+              <span>View My Work ↓</span>
+            </a>
+          </Magnetic>
           <a href="#contact" className="btn-secondary">
             Get In Touch
           </a>

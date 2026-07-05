@@ -2,12 +2,14 @@
 
 import { useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { SPRING_OPTS, usePrefersReducedMotion } from '@/lib/motion';
 
 export default function ParticleBackground() {
+  const reducedMotion = usePrefersReducedMotion();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { stiffness: 40, damping: 20 });
-  const springY = useSpring(mouseY, { stiffness: 40, damping: 20 });
+  const springX = useSpring(mouseX, SPRING_OPTS.soft);
+  const springY = useSpring(mouseY, SPRING_OPTS.soft);
 
   const orb1X = useTransform(springX, [-1, 1], [-24, 24]);
   const orb1Y = useTransform(springY, [-1, 1], [-24, 24]);
@@ -15,13 +17,14 @@ export default function ParticleBackground() {
   const orb2Y = useTransform(springY, [-1, 1], [18, -18]);
 
   useEffect(() => {
+    if (reducedMotion) return;
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set((e.clientX / window.innerWidth) * 2 - 1);
       mouseY.set((e.clientY / window.innerHeight) * 2 - 1);
     };
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [mouseX, mouseY]);
+  }, [mouseX, mouseY, reducedMotion]);
 
   return (
     <div
