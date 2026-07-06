@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { ExternalLink, ArrowLeft } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/BrandIcons';
+import AnimatedSection from '@/components/ui/AnimatedSection';
 import { getPublishedProjectBySlug } from '@/lib/content';
 
 export async function generateMetadata({
@@ -45,21 +46,24 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           Back to Projects
         </Link>
 
-        <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '12px' }}>
-          {project.project_date}
-        </div>
-        <h1
-          style={{
-            fontSize: 'clamp(1.8rem, 4vw, 2.6rem)',
-            fontWeight: 800,
-            color: 'var(--text-primary)',
-            marginBottom: '20px',
-            lineHeight: 1.2,
-          }}
-        >
-          {project.title}
-        </h1>
+        <AnimatedSection delay={0.05} duration={0.5}>
+          <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '12px' }}>
+            {project.project_date}
+          </div>
+          <h1
+            style={{
+              fontSize: 'clamp(1.8rem, 4vw, 2.6rem)',
+              fontWeight: 800,
+              color: 'var(--text-primary)',
+              marginBottom: '20px',
+              lineHeight: 1.2,
+            }}
+          >
+            {project.title}
+          </h1>
+        </AnimatedSection>
 
+        <AnimatedSection delay={0.15} duration={0.5}>
         <p
           style={{
             fontSize: '1.05rem',
@@ -115,6 +119,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             <MDXRemote source={project.content} />
           </div>
         )}
+        </AnimatedSection>
       </article>
     </main>
   );

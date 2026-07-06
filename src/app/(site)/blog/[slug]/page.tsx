@@ -3,6 +3,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { ArrowLeft } from 'lucide-react';
+import AnimatedSection from '@/components/ui/AnimatedSection';
 import { getBlogPostBySlug } from '@/lib/content';
 
 export async function generateMetadata({
@@ -44,40 +45,44 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           Back to Blog
         </Link>
 
-        <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '12px' }}>
-          {post.published_at
-            ? new Date(post.published_at).toLocaleDateString(undefined, {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })
-            : ''}
-        </div>
-        <h1
-          style={{
-            fontSize: 'clamp(1.8rem, 4vw, 2.6rem)',
-            fontWeight: 800,
-            color: 'var(--text-primary)',
-            marginBottom: '24px',
-            lineHeight: 1.2,
-          }}
-        >
-          {post.title}
-        </h1>
-
-        {post.tags.length > 0 && (
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '32px' }}>
-            {post.tags.map((tag) => (
-              <span key={tag} className="tech-tag">
-                {tag}
-              </span>
-            ))}
+        <AnimatedSection delay={0.05} duration={0.5}>
+          <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '12px' }}>
+            {post.published_at
+              ? new Date(post.published_at).toLocaleDateString(undefined, {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })
+              : ''}
           </div>
-        )}
+          <h1
+            style={{
+              fontSize: 'clamp(1.8rem, 4vw, 2.6rem)',
+              fontWeight: 800,
+              color: 'var(--text-primary)',
+              marginBottom: '24px',
+              lineHeight: 1.2,
+            }}
+          >
+            {post.title}
+          </h1>
+        </AnimatedSection>
 
-        <div className="blog-content">
-          <MDXRemote source={post.content} />
-        </div>
+        <AnimatedSection delay={0.15} duration={0.5}>
+          {post.tags.length > 0 && (
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '32px' }}>
+              {post.tags.map((tag) => (
+                <span key={tag} className="tech-tag">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+
+          <div className="blog-content">
+            <MDXRemote source={post.content} />
+          </div>
+        </AnimatedSection>
       </article>
     </main>
   );

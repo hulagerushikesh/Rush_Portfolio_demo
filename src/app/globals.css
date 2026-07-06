@@ -501,6 +501,31 @@ h1, h2, h3 {
   margin: 0 0 16px;
 }
 
+/* ===== SKELETON LOADING ===== */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 247, 237, 0.05);
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 247, 237, 0.06),
+    transparent
+  );
+  animation: skeletonShimmer 1.6s var(--ease-in-out) infinite;
+}
+
+@keyframes skeletonShimmer {
+  100% { transform: translateX(100%); }
+}
+
 /* ===== DIVIDER ===== */
 .gradient-divider {
   height: 1px;
