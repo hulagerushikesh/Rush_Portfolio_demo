@@ -1,5 +1,6 @@
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import GradientText from '@/components/ui/GradientText';
+import CountUp from '@/components/ui/CountUp';
 import { getResumeData, getYearsOfExperience, getTechnologyCount } from '@/utils/data';
 import { getPublishedProjects } from '@/lib/content';
 
@@ -102,7 +103,9 @@ export default async function AboutSection() {
                       marginBottom: '4px',
                     }}
                   >
-                    <GradientText>{stat.value}</GradientText>
+                    <GradientText>
+                      <CountUp value={stat.value} />
+                    </GradientText>
                   </div>
                   <div
                     style={{

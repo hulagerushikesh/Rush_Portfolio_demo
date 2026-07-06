@@ -1,12 +1,24 @@
 'use client';
 
+import { useRef } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { GraduationCap } from 'lucide-react';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import GradientText from '@/components/ui/GradientText';
+import { SPRING_OPTS, usePrefersReducedMotion } from '@/lib/motion';
 import { getResumeData } from '@/utils/data';
 
 export default function ExperienceSection() {
   const resume = getResumeData();
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const reducedMotion = usePrefersReducedMotion();
+
+  // Timeline line draws in as the user scrolls through the entries.
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ['start 0.8', 'end 0.45'],
+  });
+  const lineProgress = useSpring(scrollYProgress, SPRING_OPTS.gentle);
 
   return (
     <section id="experience">
@@ -23,14 +35,15 @@ export default function ExperienceSection() {
 
         {/* Experience Timeline */}
         <div
+          ref={timelineRef}
           style={{
             position: 'relative',
             marginTop: '48px',
             paddingLeft: '32px',
           }}
         >
-          {/* Timeline line */}
-          <div
+          {/* Timeline line — scaleY driven by scroll progress */}
+          <motion.div
             style={{
               position: 'absolute',
               left: '7px',
@@ -40,6 +53,8 @@ export default function ExperienceSection() {
               background:
                 'linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary), transparent)',
               borderRadius: '2px',
+              transformOrigin: 'top',
+              scaleY: reducedMotion ? 1 : lineProgress,
             }}
           />
 

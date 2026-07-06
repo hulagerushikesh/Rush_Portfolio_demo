@@ -1,9 +1,26 @@
 'use client';
 
+import { motion, type Variants } from 'framer-motion';
 import { Terminal, Brain, Layers, Cloud } from 'lucide-react';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import GradientText from '@/components/ui/GradientText';
+import { DURATION, EASE_STANDARD } from '@/lib/motion';
 import { getResumeData } from '@/utils/data';
+
+// Tags inside each category card trickle in rather than appearing at once.
+const tagListVariants: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.03, delayChildren: 0.15 } },
+};
+
+const tagVariants: Variants = {
+  hidden: { opacity: 0, y: 8 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: DURATION.base, ease: EASE_STANDARD },
+  },
+};
 
 const skillIcons: Record<string, typeof Terminal> = {
   languages: Terminal,
@@ -113,7 +130,11 @@ export default function SkillsSection() {
                 </div>
 
                 {/* Skill tags */}
-                <div
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: '-60px' }}
+                  variants={tagListVariants}
                   style={{
                     display: 'flex',
                     flexWrap: 'wrap',
@@ -121,11 +142,11 @@ export default function SkillsSection() {
                   }}
                 >
                   {skills.map((skill) => (
-                    <span key={skill} className="tech-tag">
+                    <motion.span key={skill} className="tech-tag" variants={tagVariants}>
                       {skill}
-                    </span>
+                    </motion.span>
                   ))}
-                </div>
+                </motion.div>
               </div>
             </AnimatedSection>
             );
