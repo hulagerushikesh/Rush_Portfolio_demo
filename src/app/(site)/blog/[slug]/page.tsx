@@ -4,6 +4,8 @@ import type { Metadata } from 'next';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { ArrowLeft } from 'lucide-react';
 import AnimatedSection from '@/components/ui/AnimatedSection';
+import ReadingProgress from '@/components/ui/ReadingProgress';
+import { mdxComponents } from '@/components/mdx/mdx-components';
 import { getBlogPostBySlug } from '@/lib/content';
 
 export async function generateMetadata({
@@ -28,6 +30,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <main style={{ minHeight: '100vh' }}>
+      <ReadingProgress />
       <article className="section-container" style={{ maxWidth: '760px' }}>
         <Link
           href="/blog"
@@ -80,7 +83,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           )}
 
           <div className="blog-content">
-            <MDXRemote source={post.content} />
+            <MDXRemote source={post.content} components={mdxComponents} />
           </div>
         </AnimatedSection>
       </article>

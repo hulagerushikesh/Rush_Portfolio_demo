@@ -5,6 +5,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import { ExternalLink, ArrowLeft } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/BrandIcons';
 import AnimatedSection from '@/components/ui/AnimatedSection';
+import { mdxComponents } from '@/components/mdx/mdx-components';
 import { getPublishedProjectBySlug } from '@/lib/content';
 
 export async function generateMetadata({
@@ -116,7 +117,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
         {project.content && (
           <div className="blog-content">
-            <MDXRemote source={project.content} />
+            <MDXRemote source={project.content} components={mdxComponents} />
           </div>
         )}
         </AnimatedSection>
