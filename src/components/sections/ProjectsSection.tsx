@@ -3,6 +3,7 @@ import { Star, Clock, Rocket, ExternalLink, ArrowRight } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/BrandIcons';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import GradientText from '@/components/ui/GradientText';
+import TiltCard from '@/components/ui/TiltCard';
 import { getPublishedProjects } from '@/lib/content';
 
 export default async function ProjectsSection() {
@@ -31,6 +32,7 @@ export default async function ProjectsSection() {
         >
           {projects.map((project, i) => (
             <AnimatedSection key={project.id} delay={0.15 * i} variant="scaleIn">
+              <TiltCard>
               <div
                 className="glass-card gradient-border"
                 style={{
@@ -224,6 +226,7 @@ export default async function ProjectsSection() {
                   </Link>
                 </div>
               </div>
+              </TiltCard>
             </AnimatedSection>
           ))}
           {projects.length === 0 && (
