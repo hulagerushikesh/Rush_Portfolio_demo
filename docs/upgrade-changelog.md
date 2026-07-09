@@ -85,3 +85,28 @@ Phase 10 must compare against these; flag any regression > 5 points.
 - Upload field: shimmering indeterminate bar while uploading, preview image fades in. Upload logic byte-identical.
 - **Deviation:** no exit animations on delete — rows are server-rendered and removed by revalidation; client-side exit animation would require moving list state to the client (touches the CRUD data flow, against ground rules 1/9).
 - Auth verified untouched: login flow + gated pages exercised end-to-end after changes.
+
+## Phase 10 — Performance & accessibility pass (2026-07-09)
+
+### Lighthouse vs Phase 0 baseline (same pages, prod build, Lighthouse 13.4)
+| Page | Perf (base → now) | A11y (base → now) |
+|---|---|---|
+| `/` | 77 → **88** | 94 → **100** |
+| `/projects/enterprise-ai-platform` | 90 → 90 | 95 → 95 |
+| `/blog/designing-motion-for-dev-portfolios` | 89 → 87 | 100 → 100 |
+
+No regression exceeds the 5-point threshold (blog −2 is run noise; its TBT rose 110→250ms from MDX client overrides — acceptable). Home improved on both axes.
+
+### A11y fixes (pre-existing, found by this pass)
+- Footer bottom-bar text `--text-muted` (3.84:1) → `--text-secondary` (passes 4.5:1).
+- Footer column `h4`s (skipped heading level after the h2 section flow) → styled `p` labels.
+- Explicit `:focus-visible` outlines for btn-primary/btn-secondary/tech-tag/code-copy-btn/link-underline/glow-hover.
+
+### Reduced-motion audit (mechanism → coverage)
+1. CSS media-query kill switch → all keyframes/transitions (shimmer, floats, cursor blink, hovers).
+2. `MotionConfig reducedMotion="user"` → every framer `animate`/`whileInView` prop (AnimatedSection, template, nav, banners, CodeBlock, MDXImage, AdminListItem, RouteProgress).
+3. Hand-gated style-bound motion values (MotionConfig can't reach these): ParticleBackground parallax, Magnetic, TiltCard, hero typewriter, hero scroll exit (gap found + fixed this phase), timeline scaleY, CountUp.
+4. ReadingProgress intentionally kept — it's a scroll-position indicator, not autonomous motion.
+
+### Bundle
+- `.next/static` total: 1764 KB → 2036 KB (+272 KB uncompressed, spread across route chunks; zero new dependencies). Framer Motion is required above the fold (hero/navbar) so it cannot be split out; all new components are small and route-scoped (loading skeletons, MDX overrides, admin wrappers) — nothing merits dynamic import.

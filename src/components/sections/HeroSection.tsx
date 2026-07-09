@@ -98,9 +98,10 @@ export default function HeroSection() {
           textAlign: 'center',
           maxWidth: '800px',
           padding: '0 24px',
-          opacity: heroOpacity,
-          y: heroY,
-          scale: heroScale,
+          // Style-bound motion values bypass MotionConfig — gate manually.
+          opacity: reducedMotion ? 1 : heroOpacity,
+          y: reducedMotion ? 0 : heroY,
+          scale: reducedMotion ? 1 : heroScale,
         }}
       >
         {/* Greeting */}

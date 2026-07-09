@@ -72,7 +72,7 @@ export default function Footer() {
 
           {/* Quick links */}
           <div>
-            <h4
+            <p
               style={{
                 fontSize: '0.85rem',
                 fontWeight: 600,
@@ -83,7 +83,7 @@ export default function Footer() {
               }}
             >
               Quick Links
-            </h4>
+            </p>
             <nav
               style={{
                 display: 'flex',
@@ -112,7 +112,7 @@ export default function Footer() {
 
           {/* Social */}
           <div>
-            <h4
+            <p
               style={{
                 fontSize: '0.85rem',
                 fontWeight: 600,
@@ -123,7 +123,7 @@ export default function Footer() {
               }}
             >
               Connect
-            </h4>
+            </p>
             <div style={{ display: 'flex', gap: '12px' }}>
               {socialLinks.map(({ label, href, Icon }) => (
                 <a
@@ -169,7 +169,7 @@ export default function Footer() {
           <p
             style={{
               fontSize: '0.8rem',
-              color: 'var(--text-muted)',
+              color: 'var(--text-secondary)',
             }}
           >
             © {currentYear} Rushikesh Hulage. All rights reserved.
@@ -177,7 +177,7 @@ export default function Footer() {
           <p
             style={{
               fontSize: '0.8rem',
-              color: 'var(--text-muted)',
+              color: 'var(--text-secondary)',
               display: 'flex',
               alignItems: 'center',
               gap: '6px',

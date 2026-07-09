@@ -395,6 +395,19 @@ h1, h2, h3 {
   transition: transform var(--transition-fast);
 }
 
+/* ===== FOCUS VISIBILITY =====
+   Motion never replaces the focus ring — keyboard users get an explicit
+   outline on every interactive element that has custom hover styling. */
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.tech-tag:focus-visible,
+.code-copy-btn:focus-visible,
+.link-underline:focus-visible,
+.glow-hover:focus-visible {
+  outline: 2px solid var(--accent-secondary);
+  outline-offset: 2px;
+}
+
 /* ===== INLINE LINK UNDERLINE DRAW-IN ===== */
 .link-underline {
   position: relative;
