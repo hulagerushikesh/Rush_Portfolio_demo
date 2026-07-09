@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
 import { deleteBlogPost } from '@/app/actions/blog';
 import ConfirmSubmitButton from '@/components/admin/ConfirmSubmitButton';
+import AdminListItem from '@/components/admin/AdminListItem';
 import type { BlogPost } from '@/types/content';
 
 export default async function AdminBlogPage() {
@@ -18,9 +19,9 @@ export default async function AdminBlogPage() {
       </div>
 
       <div style={{ display: 'grid', gap: '12px' }}>
-        {((posts as BlogPost[]) ?? []).map((post) => (
+        {((posts as BlogPost[]) ?? []).map((post, i) => (
+          <AdminListItem key={post.id} index={i}>
           <div
-            key={post.id}
             className="glass-card"
             style={{
               padding: '16px 20px',
@@ -56,6 +57,7 @@ export default async function AdminBlogPage() {
               </form>
             </div>
           </div>
+          </AdminListItem>
         ))}
         {(!posts || posts.length === 0) && <p style={{ color: 'var(--text-muted)' }}>No blog posts yet.</p>}
       </div>

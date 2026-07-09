@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import CountUp from '@/components/ui/CountUp';
 import { createClient } from '@/lib/supabase/server';
 
 export default async function AdminDashboardPage() {
@@ -27,7 +28,9 @@ export default async function AdminDashboardPage() {
             className="glass-card"
             style={{ padding: '24px', textDecoration: 'none', display: 'block' }}
           >
-            <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--text-primary)' }}>{card.value}</div>
+            <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+              <CountUp value={String(card.value)} />
+            </div>
             <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginTop: '4px' }}>{card.label}</div>
           </Link>
         ))}

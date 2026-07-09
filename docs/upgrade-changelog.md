@@ -78,3 +78,10 @@ Phase 10 must compare against these; flag any regression > 5 points.
 - `CodeBlock` MDX override: copy-to-clipboard with spring checkmark confirmation (button reveals on hover/focus).
 - `MDXImage` override: native lazy loading + fade/slide reveal in view. Both wired into blog AND project MDX renders.
 - **Deviation:** scrollspy TOC skipped — posts are short, no TOC exists; not worth the complexity yet.
+
+## Phase 9 — Admin CMS polish (2026-07-09, user-approved)
+- Dashboard counts use `CountUp` (SSR-safe values verified live: 4/1/1).
+- `AdminListItem` wrapper: staggered enter animation for projects/blog/messages rows (presentation only — rows stay server-rendered, deletes still go through server actions).
+- Upload field: shimmering indeterminate bar while uploading, preview image fades in. Upload logic byte-identical.
+- **Deviation:** no exit animations on delete — rows are server-rendered and removed by revalidation; client-side exit animation would require moving list state to the client (touches the CRUD data flow, against ground rules 1/9).
+- Auth verified untouched: login flow + gated pages exercised end-to-end after changes.

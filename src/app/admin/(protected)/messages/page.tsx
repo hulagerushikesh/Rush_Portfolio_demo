@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { markMessageRead, deleteMessage } from '@/app/actions/messages';
 import ConfirmSubmitButton from '@/components/admin/ConfirmSubmitButton';
+import AdminListItem from '@/components/admin/AdminListItem';
 import type { ContactMessage } from '@/types/content';
 
 export default async function AdminMessagesPage() {
@@ -14,9 +15,9 @@ export default async function AdminMessagesPage() {
     <div>
       <h1 style={{ fontSize: '1.8rem', fontWeight: 700, marginBottom: '24px' }}>Messages</h1>
       <div style={{ display: 'grid', gap: '12px' }}>
-        {((messages as ContactMessage[]) ?? []).map((msg) => (
+        {((messages as ContactMessage[]) ?? []).map((msg, i) => (
+          <AdminListItem key={msg.id} index={i}>
           <div
-            key={msg.id}
             className="glass-card"
             style={{
               padding: '20px',
@@ -51,6 +52,7 @@ export default async function AdminMessagesPage() {
               {msg.message}
             </p>
           </div>
+          </AdminListItem>
         ))}
         {(!messages || messages.length === 0) && <p style={{ color: 'var(--text-muted)' }}>No messages yet.</p>}
       </div>

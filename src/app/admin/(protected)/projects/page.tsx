@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
 import { deleteProject } from '@/app/actions/projects';
 import ConfirmSubmitButton from '@/components/admin/ConfirmSubmitButton';
+import AdminListItem from '@/components/admin/AdminListItem';
 import type { Project } from '@/types/content';
 
 export default async function AdminProjectsPage() {
@@ -22,9 +23,9 @@ export default async function AdminProjectsPage() {
       </div>
 
       <div style={{ display: 'grid', gap: '12px' }}>
-        {((projects as Project[]) ?? []).map((project) => (
+        {((projects as Project[]) ?? []).map((project, i) => (
+          <AdminListItem key={project.id} index={i}>
           <div
-            key={project.id}
             className="glass-card"
             style={{
               padding: '16px 20px',
@@ -61,6 +62,7 @@ export default async function AdminProjectsPage() {
               </form>
             </div>
           </div>
+          </AdminListItem>
         ))}
         {(!projects || projects.length === 0) && <p style={{ color: 'var(--text-muted)' }}>No projects yet.</p>}
       </div>

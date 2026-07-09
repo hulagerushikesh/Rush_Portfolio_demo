@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { createClient } from '@/lib/supabase/client';
+import { DURATION, EASE_STANDARD } from '@/lib/motion';
 
 export default function ImageUploadField({
   name,
@@ -47,13 +49,30 @@ export default function ImageUploadField({
       <label className="form-label">{label}</label>
       <input type="hidden" name={name} value={url} readOnly />
       <input type="file" accept="image/*" className="form-input" onChange={onFileChange} disabled={uploading} />
-      {uploading && (
-        <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '4px' }}>Uploading...</p>
-      )}
+      <AnimatePresence mode="wait">
+        {uploading && (
+          <motion.div
+            key="uploading"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: DURATION.fast }}
+            style={{ marginTop: '8px' }}
+          >
+            {/* Indeterminate shimmer while the file streams to Storage */}
+            <div className="skeleton" style={{ height: '4px', borderRadius: 'var(--radius-full)' }} />
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '6px' }}>
+              Uploading…
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
       {error && <p className="form-error">{error}</p>}
       {url && !uploading && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
+        <motion.img
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: DURATION.base, ease: EASE_STANDARD }}
           src={url}
           alt="Preview"
           style={{ marginTop: '8px', maxHeight: '120px', borderRadius: 'var(--radius-md)' }}
