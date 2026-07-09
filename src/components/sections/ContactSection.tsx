@@ -4,11 +4,32 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { contactFormSchema, type ContactFormData } from '@/lib/validations';
 import { useState } from 'react';
-import { Mail, MapPin, CheckCircle2 } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Mail, MapPin, CheckCircle2, Info } from 'lucide-react';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import GradientText from '@/components/ui/GradientText';
 import { submitContactMessage } from '@/app/actions/messages';
 import { GithubIcon, LinkedinIcon } from '@/components/ui/BrandIcons';
+import { DURATION, EASE_STANDARD, SPRING } from '@/lib/motion';
+
+/** Validation message that animates in/out instead of popping. */
+function FieldError({ message }: { message?: string }) {
+  return (
+    <AnimatePresence mode="wait">
+      {message && (
+        <motion.p
+          className="form-error"
+          initial={{ opacity: 0, y: -4 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -4 }}
+          transition={{ duration: DURATION.fast, ease: EASE_STANDARD }}
+        >
+          {message}
+        </motion.p>
+      )}
+    </AnimatePresence>
+  );
+}
 
 const contactInfo = [
   { Icon: Mail, label: 'Email', value: 'hulagerushikesh@gmail.com', href: 'mailto:hulagerushikesh@gmail.com' },
@@ -116,6 +137,7 @@ export default function ContactSection() {
                     </div>
                     {info.href ? (
                       <a
+                        className="link-underline"
                         href={info.href}
                         target={info.href.startsWith('mailto') ? undefined : '_blank'}
                         rel="noopener noreferrer"
@@ -150,47 +172,87 @@ export default function ContactSection() {
                 padding: '32px',
               }}
             >
-              {submitted && (
-                <div
-                  style={{
-                    padding: '14px 20px',
-                    background: 'rgba(16, 185, 129, 0.1)',
-                    border: '1px solid rgba(16, 185, 129, 0.2)',
-                    borderRadius: 'var(--radius-md)',
-                    color: 'var(--accent-success)',
-                    fontSize: '0.9rem',
-                    marginBottom: '20px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '8px',
-                  }}
-                >
-                  <CheckCircle2 size={18} strokeWidth={1.75} />
-                  Message sent successfully! I&apos;ll get back to you soon.
-                </div>
-              )}
+              <AnimatePresence>
+                {submitted && (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: DURATION.base, ease: EASE_STANDARD }}
+                    style={{
+                      padding: '14px 20px',
+                      background: 'rgba(16, 185, 129, 0.1)',
+                      border: '1px solid rgba(16, 185, 129, 0.2)',
+                      borderRadius: 'var(--radius-md)',
+                      color: 'var(--accent-success)',
+                      fontSize: '0.9rem',
+                      marginBottom: '20px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '8px',
+                    }}
+                  >
+                    <motion.span
+                      initial={{ scale: 0, rotate: -90 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{ ...SPRING.snappy, delay: 0.15 }}
+                      style={{ display: 'inline-flex' }}
+                    >
+                      <CheckCircle2 size={18} strokeWidth={1.75} />
+                    </motion.span>
+                    Message sent successfully! I&apos;ll get back to you soon.
+                  </motion.div>
+                )}
 
-              {submitError && (
-                <div
-                  style={{
-                    padding: '14px 20px',
-                    background: 'rgba(239, 68, 68, 0.1)',
-                    border: '1px solid rgba(239, 68, 68, 0.2)',
-                    borderRadius: 'var(--radius-md)',
-                    color: '#f87171',
-                    fontSize: '0.9rem',
-                    marginBottom: '20px',
-                    textAlign: 'center',
-                  }}
-                >
-                  {submitError}
-                </div>
-              )}
+                {submitError && (
+                  // The "temporarily unavailable" fallback is expected state,
+                  // not a failure — style it as calm info, not an alarm.
+                  <motion.div
+                    key="error"
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: DURATION.base, ease: EASE_STANDARD }}
+                    style={
+                      submitError.includes('unavailable')
+                        ? {
+                            padding: '14px 20px',
+                            background: 'rgba(217, 119, 6, 0.08)',
+                            border: '1px solid rgba(217, 119, 6, 0.25)',
+                            borderRadius: 'var(--radius-md)',
+                            color: 'var(--accent-tertiary)',
+                            fontSize: '0.9rem',
+                            marginBottom: '20px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '8px',
+                          }
+                        : {
+                            padding: '14px 20px',
+                            background: 'rgba(239, 68, 68, 0.1)',
+                            border: '1px solid rgba(239, 68, 68, 0.2)',
+                            borderRadius: 'var(--radius-md)',
+                            color: '#f87171',
+                            fontSize: '0.9rem',
+                            marginBottom: '20px',
+                            textAlign: 'center',
+                          }
+                    }
+                  >
+                    {submitError.includes('unavailable') && (
+                      <Info size={18} strokeWidth={1.75} style={{ flexShrink: 0 }} />
+                    )}
+                    {submitError}
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               <div style={{ display: 'grid', gap: '20px' }}>
                 {/* Name */}
-                <div>
+                <div className="form-field">
                   <label htmlFor="contact-name" className="form-label">
                     Name
                   </label>
@@ -201,11 +263,11 @@ export default function ContactSection() {
                     placeholder="Your name"
                     {...register('name')}
                   />
-                  {errors.name && <p className="form-error">{errors.name.message}</p>}
+                  <FieldError message={errors.name?.message} />
                 </div>
 
                 {/* Email */}
-                <div>
+                <div className="form-field">
                   <label htmlFor="contact-email" className="form-label">
                     Email
                   </label>
@@ -216,11 +278,11 @@ export default function ContactSection() {
                     placeholder="your@email.com"
                     {...register('email')}
                   />
-                  {errors.email && <p className="form-error">{errors.email.message}</p>}
+                  <FieldError message={errors.email?.message} />
                 </div>
 
                 {/* Subject */}
-                <div>
+                <div className="form-field">
                   <label htmlFor="contact-subject" className="form-label">
                     Subject
                   </label>
@@ -231,11 +293,11 @@ export default function ContactSection() {
                     placeholder="What's this about?"
                     {...register('subject')}
                   />
-                  {errors.subject && <p className="form-error">{errors.subject.message}</p>}
+                  <FieldError message={errors.subject?.message} />
                 </div>
 
                 {/* Message */}
-                <div>
+                <div className="form-field">
                   <label htmlFor="contact-message" className="form-label">
                     Message
                   </label>
@@ -247,7 +309,7 @@ export default function ContactSection() {
                     style={{ resize: 'vertical' }}
                     {...register('message')}
                   />
-                  {errors.message && <p className="form-error">{errors.message.message}</p>}
+                  <FieldError message={errors.message?.message} />
                 </div>
 
                 <button
