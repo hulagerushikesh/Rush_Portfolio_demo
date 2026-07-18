@@ -9,98 +9,87 @@ export default async function AboutSection() {
   const projects = await getPublishedProjects();
 
   const stats = [
-    { value: `${getYearsOfExperience(resume.experience[0].startDate)}+`, label: 'Years Experience' },
-    { value: `${projects.length}`, label: 'Projects Shipped' },
+    { value: `${getYearsOfExperience(resume.experience[0].startDate)}+`, label: 'Years' },
+    { value: `${projects.length}`, label: 'Shipped' },
     { value: `${getTechnologyCount(resume.skills)}+`, label: 'Technologies' },
     { value: `${resume.certifications.length}`, label: 'Certifications' },
   ];
 
   return (
     <section id="about">
-      <div className="section-container">
-        <AnimatedSection>
-          <span className="section-label">About Me</span>
-          <h2 className="section-title">
-            Building <GradientText>intelligent systems</GradientText> at scale
-          </h2>
-        </AnimatedSection>
+      <div className="section-container section-grid">
+        <aside className="section-rail">
+          <span className="rail-idx">04</span>
+          <span className="rail-k">Profile</span>
+          <span className="rail-k">Readme</span>
+        </aside>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr',
-            gap: '48px',
-            marginTop: '48px',
-          }}
-        >
-          {/* About text */}
-          <AnimatedSection delay={0.2}>
-            <div style={{ maxWidth: '720px' }}>
-              <p
-                style={{
-                  fontSize: '1.1rem',
-                  color: 'var(--text-secondary)',
-                  lineHeight: 1.8,
-                  marginBottom: '20px',
-                }}
-              >
-                I&apos;m a Software Engineer at <strong style={{ color: 'var(--text-primary)' }}>Telstra</strong>, where I own
+        <div>
+          <AnimatedSection>
+            <span className="section-label">About</span>
+            <h2 className="section-title">Building intelligent systems at scale</h2>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.15}>
+            <div style={{ maxWidth: '68ch', marginTop: '8px' }}>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '20px' }}>
+                I&apos;m a Software Engineer at{' '}
+                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Telstra</strong>, where I own
                 platform engineering initiatives spanning secure backend services, cloud
                 infrastructure, and applied AI/ML — taking systems from design through
                 production, not just the parts that are interesting.
               </p>
-              <p
-                style={{
-                  fontSize: '1.1rem',
-                  color: 'var(--text-secondary)',
-                  lineHeight: 1.8,
-                  marginBottom: '20px',
-                }}
-              >
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '20px' }}>
                 That&apos;s meant designing secure authentication systems with{' '}
-                <strong style={{ color: 'var(--text-primary)' }}>Java &amp; Spring Boot</strong>, leading a
-                critical security migration end-to-end, and building enterprise AI
-                platforms on <strong style={{ color: 'var(--text-primary)' }}>RAG, LLMs, and cloud-native ML
-                pipelines</strong> — the kind of ownership that comes with a few years of
-                shipping systems other teams depend on.
+                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Java &amp; Spring Boot</strong>,
+                leading a critical security migration end-to-end, and building enterprise AI
+                platforms on{' '}
+                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>
+                  RAG, LLMs, and cloud-native ML pipelines
+                </strong>{' '}
+                — the kind of ownership that comes with a few years of shipping systems other
+                teams depend on.
               </p>
-              <p
-                style={{
-                  fontSize: '1.1rem',
-                  color: 'var(--text-secondary)',
-                  lineHeight: 1.8,
-                }}
-              >
-                A B.Tech graduate from <strong style={{ color: 'var(--text-primary)' }}>VJTI Mumbai</strong>, I stay
-                sharp outside work too — contributing to <strong style={{ color: 'var(--text-primary)' }}>Hugging Face
-                Transformers</strong> and placing Top 10 at the Google APAC Challenge 2025.
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8 }}>
+                A B.Tech graduate from{' '}
+                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>VJTI Mumbai</strong>, I stay
+                sharp outside work too — contributing to{' '}
+                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>
+                  Hugging Face Transformers
+                </strong>{' '}
+                and placing Top 10 at the Google APAC Challenge 2025.
               </p>
             </div>
           </AnimatedSection>
 
-          {/* Stats grid */}
-          <AnimatedSection delay={0.4}>
+          {/* Stats — mono readout strip */}
+          <AnimatedSection delay={0.3}>
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-                gap: '16px',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+                marginTop: '44px',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: 'var(--radius-md)',
+                overflow: 'hidden',
               }}
             >
               {stats.map((stat, i) => (
                 <div
                   key={i}
-                  className="glass-card"
                   style={{
-                    padding: '28px 20px',
-                    textAlign: 'center',
+                    padding: '26px 20px',
+                    borderLeft: i === 0 ? 'none' : '1px solid var(--border-subtle)',
+                    background: 'var(--bg-secondary)',
                   }}
                 >
                   <div
                     style={{
-                      fontSize: '2.25rem',
-                      fontWeight: 800,
-                      marginBottom: '4px',
+                      fontFamily: 'var(--font-geist-mono)',
+                      fontSize: '2.1rem',
+                      fontWeight: 600,
+                      letterSpacing: '-0.02em',
+                      marginBottom: '6px',
                     }}
                   >
                     <GradientText>
@@ -109,9 +98,11 @@ export default async function AboutSection() {
                   </div>
                   <div
                     style={{
-                      fontSize: '0.85rem',
+                      fontFamily: 'var(--font-geist-mono)',
+                      fontSize: '0.7rem',
+                      letterSpacing: '0.1em',
+                      textTransform: 'uppercase',
                       color: 'var(--text-muted)',
-                      fontWeight: 500,
                     }}
                   >
                     {stat.label}

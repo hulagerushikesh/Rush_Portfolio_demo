@@ -7,10 +7,10 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { label: 'Projects', href: '#projects' },
+    { label: 'Work', href: '#projects' },
     { label: 'Blog', href: '/blog' },
     { label: 'Experience', href: '#experience' },
-    { label: 'Skills', href: '#skills' },
+    { label: 'Stack', href: '#skills' },
     { label: 'About', href: '#about' },
     { label: 'Contact', href: '#contact' },
   ];
@@ -22,87 +22,63 @@ export default function Footer() {
   ];
 
   return (
-    <footer
-      style={{
-        background: 'var(--bg-secondary)',
-        borderTop: '1px solid var(--border-subtle)',
-      }}
-    >
-      <div className="gradient-divider" />
-
-      <div
-        style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          padding: '48px 24px 32px',
-        }}
-      >
+    <footer style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-subtle)' }}>
+      <div style={{ maxWidth: 'var(--maxw)', margin: '0 auto', padding: '52px 32px 34px' }}>
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
             gap: '40px',
-            marginBottom: '40px',
+            marginBottom: '44px',
           }}
         >
           {/* Brand */}
           <div>
             <div
               style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: '1.5rem',
-                fontWeight: 700,
-                marginBottom: '12px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '9px',
+                fontFamily: 'var(--font-geist-mono)',
+                fontSize: '0.95rem',
+                fontWeight: 600,
+                marginBottom: '14px',
+                color: 'var(--text-primary)',
               }}
-              className="gradient-text"
             >
-              Rushikesh.
+              <span
+                style={{
+                  width: '8px',
+                  height: '8px',
+                  borderRadius: '50%',
+                  background: 'var(--accent-primary)',
+                  boxShadow: '0 0 0 4px rgba(95, 212, 192, 0.14)',
+                }}
+              />
+              rushikesh.hulage
             </div>
-            <p
-              style={{
-                fontSize: '0.9rem',
-                color: 'var(--text-secondary)',
-                lineHeight: 1.6,
-                maxWidth: '280px',
-              }}
-            >
-              Software Engineer passionate about AI/ML and building scalable cloud-native systems.
+            <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.6, maxWidth: '280px' }}>
+              Platform &amp; ML engineer. I build and secure the systems other teams ship on.
             </p>
           </div>
 
           {/* Quick links */}
           <div>
-            <p
-              style={{
-                fontSize: '0.85rem',
-                fontWeight: 600,
-                color: 'var(--text-primary)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.08em',
-                marginBottom: '16px',
-              }}
-            >
-              Quick Links
-            </p>
-            <nav
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '10px',
-              }}
-            >
+            <p className="eyebrow" style={{ marginBottom: '16px' }}>Index</p>
+            <nav style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {quickLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
+                  className="link-underline"
                   style={{
                     color: 'var(--text-secondary)',
-                    fontSize: '0.9rem',
+                    fontFamily: 'var(--font-geist-mono)',
+                    fontSize: '0.82rem',
+                    letterSpacing: '0.02em',
                     textDecoration: 'none',
-                    transition: 'color 0.2s',
+                    width: 'max-content',
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-primary)')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
                 >
                   {link.label}
                 </a>
@@ -112,19 +88,8 @@ export default function Footer() {
 
           {/* Social */}
           <div>
-            <p
-              style={{
-                fontSize: '0.85rem',
-                fontWeight: 600,
-                color: 'var(--text-primary)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.08em',
-                marginBottom: '16px',
-              }}
-            >
-              Connect
-            </p>
-            <div style={{ display: 'flex', gap: '12px' }}>
+            <p className="eyebrow" style={{ marginBottom: '16px' }}>Channels</p>
+            <div style={{ display: 'flex', gap: '10px' }}>
               {socialLinks.map(({ label, href, Icon }) => (
                 <a
                   key={label}
@@ -132,20 +97,20 @@ export default function Footer() {
                   target={href.startsWith('mailto') ? undefined : '_blank'}
                   rel="noopener noreferrer"
                   title={label}
+                  className="glow-hover"
                   style={{
                     width: '40px',
                     height: '40px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    borderRadius: '10px',
+                    borderRadius: 'var(--radius-md)',
                     border: '1px solid var(--border-subtle)',
-                    background: 'var(--bg-glass)',
+                    background: 'var(--bg-primary)',
                     color: 'var(--text-secondary)',
-                    transition: 'all 0.3s',
+                    transition: 'all var(--transition-base)',
                     textDecoration: 'none',
                   }}
-                  className="glow-hover"
                 >
                   <Icon size={18} />
                 </a>
@@ -164,30 +129,15 @@ export default function Footer() {
             alignItems: 'center',
             flexWrap: 'wrap',
             gap: '12px',
+            fontFamily: 'var(--font-geist-mono)',
+            fontSize: '0.72rem',
+            letterSpacing: '0.04em',
+            color: 'var(--text-muted)',
           }}
         >
-          <p
-            style={{
-              fontSize: '0.8rem',
-              color: 'var(--text-secondary)',
-            }}
-          >
-            © {currentYear} Rushikesh Hulage. All rights reserved.
-          </p>
-          <p
-            style={{
-              fontSize: '0.8rem',
-              color: 'var(--text-secondary)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-            }}
-          >
-            Built with
-            <span style={{ color: 'var(--accent-primary)' }}>Next.js</span>
-            &
-            <span style={{ color: 'var(--accent-secondary)' }}>Framer Motion</span>
-          </p>
+          <span>© {currentYear} RUSHIKESH HULAGE</span>
+          <span>PUNE, IN · 18.52°N 73.86°E</span>
+          <span>BUILT WITH NEXT.JS + FRAMER MOTION</span>
         </div>
       </div>
     </footer>

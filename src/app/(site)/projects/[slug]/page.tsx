@@ -48,16 +48,21 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         </Link>
 
         <AnimatedSection delay={0.05} duration={0.5}>
-          <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '12px' }}>
-            {project.project_date}
+          <div
+            className="eyebrow"
+            style={{ marginBottom: '14px' }}
+          >
+            {project.project_date ? `// ${project.project_date}` : '// PROJECT'}
           </div>
           <h1
             style={{
-              fontSize: 'clamp(1.8rem, 4vw, 2.6rem)',
-              fontWeight: 800,
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(1.9rem, 4.5vw, 2.8rem)',
+              fontWeight: 600,
+              letterSpacing: '-0.02em',
               color: 'var(--text-primary)',
               marginBottom: '20px',
-              lineHeight: 1.2,
+              lineHeight: 1.1,
             }}
           >
             {project.title}

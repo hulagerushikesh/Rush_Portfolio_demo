@@ -122,10 +122,10 @@ export default function Navbar() {
           padding: compact ? '8px 24px' : '14px 32px',
           borderRadius: 'var(--radius-xl)',
           background: scrolled
-            ? 'rgba(10, 10, 15, 0.88)'
-            : 'rgba(10, 10, 15, 0.4)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
+            ? 'rgba(11, 15, 16, 0.9)'
+            : 'rgba(11, 15, 16, 0.45)',
+          backdropFilter: 'blur(18px)',
+          WebkitBackdropFilter: 'blur(18px)',
           border: `1px solid ${scrolled ? 'var(--border-accent)' : 'var(--border-subtle)'}`,
           boxShadow: scrolled ? 'var(--shadow-glow)' : 'none',
           transition: 'all var(--duration-slow) var(--ease-in-out)',
@@ -145,17 +145,28 @@ export default function Navbar() {
               background: 'none',
               border: 'none',
               cursor: 'pointer',
-              fontSize: '1.5rem',
-              fontWeight: 800,
+              fontSize: '0.9rem',
+              fontWeight: 600,
+              letterSpacing: '0.02em',
               padding: 0,
-              transition: 'transform 0.2s',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '9px',
+              fontFamily: 'var(--font-geist-mono)',
+              color: 'var(--text-primary)',
               justifySelf: 'start',
             }}
-            className="gradient-text"
-            onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
-            onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
           >
-            R.
+            <span
+              style={{
+                width: '8px',
+                height: '8px',
+                borderRadius: '50%',
+                background: 'var(--accent-primary)',
+                boxShadow: '0 0 0 4px rgba(95, 212, 192, 0.14)',
+              }}
+            />
+            rushikesh.hulage
           </button>
 
           {/* Desktop nav — center */}
@@ -177,15 +188,16 @@ export default function Navbar() {
                   background: 'transparent',
                   border: 'none',
                   cursor: 'pointer',
-                  padding: '10px 18px',
-                  borderRadius: 'var(--radius-full)',
-                  color: isActive ? 'var(--accent-tertiary)' : 'var(--text-secondary)',
-                  fontSize: '0.95rem',
+                  padding: '9px 14px',
+                  borderRadius: 'var(--radius-sm)',
+                  color: isActive ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                  fontSize: '0.74rem',
                   fontWeight: 500,
                   transition: 'color 0.2s',
-                  fontFamily: 'inherit',
+                  fontFamily: 'var(--font-geist-mono)',
+                  textTransform: 'uppercase',
                   whiteSpace: 'nowrap',
-                  letterSpacing: '0.01em',
+                  letterSpacing: '0.08em',
                   textDecoration: 'none',
                 };
                 const onMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
@@ -200,8 +212,9 @@ export default function Navbar() {
                     style={{
                       position: 'absolute',
                       inset: 0,
-                      borderRadius: 'var(--radius-full)',
-                      background: 'rgba(217, 119, 6, 0.15)',
+                      borderRadius: 'var(--radius-sm)',
+                      background: 'rgba(95, 212, 192, 0.12)',
+                      border: '1px solid rgba(95, 212, 192, 0.22)',
                       zIndex: -1,
                     }}
                     transition={SPRING.snappy}
@@ -313,7 +326,7 @@ export default function Navbar() {
             style={{
               position: 'fixed',
               inset: 0,
-              background: 'rgba(10, 10, 15, 0.95)',
+              background: 'rgba(11, 15, 16, 0.96)',
               backdropFilter: 'blur(20px)',
               WebkitBackdropFilter: 'blur(20px)',
               zIndex: 99,
@@ -340,12 +353,13 @@ export default function Navbar() {
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
-                  fontSize: '1.5rem',
-                  fontWeight: isActive ? 700 : 400,
+                  fontSize: '1.4rem',
+                  fontFamily: 'var(--font-geist-mono)',
+                  letterSpacing: '0.02em',
+                  fontWeight: isActive ? 600 : 400,
                   color: isActive ? 'var(--accent-primary)' : 'var(--text-secondary)',
-                  padding: '10px 20px',
+                  padding: '8px 20px',
                   transition: 'color 0.2s',
-                  fontFamily: 'inherit',
                   textDecoration: 'none',
                 };
 

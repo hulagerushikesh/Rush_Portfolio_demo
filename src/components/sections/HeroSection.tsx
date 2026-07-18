@@ -1,9 +1,8 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Mail } from 'lucide-react';
-import ParticleBackground from '@/components/ui/ParticleBackground';
 import GradientText from '@/components/ui/GradientText';
 import Magnetic from '@/components/ui/Magnetic';
 import { GithubIcon, LinkedinIcon } from '@/components/ui/BrandIcons';
@@ -15,18 +14,13 @@ const socialLinks = [
   { label: 'Email', href: 'mailto:hulagerushikesh@gmail.com', Icon: Mail },
 ];
 
-const roles = [
-  'Software Engineer',
-  'ML Engineer',
-  'Cloud Architect',
-  'Platform Engineer',
+const meta = [
+  { k: 'ROLE /', v: 'Software Engineer, Platform Engineering' },
+  { k: 'AT /', v: 'Telstra' },
+  { k: 'LOC /', v: 'Pune, IN' },
 ];
 
 export default function HeroSection() {
-  const [currentRole, setCurrentRole] = useState(0);
-  const [displayText, setDisplayText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [isIdle, setIsIdle] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const reducedMotion = usePrefersReducedMotion();
 
@@ -35,46 +29,7 @@ export default function HeroSection() {
     offset: ['start start', 'end start'],
   });
   const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.96]);
-
-  useEffect(() => {
-    if (reducedMotion) return;
-    const role = roles[currentRole];
-
-    // Full word typed: rest with a blinking cursor, then start deleting.
-    if (!isDeleting && displayText === role) {
-      setIsIdle(true);
-      const timeout = setTimeout(() => {
-        setIsIdle(false);
-        setIsDeleting(true);
-      }, 2200);
-      return () => clearTimeout(timeout);
-    }
-
-    // Fully deleted: move on to the next role.
-    if (isDeleting && displayText === '') {
-      setIsDeleting(false);
-      setCurrentRole((prev) => (prev + 1) % roles.length);
-      return;
-    }
-
-    // Human-ish variable keystroke timing.
-    const delay = isDeleting ? 35 + Math.random() * 25 : 55 + Math.random() * 60;
-    const timeout = setTimeout(() => {
-      setDisplayText(
-        isDeleting ? displayText.slice(0, -1) : role.slice(0, displayText.length + 1)
-      );
-    }, delay);
-    return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentRole, reducedMotion]);
-
-  // Reduced motion: show the first role statically, no typing loop.
-  const typedText = reducedMotion ? roles[0] : displayText;
-  // Terminal-style syntax pass: the role's last word gets the accent color.
-  const typedWords = typedText.split(' ');
-  const typedHead = typedWords.slice(0, -1).join(' ');
-  const typedTail = typedWords[typedWords.length - 1] ?? '';
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, 60]);
 
   return (
     <section
@@ -85,184 +40,151 @@ export default function HeroSection() {
         minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
         overflow: 'hidden',
       }}
     >
-      <ParticleBackground />
+      <div className="grid-bg" aria-hidden="true" />
 
       <motion.div
+        className="section-container"
         style={{
           position: 'relative',
           zIndex: 1,
-          textAlign: 'center',
-          maxWidth: '800px',
-          padding: '0 24px',
-          // Style-bound motion values bypass MotionConfig — gate manually.
+          width: '100%',
+          paddingTop: 'clamp(120px, 18vh, 200px)',
+          paddingBottom: 'clamp(80px, 12vh, 140px)',
           opacity: reducedMotion ? 1 : heroOpacity,
           y: reducedMotion ? 0 : heroY,
-          scale: reducedMotion ? 1 : heroScale,
         }}
       >
-        {/* Greeting */}
+        {/* Status pill */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
           style={{
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '8px',
-            padding: '8px 20px',
-            background: 'rgba(217, 119, 6, 0.1)',
-            border: '1px solid rgba(217, 119, 6, 0.2)',
-            borderRadius: '9999px',
-            marginBottom: '24px',
-            fontSize: '0.9rem',
-            color: 'var(--accent-tertiary)',
+            gap: '9px',
+            fontFamily: 'var(--font-geist-mono)',
+            fontSize: '0.72rem',
+            letterSpacing: '0.14em',
+            textTransform: 'uppercase',
+            color: 'var(--text-secondary)',
+            border: '1px solid var(--border-strong)',
+            padding: '6px 13px',
+            borderRadius: 'var(--radius-full)',
+            marginBottom: '32px',
           }}
         >
-          Hey there, I&apos;m
+          <span
+            style={{
+              position: 'relative',
+              width: '7px',
+              height: '7px',
+              borderRadius: '50%',
+              background: 'var(--accent-primary)',
+            }}
+          >
+            <span
+              className="animate-pulse-glow"
+              style={{
+                position: 'absolute',
+                inset: '-4px',
+                borderRadius: '50%',
+                border: '1px solid var(--accent-primary)',
+              }}
+            />
+          </span>
+          Available for senior / platform roles
         </motion.div>
 
-        {/* Name */}
+        {/* Name — mono display */}
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
           style={{
-            fontSize: 'clamp(2.5rem, 8vw, 4.5rem)',
-            fontWeight: 800,
-            lineHeight: 1.1,
-            marginBottom: '16px',
-            letterSpacing: '-0.02em',
+            fontFamily: 'var(--font-geist-mono)',
+            fontWeight: 600,
+            fontSize: 'clamp(2.6rem, 9vw, 6rem)',
+            lineHeight: 0.98,
+            letterSpacing: '-0.03em',
+            margin: '0 0 26px',
           }}
         >
-          <GradientText>Rushikesh Hulage</GradientText>
+          Rushikesh
+          <br />
+          <span style={{ color: 'var(--text-muted)' }}>Hulage</span>
         </motion.h1>
 
-        {/* Typewriter Role — terminal-window chrome */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          style={{
-            display: 'inline-block',
-            textAlign: 'left',
-            marginBottom: '24px',
-            minWidth: '300px',
-            borderRadius: 'var(--radius-md)',
-            border: '1px solid var(--border-subtle)',
-            background: 'var(--bg-glass)',
-            overflow: 'hidden',
-            boxShadow: 'var(--shadow-card)',
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '8px 14px',
-              borderBottom: '1px solid var(--border-subtle)',
-              background: 'rgba(255, 247, 237, 0.02)',
-            }}
-          >
-            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#f87171' }} />
-            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#fbbf24' }} />
-            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#34d399' }} />
-            <span
-              style={{
-                marginLeft: '8px',
-                fontSize: '0.7rem',
-                color: 'var(--text-muted)',
-                fontFamily: 'var(--font-geist-mono)',
-              }}
-            >
-              whoami.sh
-            </span>
-          </div>
-          <div
-            style={{
-              padding: '14px 18px',
-              fontFamily: 'var(--font-geist-mono)',
-              fontSize: 'clamp(1rem, 2.8vw, 1.4rem)',
-              minHeight: '2.5rem',
-              fontWeight: 500,
-            }}
-          >
-            <span style={{ color: 'var(--accent-primary)' }}>$</span>{' '}
-            <span style={{ color: 'var(--text-primary)' }}>
-              {typedHead}
-              {typedHead && ' '}
-            </span>
-            <span style={{ color: 'var(--accent-tertiary)' }}>{typedTail}</span>
-            {/* Cursor: solid while typing, blinks only while resting — like a real terminal. */}
-            {!reducedMotion && (
-              <span
-                style={{
-                  color: 'var(--accent-primary)',
-                  marginLeft: '2px',
-                }}
-                className={isIdle ? 'animate-typewriter-cursor' : undefined}
-              >
-                |
-              </span>
-            )}
-          </div>
-        </motion.div>
-
-        {/* Summary */}
+        {/* Thesis */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: 0.6, delay: 0.35 }}
           style={{
-            fontSize: '1.1rem',
-            color: 'var(--text-secondary)',
-            lineHeight: 1.7,
-            marginBottom: '40px',
-            maxWidth: '600px',
-            margin: '0 auto 40px',
+            fontSize: 'clamp(1.15rem, 2.4vw, 1.5rem)',
+            lineHeight: 1.5,
+            maxWidth: '32ch',
+            color: 'var(--text-primary)',
+            margin: '0 0 38px',
           }}
         >
-          I build and ship production systems — from secure cloud infrastructure
-          to AI pipelines that solve problems other teams rely on.
+          I build and secure the <GradientText>platforms</GradientText> other teams
+          ship on — backend, cloud, and applied <GradientText>AI</GradientText>.
         </motion.p>
 
-        {/* CTA Buttons */}
+        {/* Meta row */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
           style={{
             display: 'flex',
-            gap: '16px',
-            justifyContent: 'center',
             flexWrap: 'wrap',
-            marginBottom: '48px',
+            gap: '10px 40px',
+            fontFamily: 'var(--font-geist-mono)',
+            fontSize: '0.78rem',
+            color: 'var(--text-secondary)',
+            letterSpacing: '0.03em',
+            padding: '20px 0',
+            marginBottom: '34px',
+            borderTop: '1px solid var(--border-subtle)',
+            borderBottom: '1px solid var(--border-subtle)',
           }}
+        >
+          {meta.map((m) => (
+            <div key={m.k}>
+              <span style={{ color: 'var(--text-muted)' }}>{m.k} </span>
+              {m.v}
+            </div>
+          ))}
+        </motion.div>
+
+        {/* CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.62 }}
+          style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', marginBottom: '40px' }}
         >
           <Magnetic>
             <a href="#projects" className="btn-primary">
-              <span>View My Work ↓</span>
+              View selected work <span>↗</span>
             </a>
           </Magnetic>
           <a href="#contact" className="btn-secondary">
-            Get In Touch
+            Get in touch
           </a>
         </motion.div>
 
-        {/* Social Links */}
+        {/* Social links */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.2 }}
-          style={{
-            display: 'flex',
-            gap: '20px',
-            justifyContent: 'center',
-          }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          style={{ display: 'flex', gap: '14px' }}
         >
           {socialLinks.map(({ label, href, Icon }) => (
             <a
@@ -271,22 +193,22 @@ export default function HeroSection() {
               target={href.startsWith('mailto') ? undefined : '_blank'}
               rel="noopener noreferrer"
               title={label}
+              className="glow-hover"
               style={{
-                width: '48px',
-                height: '48px',
+                width: '42px',
+                height: '42px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                borderRadius: '50%',
+                borderRadius: 'var(--radius-md)',
                 border: '1px solid var(--border-subtle)',
-                background: 'var(--bg-glass)',
+                background: 'var(--bg-secondary)',
                 color: 'var(--text-secondary)',
-                transition: 'all 0.3s',
+                transition: 'all var(--transition-base)',
                 textDecoration: 'none',
               }}
-              className="glow-hover"
             >
-              <Icon size={20} />
+              <Icon size={18} />
             </a>
           ))}
         </motion.div>
@@ -296,52 +218,30 @@ export default function HeroSection() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
+        transition={{ delay: 1.2 }}
         style={{
           position: 'absolute',
-          bottom: '32px',
+          bottom: '28px',
           left: '50%',
           transform: 'translateX(-50%)',
           display: 'flex',
-          flexDirection: 'column',
           alignItems: 'center',
-          gap: '8px',
+          gap: '10px',
+          fontFamily: 'var(--font-geist-mono)',
+          fontSize: '0.68rem',
+          letterSpacing: '0.16em',
+          textTransform: 'uppercase',
+          color: 'var(--text-muted)',
         }}
       >
-        <span
-          style={{
-            fontSize: '0.75rem',
-            color: 'var(--text-muted)',
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-          }}
+        <span>Scroll</span>
+        <motion.span
+          animate={{ y: [0, 5, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity }}
+          style={{ color: 'var(--accent-primary)' }}
         >
-          Scroll
-        </span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          style={{
-            width: '24px',
-            height: '40px',
-            border: '2px solid var(--border-subtle)',
-            borderRadius: '12px',
-            display: 'flex',
-            justifyContent: 'center',
-            paddingTop: '8px',
-          }}
-        >
-          <motion.div
-            animate={{ opacity: [1, 0], y: [0, 12] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            style={{
-              width: '3px',
-              height: '8px',
-              borderRadius: '2px',
-              background: 'var(--accent-primary)',
-            }}
-          />
-        </motion.div>
+          ↓
+        </motion.span>
       </motion.div>
     </section>
   );

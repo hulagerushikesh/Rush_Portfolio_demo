@@ -1,16 +1,14 @@
 'use client';
 
 import { motion, type Variants } from 'framer-motion';
-import { Terminal, Brain, Layers, Cloud } from 'lucide-react';
 import AnimatedSection from '@/components/ui/AnimatedSection';
-import GradientText from '@/components/ui/GradientText';
 import { DURATION, EASE_STANDARD } from '@/lib/motion';
 import { getResumeData } from '@/utils/data';
 
-// Tags inside each category card trickle in rather than appearing at once.
+// Chips within a row trickle in rather than appearing all at once.
 const tagListVariants: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.03, delayChildren: 0.15 } },
+  visible: { transition: { staggerChildren: 0.025, delayChildren: 0.1 } },
 };
 
 const tagVariants: Variants = {
@@ -22,40 +20,11 @@ const tagVariants: Variants = {
   },
 };
 
-const skillIcons: Record<string, typeof Terminal> = {
-  languages: Terminal,
-  aiMl: Brain,
-  frameworks: Layers,
-  cloud: Cloud,
-};
-
-const skillLabels: Record<string, string> = {
-  languages: 'Languages',
-  aiMl: 'AI / ML',
-  frameworks: 'Frameworks & Tools',
-  cloud: 'Cloud & DevOps',
-};
-
-// Alternate between the two brand accents rather than a distinct hue per card.
-const skillColors: Record<string, string> = {
-  languages: 'rgba(217, 119, 6, 0.12)',
-  aiMl: 'rgba(245, 158, 11, 0.12)',
-  frameworks: 'rgba(217, 119, 6, 0.12)',
-  cloud: 'rgba(245, 158, 11, 0.12)',
-};
-
-const skillBorderColors: Record<string, string> = {
-  languages: 'rgba(217, 119, 6, 0.25)',
-  aiMl: 'rgba(245, 158, 11, 0.25)',
-  frameworks: 'rgba(217, 119, 6, 0.25)',
-  cloud: 'rgba(245, 158, 11, 0.25)',
-};
-
-const skillIconColors: Record<string, string> = {
-  languages: 'var(--accent-primary)',
-  aiMl: 'var(--accent-secondary)',
-  frameworks: 'var(--accent-primary)',
-  cloud: 'var(--accent-secondary)',
+const skillLabels: Record<string, { label: string; sub: string }> = {
+  languages: { label: 'Languages', sub: 'LANG' },
+  aiMl: { label: 'AI / ML', sub: 'MODELS' },
+  frameworks: { label: 'Frameworks', sub: 'LIBS' },
+  cloud: { label: 'Cloud / MLOps', sub: 'INFRA' },
 };
 
 export default function SkillsSection() {
@@ -64,93 +33,50 @@ export default function SkillsSection() {
 
   return (
     <section id="skills" style={{ background: 'var(--bg-secondary)' }}>
-      <div className="section-container">
-        <AnimatedSection>
-          <span className="section-label">Skills</span>
-          <h2 className="section-title">
-            Technologies I <GradientText>work with</GradientText>
-          </h2>
-          <p className="section-subtitle">
-            Tools I rely on daily to design, build, and ship production systems.
-          </p>
-        </AnimatedSection>
+      <div className="section-container section-grid">
+        <aside className="section-rail">
+          <span className="rail-idx">03</span>
+          <span className="rail-k">Tooling</span>
+          <span className="rail-k">Spec</span>
+        </aside>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '24px',
-            marginTop: '48px',
-          }}
-        >
-          {skillCategories.map(([key, skills], catIndex) => {
-            const Icon = skillIcons[key];
-            return (
-            <AnimatedSection key={key} delay={0.1 * catIndex} variant="blurIn">
-              <div
-                className="glass-card"
-                style={{
-                  padding: '32px',
-                  height: '100%',
-                }}
-              >
-                {/* Category header */}
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '12px',
-                    marginBottom: '24px',
-                  }}
-                >
-                  <div
-                    style={{
-                      width: '44px',
-                      height: '44px',
-                      borderRadius: '12px',
-                      background: skillColors[key],
-                      border: `1px solid ${skillBorderColors[key]}`,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: skillIconColors[key],
-                    }}
-                  >
-                    <Icon size={20} strokeWidth={1.75} />
+        <div>
+          <AnimatedSection>
+            <span className="section-label">Stack</span>
+            <h2 className="section-title">The instruments I reach for</h2>
+            <p className="section-subtitle">
+              Tools I rely on daily to design, build, and ship production systems — by domain.
+            </p>
+          </AnimatedSection>
+
+          <div style={{ marginTop: '40px' }}>
+            {skillCategories.map(([key, skills], i) => {
+              const meta = skillLabels[key] ?? { label: key, sub: '' };
+              return (
+                <AnimatedSection key={key} delay={0.08 * i} variant="blurIn">
+                  <div className="spec-row">
+                    <div className="spec-k">
+                      {meta.label}
+                      <span>{meta.sub}</span>
+                    </div>
+                    <motion.div
+                      className="spec-v"
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, margin: '-60px' }}
+                      variants={tagListVariants}
+                    >
+                      {skills.map((skill) => (
+                        <motion.span key={skill} className="tech-tag" variants={tagVariants}>
+                          {skill}
+                        </motion.span>
+                      ))}
+                    </motion.div>
                   </div>
-                  <h3
-                    style={{
-                      fontSize: '1.1rem',
-                      fontWeight: 600,
-                      color: 'var(--text-primary)',
-                    }}
-                  >
-                    {skillLabels[key]}
-                  </h3>
-                </div>
-
-                {/* Skill tags */}
-                <motion.div
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: '-60px' }}
-                  variants={tagListVariants}
-                  style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    gap: '8px',
-                  }}
-                >
-                  {skills.map((skill) => (
-                    <motion.span key={skill} className="tech-tag" variants={tagVariants}>
-                      {skill}
-                    </motion.span>
-                  ))}
-                </motion.div>
-              </div>
-            </AnimatedSection>
-            );
-          })}
+                </AnimatedSection>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
