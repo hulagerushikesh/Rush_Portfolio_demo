@@ -1,15 +1,11 @@
-import { createClient } from '@/lib/supabase/server';
+import { getAllMessages } from '@/lib/admin-content';
 import { markMessageRead, deleteMessage } from '@/app/actions/messages';
 import ConfirmSubmitButton from '@/components/admin/ConfirmSubmitButton';
 import AdminListItem from '@/components/admin/AdminListItem';
 import type { ContactMessage } from '@/types/content';
 
 export default async function AdminMessagesPage() {
-  const supabase = await createClient();
-  const { data: messages } = await supabase
-    .from('messages')
-    .select('*')
-    .order('created_at', { ascending: false });
+  const messages = await getAllMessages();
 
   return (
     <div>

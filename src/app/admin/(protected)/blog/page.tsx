@@ -1,13 +1,12 @@
 import Link from 'next/link';
-import { createClient } from '@/lib/supabase/server';
+import { getAllBlogPosts } from '@/lib/admin-content';
 import { deleteBlogPost } from '@/app/actions/blog';
 import ConfirmSubmitButton from '@/components/admin/ConfirmSubmitButton';
 import AdminListItem from '@/components/admin/AdminListItem';
 import type { BlogPost } from '@/types/content';
 
 export default async function AdminBlogPage() {
-  const supabase = await createClient();
-  const { data: posts } = await supabase.from('blog_posts').select('*').order('created_at', { ascending: false });
+  const posts = await getAllBlogPosts();
 
   return (
     <div>

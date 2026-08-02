@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   description: 'Notes on AI/ML, backend engineering, and cloud systems.',
 };
 
+// Content edits call revalidatePath, but a build-time Firestore timeout would
+// otherwise bake an empty page in until the next deploy. This lets it self-heal.
+export const revalidate = 300;
+
 export default async function BlogIndexPage() {
   const posts = await getPublishedBlogPosts();
 

@@ -1,20 +1,14 @@
 import Link from 'next/link';
 import CountUp from '@/components/ui/CountUp';
-import { createClient } from '@/lib/supabase/server';
+import { getDashboardCounts } from '@/lib/admin-content';
 
 export default async function AdminDashboardPage() {
-  const supabase = await createClient();
-
-  const [{ count: projectCount }, { count: postCount }, { count: unreadCount }] = await Promise.all([
-    supabase.from('projects').select('*', { count: 'exact', head: true }),
-    supabase.from('blog_posts').select('*', { count: 'exact', head: true }),
-    supabase.from('messages').select('*', { count: 'exact', head: true }).eq('read', false),
-  ]);
+  const { projectCount, postCount, unreadCount } = await getDashboardCounts();
 
   const cards = [
-    { label: 'Projects', value: projectCount ?? 0, href: '/admin/projects' },
-    { label: 'Blog Posts', value: postCount ?? 0, href: '/admin/blog' },
-    { label: 'Unread Messages', value: unreadCount ?? 0, href: '/admin/messages' },
+    { label: 'Projects', value: projectCount, href: '/admin/projects' },
+    { label: 'Blog Posts', value: postCount, href: '/admin/blog' },
+    { label: 'Unread Messages', value: unreadCount, href: '/admin/messages' },
   ];
 
   return (

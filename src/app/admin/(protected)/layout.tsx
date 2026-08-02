@@ -1,7 +1,10 @@
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { createClient } from '@/lib/supabase/server';
+import { getSessionUser } from '@/lib/firebase/session';
 import { signOut } from '@/app/actions/auth';
+
+// Admin reads live data behind an auth check — never prerender it.
+export const dynamic = 'force-dynamic';
 
 const navItems = [
   { href: '/admin', label: 'Dashboard' },
@@ -11,11 +14,7 @@ const navItems = [
 ];
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
+  const user = await getSessionUser();
   if (!user) redirect('/admin/login');
 
   return (

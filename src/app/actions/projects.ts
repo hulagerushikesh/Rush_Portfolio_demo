@@ -2,7 +2,9 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { createClient } from '@/lib/supabase/server';
+import { adminDb } from '@/lib/firebase/admin';
+import { COLLECTIONS, nowIso } from '@/lib/firebase/collections';
+import { requireSessionUser } from '@/lib/firebase/session';
 
 function parseProjectForm(formData: FormData) {
   const technologies = String(formData.get('technologies') || '')
@@ -28,11 +30,13 @@ function parseProjectForm(formData: FormData) {
 }
 
 export async function createProject(formData: FormData) {
-  const supabase = await createClient();
+  await requireSessionUser();
   const data = parseProjectForm(formData);
+  const timestamp = nowIso();
 
-  const { error } = await supabase.from('projects').insert(data);
-  if (error) throw new Error(error.message);
+  await adminDb()
+    .collection(COLLECTIONS.projects)
+    .add({ ...data, created_at: timestamp, updated_at: timestamp });
 
   revalidatePath('/');
   revalidatePath('/admin/projects');
@@ -40,11 +44,13 @@ export async function createProject(formData: FormData) {
 }
 
 export async function updateProject(id: string, formData: FormData) {
-  const supabase = await createClient();
+  await requireSessionUser();
   const data = parseProjectForm(formData);
 
-  const { error } = await supabase.from('projects').update(data).eq('id', id);
-  if (error) throw new Error(error.message);
+  await adminDb()
+    .collection(COLLECTIONS.projects)
+    .doc(id)
+    .update({ ...data, updated_at: nowIso() });
 
   revalidatePath('/');
   revalidatePath('/admin/projects');
@@ -52,9 +58,8 @@ export async function updateProject(id: string, formData: FormData) {
 }
 
 export async function deleteProject(id: string) {
-  const supabase = await createClient();
-  const { error } = await supabase.from('projects').delete().eq('id', id);
-  if (error) throw new Error(error.message);
+  await requireSessionUser();
+  await adminDb().collection(COLLECTIONS.projects).doc(id).delete();
 
   revalidatePath('/');
   revalidatePath('/admin/projects');

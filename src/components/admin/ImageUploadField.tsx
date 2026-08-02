@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { createClient } from '@/lib/supabase/client';
+import { uploadImage } from '@/app/actions/upload';
 import { DURATION, EASE_STANDARD } from '@/lib/motion';
 
 export default function ImageUploadField({
@@ -25,22 +25,18 @@ export default function ImageUploadField({
     setUploading(true);
     setError(null);
 
-    const supabase = createClient();
-    const path = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
+    const body = new FormData();
+    body.append('file', file);
 
-    const { error: uploadError } = await supabase.storage.from('media').upload(path, file, {
-      cacheControl: '3600',
-      upsert: false,
-    });
+    const result = await uploadImage(body);
 
-    if (uploadError) {
-      setError(uploadError.message);
+    if (!result.success) {
+      setError(result.error);
       setUploading(false);
       return;
     }
 
-    const { data } = supabase.storage.from('media').getPublicUrl(path);
-    setUrl(data.publicUrl);
+    setUrl(result.url);
     setUploading(false);
   };
 

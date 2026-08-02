@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { createClient } from '@/lib/supabase/client';
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { clientAuth } from '@/lib/firebase/client';
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -16,11 +17,29 @@ export default function AdminLoginPage() {
     setLoading(true);
     setError(null);
 
-    const supabase = createClient();
-    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+    try {
+      const auth = clientAuth();
+      const credential = await signInWithEmailAndPassword(auth, email, password);
+      const idToken = await credential.user.getIdToken();
 
-    if (signInError) {
-      setError(signInError.message);
+      const res = await fetch('/api/auth/session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ idToken }),
+      });
+
+      // The browser-side Firebase session has served its purpose; from here the
+      // httpOnly cookie is the only thing that grants access.
+      await signOut(auth);
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        setError(body.error ?? 'Could not sign in.');
+        setLoading(false);
+        return;
+      }
+    } catch {
+      setError('Invalid email or password.');
       setLoading(false);
       return;
     }

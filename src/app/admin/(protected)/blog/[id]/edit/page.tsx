@@ -1,13 +1,12 @@
 import { notFound } from 'next/navigation';
-import { createClient } from '@/lib/supabase/server';
+import { getBlogPostById } from '@/lib/admin-content';
 import BlogForm from '@/components/admin/BlogForm';
 import { updateBlogPost } from '@/app/actions/blog';
 import type { BlogPost } from '@/types/content';
 
 export default async function EditBlogPostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const supabase = await createClient();
-  const { data: post } = await supabase.from('blog_posts').select('*').eq('id', id).single();
+  const post = await getBlogPostById(id);
 
   if (!post) notFound();
 

@@ -7,6 +7,10 @@ import AchievementsSection from "@/components/sections/AchievementsSection";
 import ContactSection from "@/components/sections/ContactSection";
 import Footer from "@/components/Footer";
 
+// Content edits call revalidatePath, but a build-time Firestore timeout would
+// otherwise bake an empty page in until the next deploy. This lets it self-heal.
+export const revalidate = 300;
+
 export default function Home() {
   return (
     <main>

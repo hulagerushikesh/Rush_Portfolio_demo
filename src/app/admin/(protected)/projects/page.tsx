@@ -1,17 +1,12 @@
 import Link from 'next/link';
-import { createClient } from '@/lib/supabase/server';
+import { getAllProjects } from '@/lib/admin-content';
 import { deleteProject } from '@/app/actions/projects';
 import ConfirmSubmitButton from '@/components/admin/ConfirmSubmitButton';
 import AdminListItem from '@/components/admin/AdminListItem';
 import type { Project } from '@/types/content';
 
 export default async function AdminProjectsPage() {
-  const supabase = await createClient();
-  const { data: projects } = await supabase
-    .from('projects')
-    .select('*')
-    .order('sort_order', { ascending: true })
-    .order('created_at', { ascending: false });
+  const projects = await getAllProjects();
 
   return (
     <div>

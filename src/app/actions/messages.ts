@@ -2,8 +2,10 @@
 
 import { revalidatePath } from 'next/cache';
 import nodemailer from 'nodemailer';
-import { createClient } from '@/lib/supabase/server';
-import { isSupabaseConfigured } from '@/lib/supabase/config';
+import { adminDb } from '@/lib/firebase/admin';
+import { COLLECTIONS, nowIso } from '@/lib/firebase/collections';
+import { isFirebaseConfigured } from '@/lib/firebase/config';
+import { requireSessionUser } from '@/lib/firebase/session';
 import { contactFormSchema } from '@/lib/validations';
 
 export async function submitContactMessage(
@@ -14,17 +16,18 @@ export async function submitContactMessage(
     return { success: false as const, error: 'Please check your inputs and try again.' };
   }
 
-  if (!isSupabaseConfigured()) {
+  if (!isFirebaseConfigured()) {
     return {
       success: false as const,
       error: 'The contact form is temporarily unavailable — please email me directly instead.',
     };
   }
 
-  const supabase = await createClient();
-  const { error } = await supabase.from('messages').insert(parsed.data);
-
-  if (error) {
+  try {
+    await adminDb()
+      .collection(COLLECTIONS.messages)
+      .add({ ...parsed.data, read: false, created_at: nowIso() });
+  } catch {
     return { success: false as const, error: 'Something went wrong. Please try again.' };
   }
 
@@ -64,15 +67,13 @@ async function sendContactNotification(data: {
 }
 
 export async function markMessageRead(id: string, read: boolean) {
-  const supabase = await createClient();
-  const { error } = await supabase.from('messages').update({ read }).eq('id', id);
-  if (error) throw new Error(error.message);
+  await requireSessionUser();
+  await adminDb().collection(COLLECTIONS.messages).doc(id).update({ read });
   revalidatePath('/admin/messages');
 }
 
 export async function deleteMessage(id: string) {
-  const supabase = await createClient();
-  const { error } = await supabase.from('messages').delete().eq('id', id);
-  if (error) throw new Error(error.message);
+  await requireSessionUser();
+  await adminDb().collection(COLLECTIONS.messages).doc(id).delete();
   revalidatePath('/admin/messages');
 }
