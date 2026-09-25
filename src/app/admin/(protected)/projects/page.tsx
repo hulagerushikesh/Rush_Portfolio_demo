@@ -3,6 +3,9 @@ import { getAllProjects } from '@/lib/admin-content';
 import { deleteProject } from '@/app/actions/projects';
 import ConfirmSubmitButton from '@/components/admin/ConfirmSubmitButton';
 import AdminListItem from '@/components/admin/AdminListItem';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
 import type { Project } from '@/types/content';
 
 export default async function AdminProjectsPage() {
@@ -12,51 +15,40 @@ export default async function AdminProjectsPage() {
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
         <h1 style={{ fontSize: '1.8rem', fontWeight: 700 }}>Projects</h1>
-        <Link href="/admin/projects/new" className="btn-primary">
-          <span>+ New Project</span>
-        </Link>
+        <Button asChild size="sm">
+          <Link href="/admin/projects/new">+ New Project</Link>
+        </Button>
       </div>
 
       <div style={{ display: 'grid', gap: '12px' }}>
         {((projects as Project[]) ?? []).map((project, i) => (
           <AdminListItem key={project.id} index={i}>
-          <div
-            className="glass-card"
-            style={{
-              padding: '16px 20px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              gap: '16px',
-              flexWrap: 'wrap',
-            }}
-          >
-            <div>
-              <div style={{ fontWeight: 600 }}>{project.title}</div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                /{project.slug} · {project.published ? 'Published' : 'Draft'}
-                {project.featured ? ' · Featured' : ''}
+            <Card className="flex flex-wrap items-center justify-between gap-4 p-4 px-5">
+              <div>
+                <div style={{ fontWeight: 600 }}>{project.title}</div>
+                <div className="mt-1.5 flex flex-wrap items-center gap-2">
+                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>/{project.slug}</span>
+                  <Badge variant={project.published ? 'accent' : 'muted'}>
+                    {project.published ? 'Published' : 'Draft'}
+                  </Badge>
+                  {project.featured && <Badge variant="outline">Featured</Badge>}
+                </div>
               </div>
-            </div>
-            <div style={{ display: 'flex', gap: '8px' }}>
-              <Link
-                href={`/admin/projects/${project.id}/edit`}
-                className="btn-secondary"
-                style={{ padding: '8px 16px', fontSize: '0.85rem' }}
-              >
-                Edit
-              </Link>
-              <form action={deleteProject.bind(null, project.id)}>
-                <ConfirmSubmitButton
-                  confirmMessage={`Delete "${project.title}"? This can't be undone.`}
-                  className="btn-secondary"
-                  style={{ padding: '8px 16px', fontSize: '0.85rem', color: '#f87171' }}
-                >
-                  Delete
-                </ConfirmSubmitButton>
-              </form>
-            </div>
-          </div>
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <Button asChild variant="secondary" size="sm">
+                  <Link href={`/admin/projects/${project.id}/edit`}>Edit</Link>
+                </Button>
+                <form action={deleteProject.bind(null, project.id)}>
+                  <ConfirmSubmitButton
+                    confirmMessage={`Delete "${project.title}"? This can't be undone.`}
+                    className="btn-secondary"
+                    style={{ padding: '8px 16px', fontSize: '0.85rem', color: '#f87171' }}
+                  >
+                    Delete
+                  </ConfirmSubmitButton>
+                </form>
+              </div>
+            </Card>
           </AdminListItem>
         ))}
         {(!projects || projects.length === 0) && <p style={{ color: 'var(--text-muted)' }}>No projects yet.</p>}
