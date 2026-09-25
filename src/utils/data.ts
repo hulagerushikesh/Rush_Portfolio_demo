@@ -25,12 +25,7 @@ export interface ResumeData {
     startDate: string;
     endDate: string;
   }>;
-  skills: {
-    languages: string[];
-    aiMl: string[];
-    frameworks: string[];
-    cloud: string[];
-  };
+  skills: Record<string, string[]>;
   achievements: Array<{
     title: string;
     description: string;

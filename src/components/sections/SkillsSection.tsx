@@ -22,9 +22,12 @@ const tagVariants: Variants = {
 
 const skillLabels: Record<string, { label: string; sub: string }> = {
   languages: { label: 'Languages', sub: 'LANG' },
+  identity: { label: 'Identity & Access', sub: 'IAM' },
+  security: { label: 'Security', sub: 'SEC' },
+  backend: { label: 'Backend', sub: 'API' },
+  cloud: { label: 'Cloud / DevOps', sub: 'INFRA' },
   aiMl: { label: 'AI / ML', sub: 'MODELS' },
   frameworks: { label: 'Frameworks', sub: 'LIBS' },
-  cloud: { label: 'Cloud / MLOps', sub: 'INFRA' },
 };
 
 export default function SkillsSection() {

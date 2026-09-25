@@ -1,25 +1,28 @@
 {
   "personalInfo": {
     "name": "Rushikesh Hulage",
-    "title": "Software Engineer - Platform Engineering",
+    "title": "Software Engineer - Identity & Platform Engineering",
     "email": "hulagerushikesh@gmail.com",
     "phone": "+91-8975173649",
     "location": "Pune, Maharashtra",
     "linkedin": "https://www.linkedin.com/in/rushikesh-hulage-46018522b/",
     "github": "https://github.com/hulagerushikesh"
   },
-  "summary": "Software Engineer specializing in AI/ML, Backend Development, and Cloud Technologies. Currently working at Telstra on platform engineering with expertise in Java, Spring Boot, AWS, and machine learning frameworks.",
+  "summary": "Software Engineer with 3 years building and operating customer-facing authentication platforms at enterprise scale. I work at the protocol level across OAuth 2.0, OpenID Connect, JWT/JWKS, SSO and federation, and own the security primitives beneath them — PKI, X.509 lifecycle, mTLS, and TLS termination — in production systems where an auth outage blocks customer access. Alongside the day job I build applied AI/ML platforms: agentic RAG, real-time computer vision, and quantitative systems.",
   "experience": [
     {
-      "title": "Software Engineer – Platform Engineering",
+      "title": "Software Engineer – Identity & Platform Engineering",
       "company": "Telstra",
       "location": "Pune, India",
       "startDate": "July 2023",
       "endDate": "Present",
       "description": [
-        "Developed and maintained robust backend services for authentication and authorization using Java, Spring Boot, and AWS (EC2, IAM, API Gateway), ensuring secure and scalable access for internal applications.",
-        "Led the critical migration from AWS WAF Classic to WAFv2 for all internal Telstra applications, significantly enhancing security posture and threat detection capabilities.",
-        "Architected the WAFv2 integration with AWS services including CloudFront, S3, and CloudWatch, and configured Nginx reverse proxies to establish a comprehensive security monitoring and response system."
+        "Own the registration, authentication, and authorization services behind Telstra's customer digital channels — Java and Spring Boot backend services implementing OAuth 2.0 and OpenID Connect flows, JWT/JWKS validation, token introspection and exchange, session management, MFA, and RBAC.",
+        "Migrated 15+ enterprise applications from PCF to OpenShift with zero authentication downtime and no customer-facing incidents, by rebuilding auth integration, secure routing, and IP allow-listing ahead of each cutover.",
+        "Eliminated manual certificate renewal as a recurring outage risk by implementing end-to-end mTLS with automated X.509 issuance and rotation, and owning TLS termination at the CDN edge.",
+        "Hardened the identity platform's edge by migrating from legacy WAF to AWS CloudFront and WAFv2 — OWASP-aligned custom rule groups, regex pattern sets, IP reputation lists, and rate-based rules — with a phased DNS cutover across 10+ downstream applications at zero downtime.",
+        "Standardized SSO and single logout across enterprise apps by configuring OIDC/OAuth 2.0 clients in PingFederate and SecureAuth, and integrating with Salesforce and Entra ID (Azure AD) for identity federation.",
+        "Drove platform modernization — Java and Spring Boot upgrades, dependency remediation, CI/CD automation, and vulnerability remediation — reducing security and technical-debt risk across the identity estate."
       ]
     }
   ],
@@ -38,10 +41,12 @@
     }
   ],
   "skills": {
-    "languages": ["Python", "C++", "Java", "SQL", "Bash"],
-    "aiMl": ["NLP", "Computer Vision", "RAG", "VLM", "Agentic Workflows"],
-    "frameworks": ["PyTorch", "TensorFlow", "Hugging Face", "LangChain", "OpenCV", "Scikit-learn"],
-    "cloud": ["AWS SageMaker", "GCP Vertex AI", "Kubeflow", "MLflow", "CI/CD", "Git"]
+    "languages": ["Java", "Python", "SQL", "Bash", "C++"],
+    "identity": ["OAuth 2.0", "OpenID Connect", "SAML 2.0", "JWT/JWKS", "SSO", "MFA", "RBAC", "LDAP", "PingFederate", "Entra ID"],
+    "security": ["PKI", "X.509", "mTLS", "TLS termination", "AWS WAFv2", "OWASP Top 10", "CORS", "Secure SDLC"],
+    "backend": ["Spring Boot", "Spring Security", "Hibernate", "JPA", "REST APIs", "FastAPI", "JUnit", "Mockito"],
+    "cloud": ["AWS (CloudFront, Route 53, S3, IAM, Lambda, CloudWatch)", "OpenShift", "Kubernetes", "Docker", "CI/CD", "GitHub Actions"],
+    "aiMl": ["LLMs", "RAG", "Agentic Orchestration", "LangChain", "Qdrant", "PyTorch", "ONNX", "Computer Vision"]
   },
   "achievements": [
     {

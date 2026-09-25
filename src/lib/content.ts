@@ -2,6 +2,7 @@ import 'server-only';
 import { adminDb } from '@/lib/firebase/admin';
 import { COLLECTIONS, queryToRecords } from '@/lib/firebase/collections';
 import { isFirebaseConfigured } from '@/lib/firebase/config';
+import { staticProjects, getStaticProjectBySlug } from '@/data/projects';
 import type { Project, BlogPost } from '@/types/content';
 
 // Guards against a slow/unreachable Firestore hanging page renders.
@@ -24,7 +25,7 @@ function bySortOrderThenNewest(a: Project, b: Project): number {
 }
 
 export async function getPublishedProjects(): Promise<Project[]> {
-  if (!isFirebaseConfigured()) return [];
+  if (!isFirebaseConfigured()) return staticProjects;
 
   const projects = await withTimeout(
     queryToRecords<Project>(
@@ -33,11 +34,15 @@ export async function getPublishedProjects(): Promise<Project[]> {
     [] as Project[]
   );
 
+  // Fall back to the static catalog when the CMS has no published projects, so
+  // the public site is never empty. Published CMS content always takes priority.
+  if (projects.length === 0) return staticProjects;
+
   return projects.sort(bySortOrderThenNewest);
 }
 
 export async function getPublishedProjectBySlug(slug: string): Promise<Project | null> {
-  if (!isFirebaseConfigured()) return null;
+  if (!isFirebaseConfigured()) return getStaticProjectBySlug(slug);
 
   const matches = await withTimeout(
     queryToRecords<Project>(
@@ -50,7 +55,7 @@ export async function getPublishedProjectBySlug(slug: string): Promise<Project |
     [] as Project[]
   );
 
-  return matches[0] ?? null;
+  return matches[0] ?? getStaticProjectBySlug(slug);
 }
 
 export async function getPublishedBlogPosts(): Promise<BlogPost[]> {
