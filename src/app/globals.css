@@ -1,35 +1,37 @@
 @import "tailwindcss";
 
-/* ===== DESIGN TOKENS — "Engineering Log" =====
-   Cool, instrument-like identity: near-black ground, one signal-teal
-   accent, monospace as the display face. */
+/* ===== DESIGN TOKENS — "Engineering Log" (light) =====
+   Instrument-like identity in a bright, attractive light theme: soft
+   cool-white ground, warm-neutral ink, one signal-teal accent, monospace
+   as the display face. Same token names as the dark build — only values
+   change — so every component re-themes for free. */
 :root {
-  --bg-primary: #0b0f10;
-  --bg-secondary: #0f1517;
-  --bg-tertiary: #131b1d;
-  --bg-glass: rgba(200, 225, 222, 0.03);
-  --bg-glass-hover: rgba(200, 225, 222, 0.06);
+  --bg-primary: #f7faf9;
+  --bg-secondary: #eef3f1;
+  --bg-tertiary: #e4ebe8;
+  --bg-glass: rgba(15, 118, 110, 0.03);
+  --bg-glass-hover: rgba(15, 118, 110, 0.07);
 
-  /* Signal-teal accent — restrained, used as the single point of emphasis. */
-  --accent-primary: #5fd4c0;
-  --accent-secondary: #46b3a2;
-  --accent-tertiary: #8fe6d8;
-  --accent-glow: #5fd4c0;
-  --accent-ink: #06100e;
-  --accent-success: #34d399;
+  /* Signal-teal accent — AA-contrast on light; the single point of emphasis. */
+  --accent-primary: #0f766e;
+  --accent-secondary: #115e56;
+  --accent-tertiary: #14b8a1;
+  --accent-glow: #14b8a1;
+  --accent-ink: #ffffff;
+  --accent-success: #0f9d6b;
 
-  --text-primary: #e6ece9;
-  --text-secondary: #9fb0ac;
-  --text-accent: #8fe6d8;
-  --text-muted: #6d7d7a;
+  --text-primary: #0e1a17;
+  --text-secondary: #45564f;
+  --text-accent: #0d5f59;
+  --text-muted: #6b7d77;
 
-  --border-subtle: rgba(200, 225, 222, 0.10);
-  --border-strong: rgba(200, 225, 222, 0.20);
-  --border-accent: rgba(95, 212, 192, 0.40);
+  --border-subtle: rgba(14, 26, 23, 0.10);
+  --border-strong: rgba(14, 26, 23, 0.16);
+  --border-accent: rgba(15, 118, 110, 0.38);
 
-  --shadow-glow: 0 0 30px rgba(95, 212, 192, 0.15);
-  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.5);
-  --shadow-card-hover: 0 10px 44px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 30px rgba(20, 184, 161, 0.18);
+  --shadow-card: 0 4px 20px rgba(14, 26, 23, 0.06);
+  --shadow-card-hover: 0 12px 40px rgba(14, 26, 23, 0.11);
 
   --radius-sm: 6px;
   --radius-md: 8px;
@@ -56,8 +58,8 @@
   /* Display face is monospace — the whole site reads like a typeset spec. */
   --font-display: var(--font-geist-mono);
 
-  --background: #0b0f10;
-  --foreground: #e6ece9;
+  --background: #f7faf9;
+  --foreground: #0e1a17;
 
   /* Layout rhythm */
   --maxw: 1180px;
@@ -75,6 +77,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 88px;
+  color-scheme: light;
 }
 
 /* ===== REDUCED MOTION =====
@@ -192,7 +195,7 @@ h1, h2, h3 {
 }
 
 .glow-text {
-  text-shadow: 0 0 20px rgba(95, 212, 192, 0.4);
+  text-shadow: 0 0 20px color-mix(in srgb, var(--accent-glow) 40%, transparent);
 }
 
 .glow-hover:hover {
@@ -215,6 +218,11 @@ h1, h2, h3 {
   -webkit-mask-image: radial-gradient(ellipse 80% 70% at 28% 18%, #000 8%, transparent 72%);
   mask-image: radial-gradient(ellipse 80% 70% at 28% 18%, #000 8%, transparent 72%);
   opacity: 0.7;
+  animation: grid-drift 28s linear infinite;
+}
+
+@keyframes grid-drift {
+  to { background-position: 46px 46px; }
 }
 
 /* ===== KEYFRAMES ===== */
@@ -353,7 +361,7 @@ h1, h2, h3 {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 26px rgba(95, 212, 192, 0.22);
+  box-shadow: 0 8px 26px color-mix(in srgb, var(--accent-glow) 22%, transparent);
 }
 
 .btn-primary:active {
@@ -466,7 +474,7 @@ h1, h2, h3 {
 
 .form-input:focus {
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(95, 212, 192, 0.12);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-glow) 12%, transparent);
 }
 
 .form-input:hover:not(:focus) {
@@ -831,4 +839,29 @@ div:hover > .code-copy-btn,
   height: 1px;
   background: var(--border-subtle);
   border: none;
+}
+
+/* ===== STACK MARQUEE ===== */
+.marquee {
+  overflow: hidden;
+  margin-top: 34px;
+  padding: 14px 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+.marquee-row {
+  display: flex;
+  gap: 34px;
+  width: max-content;
+  font-family: var(--font-geist-mono);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  animation: marquee-scroll 32s linear infinite;
+}
+.marquee:hover .marquee-row { animation-play-state: paused; }
+.marquee-row span b { color: var(--accent-primary); margin-right: 7px; }
+@keyframes marquee-scroll {
+  to { transform: translateX(-50%); }
 }

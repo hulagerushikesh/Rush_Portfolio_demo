@@ -33,6 +33,8 @@ const skillLabels: Record<string, { label: string; sub: string }> = {
 export default function SkillsSection() {
   const resume = getResumeData();
   const skillCategories = Object.entries(resume.skills);
+  // Flatten every skill into one ticker; duplicated so the loop is seamless.
+  const ticker = skillCategories.flatMap(([, list]) => list);
 
   return (
     <section id="skills" style={{ background: 'var(--bg-secondary)' }}>
@@ -80,6 +82,19 @@ export default function SkillsSection() {
               );
             })}
           </div>
+
+          <AnimatedSection delay={0.1}>
+            <div className="marquee" aria-hidden="true">
+              <div className="marquee-row">
+                {[...ticker, ...ticker].map((skill, i) => (
+                  <span key={i}>
+                    <b>#</b>
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </AnimatedSection>
         </div>
       </div>
     </section>

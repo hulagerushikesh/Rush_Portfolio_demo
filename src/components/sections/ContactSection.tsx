@@ -100,8 +100,8 @@ export default function ContactSection() {
                         width: '40px',
                         height: '40px',
                         borderRadius: 'var(--radius-md)',
-                        background: 'rgba(95, 212, 192, 0.10)',
-                        border: '1px solid rgba(95, 212, 192, 0.22)',
+                        background: 'color-mix(in srgb, var(--accent-primary) 10%, transparent)',
+                        border: '1px solid color-mix(in srgb, var(--accent-primary) 22%, transparent)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -193,8 +193,8 @@ export default function ContactSection() {
                         submitError.includes('unavailable')
                           ? {
                               padding: '14px 18px',
-                              background: 'rgba(95, 212, 192, 0.08)',
-                              border: '1px solid rgba(95, 212, 192, 0.25)',
+                              background: 'color-mix(in srgb, var(--accent-primary) 8%, transparent)',
+                              border: '1px solid color-mix(in srgb, var(--accent-primary) 25%, transparent)',
                               borderRadius: 'var(--radius-md)',
                               color: 'var(--accent-tertiary)',
                               fontSize: '0.88rem',

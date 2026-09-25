@@ -15,10 +15,31 @@ const socialLinks = [
 ];
 
 const meta = [
-  { k: 'ROLE /', v: 'Software Engineer, Platform Engineering' },
+  { k: 'ROLE /', v: 'Identity & Platform Engineer' },
   { k: 'AT /', v: 'Telstra' },
   { k: 'LOC /', v: 'Pune, IN' },
 ];
+
+// Renders text as per-letter spans that rise into place — used for the hero
+// name. Framer's <MotionConfig reducedMotion="user"> collapses these to an
+// instant fade for reduced-motion users, so no manual gate is needed.
+function RisingLetters({ text, delay = 0, color }: { text: string; delay?: number; color?: string }) {
+  return (
+    <span style={{ color, display: 'inline-block' }}>
+      {[...text].map((ch, i) => (
+        <motion.span
+          key={`${ch}-${i}`}
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: delay + i * 0.03, ease: [0.22, 1, 0.36, 1] }}
+          style={{ display: 'inline-block', willChange: 'transform' }}
+        >
+          {ch === ' ' ? ' ' : ch}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -99,11 +120,8 @@ export default function HeroSection() {
           Available for senior / platform roles
         </motion.div>
 
-        {/* Name — mono display */}
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
+        {/* Name — mono display, per-letter rise */}
+        <h1
           style={{
             fontFamily: 'var(--font-geist-mono)',
             fontWeight: 600,
@@ -113,10 +131,10 @@ export default function HeroSection() {
             margin: '0 0 26px',
           }}
         >
-          Rushikesh
+          <RisingLetters text="Rushikesh" delay={0.2} />
           <br />
-          <span style={{ color: 'var(--text-muted)' }}>Hulage</span>
-        </motion.h1>
+          <RisingLetters text="Hulage" delay={0.2 + 0.28} color="var(--text-muted)" />
+        </h1>
 
         {/* Thesis */}
         <motion.p

@@ -52,7 +52,7 @@ export default function Footer() {
                   height: '8px',
                   borderRadius: '50%',
                   background: 'var(--accent-primary)',
-                  boxShadow: '0 0 0 4px rgba(95, 212, 192, 0.14)',
+                  boxShadow: '0 0 0 4px color-mix(in srgb, var(--accent-primary) 14%, transparent)',
                 }}
               />
               rushikesh.hulage

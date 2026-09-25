@@ -122,8 +122,8 @@ export default function Navbar() {
           padding: compact ? '8px 24px' : '14px 32px',
           borderRadius: 'var(--radius-xl)',
           background: scrolled
-            ? 'rgba(11, 15, 16, 0.9)'
-            : 'rgba(11, 15, 16, 0.45)',
+            ? 'color-mix(in srgb, var(--bg-primary) 88%, transparent)'
+            : 'color-mix(in srgb, var(--bg-primary) 55%, transparent)',
           backdropFilter: 'blur(18px)',
           WebkitBackdropFilter: 'blur(18px)',
           border: `1px solid ${scrolled ? 'var(--border-accent)' : 'var(--border-subtle)'}`,
@@ -163,7 +163,7 @@ export default function Navbar() {
                 height: '8px',
                 borderRadius: '50%',
                 background: 'var(--accent-primary)',
-                boxShadow: '0 0 0 4px rgba(95, 212, 192, 0.14)',
+                boxShadow: '0 0 0 4px color-mix(in srgb, var(--accent-primary) 14%, transparent)',
               }}
             />
             rushikesh.hulage
@@ -213,8 +213,8 @@ export default function Navbar() {
                       position: 'absolute',
                       inset: 0,
                       borderRadius: 'var(--radius-sm)',
-                      background: 'rgba(95, 212, 192, 0.12)',
-                      border: '1px solid rgba(95, 212, 192, 0.22)',
+                      background: 'color-mix(in srgb, var(--accent-primary) 12%, transparent)',
+                      border: '1px solid color-mix(in srgb, var(--accent-primary) 22%, transparent)',
                       zIndex: -1,
                     }}
                     transition={SPRING.snappy}
@@ -326,7 +326,7 @@ export default function Navbar() {
             style={{
               position: 'fixed',
               inset: 0,
-              background: 'rgba(11, 15, 16, 0.96)',
+              background: 'color-mix(in srgb, var(--bg-primary) 96%, transparent)',
               backdropFilter: 'blur(20px)',
               WebkitBackdropFilter: 'blur(20px)',
               zIndex: 99,
