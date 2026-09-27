@@ -30,15 +30,18 @@ function RevealLine({
   children,
   delay = 0,
   className,
+  padB = '0.1em',
 }: {
   children: React.ReactNode;
   delay?: number;
   className?: string;
+  padB?: string;
 }) {
   // A display line that clip-reveals: sits in an overflow-hidden mask and
   // slides up. <MotionConfig reducedMotion="user"> collapses it to a fade.
+  // padB gives the mask bottom room so italic descenders (g, q, y) aren't clipped.
   return (
-    <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.1em' }}>
+    <span style={{ display: 'block', overflow: 'hidden', paddingBottom: padB }}>
       <motion.span
         className={className}
         initial={{ y: '115%' }}
@@ -137,19 +140,37 @@ export default function HeroSection() {
           Available for senior / platform roles
         </motion.div>
 
-        {/* Name — oversized editorial serif, clip-reveal per line */}
+        {/* Kicker — instant context above the name */}
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.16 }}
+          style={{
+            fontFamily: 'var(--font-geist-sans)',
+            fontSize: '0.8rem',
+            fontWeight: 600,
+            letterSpacing: '0.22em',
+            textTransform: 'uppercase',
+            color: 'var(--accent-text)',
+            margin: '0 0 6px',
+          }}
+        >
+          Software Engineer · Telstra
+        </motion.p>
+
+        {/* Name — editorial serif, clip-reveal per line */}
         <h1
           style={{
             fontFamily: 'var(--font-display)',
             fontWeight: 500,
-            fontSize: 'clamp(3rem, 12vw, 9rem)',
-            lineHeight: 0.92,
+            fontSize: 'clamp(2.6rem, 8.5vw, 6.4rem)',
+            lineHeight: 0.98,
             letterSpacing: '-0.03em',
-            margin: '0 0 30px',
+            margin: '0 0 26px',
           }}
         >
           <RevealLine delay={0.2}>Rushikesh</RevealLine>
-          <RevealLine delay={0.34} className="gradient-text">
+          <RevealLine delay={0.34} className="gradient-text" padB="0.34em">
             <i style={{ fontStyle: 'italic', fontWeight: 400 }}>Hulage</i>
           </RevealLine>
         </h1>
@@ -160,12 +181,12 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.55 }}
           style={{
-            fontSize: 'clamp(1.15rem, 2.3vw, 1.55rem)',
+            fontSize: 'clamp(1.25rem, 2.6vw, 1.8rem)',
             lineHeight: 1.5,
-            maxWidth: '32ch',
+            maxWidth: '30ch',
             color: 'var(--text-primary)',
             fontWeight: 400,
-            margin: '0 auto 40px',
+            margin: '0 auto 36px',
           }}
         >
           I build and secure the <GradientText>platforms</GradientText> other teams
