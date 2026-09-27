@@ -59,8 +59,8 @@ export default async function BlogIndexPage() {
             </article>
           ))}
           {posts.length === 0 && (
-            <p style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-geist-mono)', fontSize: '0.9rem' }}>
-              {'// No posts yet — check back soon.'}
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', textAlign: 'center' }}>
+              No posts yet — check back soon.
             </p>
           )}
         </div>
