@@ -302,6 +302,21 @@ h1, h2, h3 {
   50% { transform: translate(24px, -30px) scale(1.08); }
 }
 
+/* Continuously drifting gradient for the hero accent text */
+@keyframes gradientDrift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.hero-accent {
+  background: linear-gradient(110deg, #4f74ff, #8b7bff, #6ea8ff, #3a5fe0, #4f74ff);
+  background-size: 280% 280%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: gradientDrift 7s ease-in-out infinite;
+}
+
 .animate-pulse-glow { animation: pulse-glow 2.8s ease-in-out infinite; }
 .animate-float-slow { animation: floatSlow 8s ease-in-out infinite; }
 .animate-typewriter-cursor { animation: typewriter-cursor 1s steps(1) infinite; }

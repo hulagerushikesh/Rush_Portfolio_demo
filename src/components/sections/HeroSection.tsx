@@ -1,9 +1,10 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef, useEffect } from 'react';
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 import { Mail } from 'lucide-react';
 import GradientText from '@/components/ui/GradientText';
+import RotatingWord from '@/components/ui/RotatingWord';
 import Magnetic from '@/components/ui/Magnetic';
 import { GithubIcon, LinkedinIcon } from '@/components/ui/BrandIcons';
 import { usePrefersReducedMotion } from '@/lib/motion';
@@ -66,6 +67,26 @@ export default function HeroSection() {
   const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 70]);
 
+  // Cursor parallax for the ambient background orbs — a soft spring so they
+  // drift, not snap. Disabled for reduced-motion and touch (no hover) devices.
+  const px = useMotionValue(0);
+  const py = useMotionValue(0);
+  const ox = useSpring(px, { stiffness: 40, damping: 18, mass: 0.6 });
+  const oy = useSpring(py, { stiffness: 40, damping: 18, mass: 0.6 });
+
+  useEffect(() => {
+    if (reducedMotion) return;
+    if (typeof window !== 'undefined' && !window.matchMedia('(hover: hover)').matches) return;
+    const onMove = (e: PointerEvent) => {
+      const nx = e.clientX / window.innerWidth - 0.5;
+      const ny = e.clientY / window.innerHeight - 0.5;
+      px.set(nx * 60);
+      py.set(ny * 60);
+    };
+    window.addEventListener('pointermove', onMove);
+    return () => window.removeEventListener('pointermove', onMove);
+  }, [reducedMotion, px, py]);
+
   return (
     <section
       id="home"
@@ -79,7 +100,11 @@ export default function HeroSection() {
         overflow: 'hidden',
       }}
     >
-      <div className="grid-bg" aria-hidden="true" />
+      <motion.div
+        className="grid-bg"
+        aria-hidden="true"
+        style={{ x: reducedMotion ? 0 : ox, y: reducedMotion ? 0 : oy }}
+      />
 
       <motion.div
         className="section-container"
@@ -170,7 +195,7 @@ export default function HeroSection() {
           }}
         >
           <RevealLine delay={0.2}>Rushikesh</RevealLine>
-          <RevealLine delay={0.34} className="gradient-text" padB="0.34em">
+          <RevealLine delay={0.34} className="hero-accent" padB="0.34em">
             <i style={{ fontStyle: 'italic', fontWeight: 400 }}>Hulage</i>
           </RevealLine>
         </h1>
@@ -190,7 +215,11 @@ export default function HeroSection() {
           }}
         >
           I build and secure the <GradientText>platforms</GradientText> other teams
-          ship on — backend, cloud, and applied <GradientText>AI</GradientText>.
+          ship on — backend, cloud, and{' '}
+          <RotatingWord
+            className="hero-accent"
+            words={['applied AI', 'RAG systems', 'secure APIs', 'ML pipelines']}
+          />
         </motion.p>
 
         {/* Meta row */}
