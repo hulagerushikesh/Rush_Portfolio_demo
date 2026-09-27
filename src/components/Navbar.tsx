@@ -356,7 +356,7 @@ export default function Navbar() {
                   fontFamily: 'var(--font-geist-mono)',
                   letterSpacing: '0.02em',
                   fontWeight: isActive ? 600 : 400,
-                  color: isActive ? 'var(--accent-primary)' : 'var(--text-secondary)',
+                  color: isActive ? 'var(--accent-text)' : 'var(--text-secondary)',
                   padding: '8px 20px',
                   transition: 'color 0.2s',
                   textDecoration: 'none',

@@ -17,17 +17,20 @@
   --ink: #0a0a0a;
   --bone: #f4f1ea;
 
-  /* Electric cobalt — the single point of emphasis */
-  --accent-primary: #2b3bff;
-  --accent-secondary: #1c29d6;
-  --accent-tertiary: #5a67ff;
-  --accent-glow: #2b3bff;
-  --accent-ink: #f4f1ea;
+  /* Acid lime — the single point of emphasis.
+     Bright lime is a FILL color (ink text sits on top); it is unreadable as
+     text on bone, so text-on-bone uses --accent-text (dark chartreuse). */
+  --accent-primary: #c5f82a;
+  --accent-secondary: #a6d417;
+  --accent-tertiary: #d9ff5c;
+  --accent-glow: #c5f82a;
+  --accent-ink: #0a0a0a;
+  --accent-text: #47660a;
   --accent-success: #0f9d6b;
 
   --text-primary: #0a0a0a;
   --text-secondary: #35332e;
-  --text-accent: #1c29d6;
+  --text-accent: #47660a;
   --text-muted: #78746a;
 
   /* Rules — brutalist hairlines are thick and black */
@@ -183,7 +186,7 @@ h1, h2, h3 {
 
 /* ===== ACCENT TEXT (kept class name; flat cobalt) ===== */
 .gradient-text {
-  color: var(--accent-primary);
+  color: var(--accent-text);
   font-weight: 700;
 }
 
@@ -292,7 +295,7 @@ h1, h2, h3 {
 }
 
 .section-rail .rail-idx {
-  color: var(--accent-primary);
+  color: var(--accent-text);
   display: block;
   font-family: var(--font-display);
   font-weight: 700;
@@ -446,7 +449,7 @@ h1, h2, h3 {
   bottom: -2px;
   width: 100%;
   height: 2px;
-  background: var(--accent-primary);
+  background: var(--accent-text);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform var(--transition-base);
@@ -518,7 +521,7 @@ h1, h2, h3 {
 }
 
 .form-field:focus-within .form-label {
-  color: var(--accent-primary);
+  color: var(--accent-text);
 }
 
 .form-error {
@@ -552,7 +555,7 @@ h1, h2, h3 {
 .blog-content p { margin-bottom: 16px; }
 .blog-content a {
   position: relative;
-  color: var(--accent-primary);
+  color: var(--accent-text);
   font-weight: 600;
   text-decoration: none;
 }
@@ -695,7 +698,7 @@ div:hover > .code-copy-btn,
   font-size: 2.4rem;
   line-height: 1;
   letter-spacing: -0.03em;
-  color: var(--accent-primary);
+  color: var(--accent-text);
   transition: color var(--duration-base) var(--ease-in-out);
 }
 .work-item .wi-title {
@@ -788,7 +791,7 @@ div:hover > .code-copy-btn,
   color: var(--text-primary);
 }
 .xp .xp-co {
-  color: var(--accent-primary);
+  color: var(--accent-text);
   font-family: var(--font-geist-mono);
   font-size: 0.88rem;
   font-weight: 500;
@@ -812,7 +815,7 @@ div:hover > .code-copy-btn,
   content: '→';
   position: absolute;
   left: 0;
-  color: var(--accent-primary);
+  color: var(--accent-text);
   font-family: var(--font-geist-mono);
   font-weight: 700;
 }
@@ -838,7 +841,7 @@ div:hover > .code-copy-btn,
 }
 .spec-row .spec-k span {
   display: block;
-  color: var(--accent-primary);
+  color: var(--accent-text);
   font-size: 0.66rem;
   margin-top: 4px;
   letter-spacing: 0.12em;
@@ -868,7 +871,7 @@ div:hover > .code-copy-btn,
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.3rem;
-  color: var(--accent-primary);
+  color: var(--accent-text);
   letter-spacing: -0.02em;
   transition: color var(--transition-base);
 }

@@ -105,7 +105,7 @@ export default function ContactSection() {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        color: 'var(--accent-primary)',
+                        color: 'var(--accent-text)',
                         flexShrink: 0,
                       }}
                     >
@@ -196,7 +196,7 @@ export default function ContactSection() {
                               background: 'color-mix(in srgb, var(--accent-primary) 8%, transparent)',
                               border: '1px solid color-mix(in srgb, var(--accent-primary) 25%, transparent)',
                               borderRadius: 'var(--radius-md)',
-                              color: 'var(--accent-tertiary)',
+                              color: 'var(--accent-text)',
                               fontSize: '0.88rem',
                               marginBottom: '20px',
                               display: 'flex',

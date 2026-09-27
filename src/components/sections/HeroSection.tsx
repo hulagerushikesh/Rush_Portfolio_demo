@@ -146,7 +146,7 @@ export default function HeroSection() {
               style={{
                 position: 'absolute',
                 inset: '-3px',
-                border: '1.5px solid var(--accent-primary)',
+                border: '1.5px solid var(--accent-text)',
               }}
             />
           </span>
@@ -166,7 +166,7 @@ export default function HeroSection() {
           }}
         >
           <RevealLine delay={0.2}>Rushikesh</RevealLine>
-          <RevealLine delay={0.34} color="var(--accent-primary)">
+          <RevealLine delay={0.34} color="var(--accent-text)">
             Hulage
           </RevealLine>
         </h1>
@@ -210,7 +210,7 @@ export default function HeroSection() {
         >
           {meta.map((m) => (
             <div key={m.k}>
-              <span style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>{m.k} / </span>
+              <span style={{ color: 'var(--accent-text)', fontWeight: 600 }}>{m.k} / </span>
               {m.v}
             </div>
           ))}
