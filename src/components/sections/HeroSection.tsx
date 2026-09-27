@@ -30,20 +30,49 @@ function RevealLine({
   children,
   delay = 0,
   color,
+  highlight = false,
 }: {
   children: React.ReactNode;
   delay?: number;
   color?: string;
+  highlight?: boolean;
 }) {
+  // `highlight` paints a word-width acid-lime block behind the text with ink
+  // letters on top — the hero's loudest accent. Extra vertical padding on the
+  // clip mask keeps the block from being cropped by the tight 0.86 line-height.
   return (
-    <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.06em' }}>
+    <span
+      style={{
+        display: 'block',
+        overflow: 'hidden',
+        paddingBottom: highlight ? '0.16em' : '0.06em',
+        paddingTop: highlight ? '0.12em' : 0,
+      }}
+    >
       <motion.span
-        initial={{ y: '110%' }}
+        initial={{ y: '120%' }}
         animate={{ y: 0 }}
         transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
         style={{ display: 'block', color, willChange: 'transform' }}
       >
-        {children}
+        {highlight ? (
+          <span
+            style={{
+              background: 'var(--accent-primary)',
+              color: 'var(--accent-ink)',
+              padding: '0.04em 0.16em',
+              marginLeft: '-0.16em',
+              lineHeight: 1,
+              boxDecorationBreak: 'clone',
+              WebkitBoxDecorationBreak: 'clone',
+              boxShadow: '6px 6px 0 var(--ink)',
+            }}
+          >
+            {children}
+          </span>
+        ) : (
+          children
+        )}
       </motion.span>
     </span>
   );
@@ -166,7 +195,7 @@ export default function HeroSection() {
           }}
         >
           <RevealLine delay={0.2}>Rushikesh</RevealLine>
-          <RevealLine delay={0.34} color="var(--accent-text)">
+          <RevealLine delay={0.34} highlight>
             Hulage
           </RevealLine>
         </h1>
