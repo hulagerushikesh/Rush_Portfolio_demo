@@ -21,7 +21,7 @@ export default async function AboutSection() {
         <aside className="section-rail">
           <span className="rail-idx">04</span>
           <span className="rail-k">Profile</span>
-          <span className="rail-k">Readme</span>
+          <span className="rail-k">Bio</span>
         </aside>
 
         <div>

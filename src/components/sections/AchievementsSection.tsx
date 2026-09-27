@@ -28,7 +28,7 @@ export default function AchievementsSection() {
             <div className="signals" style={{ marginTop: '40px' }}>
               {resume.achievements.map((achievement, i) => (
                 <div className="signal" key={i}>
-                  <span className="s-idx">S-{String(i + 1).padStart(2, '0')}</span>
+                  <span className="s-idx">{String(i + 1).padStart(2, '0')}</span>
                   <div className="s-title">{achievement.title}</div>
                   <p>{achievement.description}</p>
                 </div>

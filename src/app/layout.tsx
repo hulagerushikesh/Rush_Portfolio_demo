@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Geist_Mono, Space_Grotesk } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import MotionProvider from "@/components/MotionProvider";
 import CursorSpotlight from "@/components/ui/CursorSpotlight";
 import "./globals.css";
@@ -10,19 +10,12 @@ const inter = Inter({
   display: "swap",
 });
 
-// Monospace stays the label / metadata face — captions, rails, tags.
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Plus Jakarta Sans is the display face for the "Glass" identity — soft,
+// premium, rounded headlines. No monospace: the code-log motif is gone.
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-display-sans",
   subsets: ["latin"],
-  display: "swap",
-});
-
-// Space Grotesk is the display face for the "Editorial Brutalist" identity —
-// oversized grotesk headlines, index numbers, and the hero wordmark.
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -64,7 +57,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${geistMono.variable} ${spaceGrotesk.variable} antialiased`}
+        className={`${inter.variable} ${jakarta.variable} antialiased`}
       >
         <CursorSpotlight />
         <MotionProvider>{children}</MotionProvider>

@@ -29,50 +29,24 @@ const band = ['Identity', 'Platform', 'Security', 'Backend', 'Cloud', 'Applied A
 function RevealLine({
   children,
   delay = 0,
-  color,
-  highlight = false,
+  className,
 }: {
   children: React.ReactNode;
   delay?: number;
-  color?: string;
-  highlight?: boolean;
+  className?: string;
 }) {
-  // `highlight` paints a word-width acid-lime block behind the text with ink
-  // letters on top — the hero's loudest accent. Extra vertical padding on the
-  // clip mask keeps the block from being cropped by the tight 0.86 line-height.
+  // A display line that clip-reveals: sits in an overflow-hidden mask and
+  // slides up. <MotionConfig reducedMotion="user"> collapses it to a fade.
   return (
-    <span
-      style={{
-        display: 'block',
-        overflow: 'hidden',
-        paddingBottom: highlight ? '0.16em' : '0.06em',
-        paddingTop: highlight ? '0.12em' : 0,
-      }}
-    >
+    <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.1em' }}>
       <motion.span
-        initial={{ y: '120%' }}
+        className={className}
+        initial={{ y: '115%' }}
         animate={{ y: 0 }}
         transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
-        style={{ display: 'block', color, willChange: 'transform' }}
+        style={{ display: 'block', willChange: 'transform' }}
       >
-        {highlight ? (
-          <span
-            style={{
-              background: 'var(--accent-primary)',
-              color: 'var(--accent-ink)',
-              padding: '0.04em 0.16em',
-              marginLeft: '-0.16em',
-              lineHeight: 1,
-              boxDecorationBreak: 'clone',
-              WebkitBoxDecorationBreak: 'clone',
-              boxShadow: '6px 6px 0 var(--ink)',
-            }}
-          >
-            {children}
-          </span>
-        ) : (
-          children
-        )}
+        {children}
       </motion.span>
     </span>
   );
@@ -88,8 +62,6 @@ export default function HeroSection() {
   });
   const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 70]);
-  // Big ghost index drifts opposite the content for depth.
-  const ghostX = useTransform(scrollYProgress, [0, 1], [0, -160]);
 
   return (
     <section
@@ -105,29 +77,6 @@ export default function HeroSection() {
       }}
     >
       <div className="grid-bg" aria-hidden="true" />
-
-      {/* Oversized ghost wordmark behind everything */}
-      <motion.span
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          right: '-2vw',
-          bottom: '14vh',
-          fontFamily: 'var(--font-display)',
-          fontWeight: 700,
-          fontSize: 'clamp(8rem, 26vw, 24rem)',
-          lineHeight: 0.8,
-          letterSpacing: '-0.05em',
-          color: 'transparent',
-          WebkitTextStroke: '1.5px rgba(10,10,10,0.08)',
-          pointerEvents: 'none',
-          zIndex: 0,
-          x: reducedMotion ? 0 : ghostX,
-          userSelect: 'none',
-        }}
-      >
-        RH
-      </motion.span>
 
       <motion.div
         className="section-container"
@@ -146,20 +95,20 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
+          className="glass"
           style={{
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '9px',
-            fontFamily: 'var(--font-geist-mono)',
-            fontSize: '0.72rem',
-            letterSpacing: '0.14em',
-            textTransform: 'uppercase',
-            color: 'var(--text-primary)',
-            border: '2px solid var(--ink)',
-            padding: '7px 14px',
+            gap: '10px',
+            fontFamily: 'var(--font-display)',
+            fontSize: '0.76rem',
+            fontWeight: 500,
+            letterSpacing: '0.04em',
+            color: 'var(--text-secondary)',
+            padding: '8px 16px',
             marginBottom: '34px',
-            background: 'var(--bg-primary)',
-            boxShadow: '3px 3px 0 var(--ink)',
+            borderRadius: 'var(--radius-full)',
+            boxShadow: 'var(--shadow-soft)',
           }}
         >
           <span
@@ -167,6 +116,7 @@ export default function HeroSection() {
               position: 'relative',
               width: '8px',
               height: '8px',
+              borderRadius: '50%',
               background: 'var(--accent-primary)',
             }}
           >
@@ -174,8 +124,9 @@ export default function HeroSection() {
               className="animate-pulse-glow"
               style={{
                 position: 'absolute',
-                inset: '-3px',
-                border: '1.5px solid var(--accent-text)',
+                inset: '-4px',
+                borderRadius: '50%',
+                border: '1.5px solid var(--accent-primary)',
               }}
             />
           </span>
@@ -186,16 +137,15 @@ export default function HeroSection() {
         <h1
           style={{
             fontFamily: 'var(--font-display)',
-            fontWeight: 700,
-            fontSize: 'clamp(3rem, 12vw, 9rem)',
-            lineHeight: 0.86,
-            letterSpacing: '-0.045em',
+            fontWeight: 800,
+            fontSize: 'clamp(2.8rem, 11vw, 8.5rem)',
+            lineHeight: 0.94,
+            letterSpacing: '-0.04em',
             margin: '0 0 30px',
-            textTransform: 'uppercase',
           }}
         >
           <RevealLine delay={0.2}>Rushikesh</RevealLine>
-          <RevealLine delay={0.34} highlight>
+          <RevealLine delay={0.34} className="gradient-text">
             Hulage
           </RevealLine>
         </h1>
@@ -227,19 +177,19 @@ export default function HeroSection() {
             display: 'flex',
             flexWrap: 'wrap',
             gap: '10px 44px',
-            fontFamily: 'var(--font-geist-mono)',
-            fontSize: '0.78rem',
+            fontFamily: 'var(--font-display)',
+            fontSize: '0.82rem',
             color: 'var(--text-secondary)',
-            letterSpacing: '0.03em',
-            padding: '20px 0',
+            letterSpacing: '0',
+            padding: '22px 0',
             marginBottom: '38px',
-            borderTop: '2px solid var(--ink)',
-            borderBottom: '2px solid var(--ink)',
+            borderTop: '1px solid var(--border-subtle)',
+            borderBottom: '1px solid var(--border-subtle)',
           }}
         >
           {meta.map((m) => (
             <div key={m.k}>
-              <span style={{ color: 'var(--accent-text)', fontWeight: 600 }}>{m.k} / </span>
+              <span style={{ color: 'var(--accent-text)', fontWeight: 700 }}>{m.k} </span>
               {m.v}
             </div>
           ))}
@@ -276,15 +226,15 @@ export default function HeroSection() {
               target={href.startsWith('mailto') ? undefined : '_blank'}
               rel="noopener noreferrer"
               title={label}
-              className="glow-hover"
+              className="glow-hover glass"
               style={{
                 width: '46px',
                 height: '46px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                border: '2px solid var(--ink)',
-                background: 'var(--bg-primary)',
+                borderRadius: 'var(--radius-full)',
+                boxShadow: 'var(--shadow-soft)',
                 color: 'var(--text-primary)',
                 textDecoration: 'none',
               }}
@@ -307,7 +257,7 @@ export default function HeroSection() {
         <div className="marquee-row">
           {[...band, ...band].map((w, i) => (
             <span key={i}>
-              <b>✳</b>
+              <b>◆</b>
               {w}
             </span>
           ))}

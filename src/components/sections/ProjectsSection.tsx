@@ -33,7 +33,7 @@ export default async function ProjectsSection() {
                 <AnimatedSection key={project.id} delay={0.06 * i}>
                   <article className="work-item">
                     <div className="wi-idx">
-                      W-{String(i + 1).padStart(2, '0')}
+                      {String(i + 1).padStart(2, '0')}
                     </div>
 
                     <div>

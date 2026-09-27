@@ -41,8 +41,8 @@ export default function SkillsSection() {
       <div className="section-container section-grid">
         <aside className="section-rail">
           <span className="rail-idx">03</span>
-          <span className="rail-k">Tooling</span>
-          <span className="rail-k">Spec</span>
+          <span className="rail-k">Tools</span>
+          <span className="rail-k">Stack</span>
         </aside>
 
         <div>
@@ -88,7 +88,7 @@ export default function SkillsSection() {
               <div className="marquee-row">
                 {[...ticker, ...ticker].map((skill, i) => (
                   <span key={i}>
-                    <b>#</b>
+                    <b>◆</b>
                     {skill}
                   </span>
                 ))}

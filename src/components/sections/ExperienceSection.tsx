@@ -12,7 +12,7 @@ export default function ExperienceSection() {
         <aside className="section-rail">
           <span className="rail-idx">02</span>
           <span className="rail-k">Career</span>
-          <span className="rail-k">Log</span>
+          <span className="rail-k">Path</span>
         </aside>
 
         <div>
@@ -20,7 +20,7 @@ export default function ExperienceSection() {
             <span className="section-label">Experience</span>
             <h2 className="section-title">Where I&apos;ve worked</h2>
             <p className="section-subtitle">
-              A typed record of roles building and securing scalable platforms —
+              The roles where I&apos;ve built and secured scalable platforms —
               most recent first.
             </p>
           </AnimatedSection>

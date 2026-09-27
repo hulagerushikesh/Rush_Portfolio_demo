@@ -48,11 +48,11 @@ export default function Footer() {
             >
               <span
                 style={{
-                  width: '8px',
-                  height: '8px',
+                  width: '10px',
+                  height: '10px',
                   borderRadius: '50%',
-                  background: 'var(--accent-primary)',
-                  boxShadow: '0 0 0 4px color-mix(in srgb, var(--accent-primary) 14%, transparent)',
+                  background: 'var(--grad-accent)',
+                  boxShadow: '0 2px 8px color-mix(in srgb, var(--accent-primary) 40%, transparent)',
                 }}
               />
               rushikesh.hulage

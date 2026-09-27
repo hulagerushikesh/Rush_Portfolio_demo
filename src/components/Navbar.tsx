@@ -120,14 +120,14 @@ export default function Navbar() {
           width: 'calc(100% - 48px)',
           maxWidth: '1100px',
           padding: compact ? '8px 24px' : '14px 32px',
-          borderRadius: 0,
+          borderRadius: 'var(--radius-full)',
           background: scrolled
-            ? 'color-mix(in srgb, var(--bg-primary) 92%, transparent)'
-            : 'color-mix(in srgb, var(--bg-primary) 70%, transparent)',
-          backdropFilter: 'blur(18px)',
-          WebkitBackdropFilter: 'blur(18px)',
-          border: '2px solid var(--ink)',
-          boxShadow: scrolled ? '5px 5px 0 var(--accent-primary)' : '4px 4px 0 var(--ink)',
+            ? 'rgba(255, 255, 255, 0.72)'
+            : 'rgba(255, 255, 255, 0.5)',
+          backdropFilter: 'blur(22px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(22px) saturate(180%)',
+          border: '1px solid var(--glass-border)',
+          boxShadow: scrolled ? 'var(--shadow-card)' : 'var(--shadow-soft)',
           transition: 'all var(--duration-slow) var(--ease-in-out)',
         }}
       >
@@ -159,10 +159,11 @@ export default function Navbar() {
           >
             <span
               style={{
-                width: '9px',
-                height: '9px',
-                background: 'var(--accent-primary)',
-                border: '1.5px solid var(--ink)',
+                width: '10px',
+                height: '10px',
+                borderRadius: '50%',
+                background: 'var(--grad-accent)',
+                boxShadow: '0 2px 8px color-mix(in srgb, var(--accent-primary) 45%, transparent)',
               }}
             />
             rushikesh.hulage
@@ -188,7 +189,7 @@ export default function Navbar() {
                   border: 'none',
                   cursor: 'pointer',
                   padding: '9px 14px',
-                  borderRadius: 0,
+                  borderRadius: 'var(--radius-full)',
                   color: isActive ? 'var(--accent-ink)' : 'var(--text-secondary)',
                   fontSize: '0.74rem',
                   fontWeight: 600,
@@ -211,9 +212,9 @@ export default function Navbar() {
                     style={{
                       position: 'absolute',
                       inset: 0,
-                      borderRadius: 0,
-                      background: 'var(--accent-primary)',
-                      border: '1.5px solid var(--ink)',
+                      borderRadius: 'var(--radius-full)',
+                      background: 'var(--grad-accent)',
+                      boxShadow: '0 6px 18px color-mix(in srgb, var(--accent-primary) 40%, transparent)',
                       zIndex: -1,
                     }}
                     transition={SPRING.snappy}
