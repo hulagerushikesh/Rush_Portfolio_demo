@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter, Fraunces } from "next/font/google";
 import MotionProvider from "@/components/MotionProvider";
 import CursorSpotlight from "@/components/ui/CursorSpotlight";
 import "./globals.css";
@@ -10,12 +10,13 @@ const inter = Inter({
   display: "swap",
 });
 
-// Plus Jakarta Sans is the display face for the "Glass" identity — soft,
-// premium, rounded headlines. No monospace: the code-log motif is gone.
-const jakarta = Plus_Jakarta_Sans({
+// Fraunces is the editorial display face — an expressive high-contrast serif
+// with optical sizing and an italic cut used for accents. Body copy stays Inter.
+const fraunces = Fraunces({
   variable: "--font-display-sans",
   subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -57,7 +58,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${jakarta.variable} antialiased`}
+        className={`${inter.variable} ${fraunces.variable} antialiased`}
       >
         <CursorSpotlight />
         <MotionProvider>{children}</MotionProvider>

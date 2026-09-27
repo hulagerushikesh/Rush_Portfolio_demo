@@ -84,6 +84,10 @@ export default function HeroSection() {
           position: 'relative',
           zIndex: 1,
           width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          textAlign: 'center',
           paddingTop: 'clamp(120px, 18vh, 200px)',
           paddingBottom: 'clamp(60px, 8vh, 100px)',
           opacity: reducedMotion ? 1 : heroOpacity,
@@ -133,20 +137,20 @@ export default function HeroSection() {
           Available for senior / platform roles
         </motion.div>
 
-        {/* Name — oversized grotesk, clip-reveal per line */}
+        {/* Name — oversized editorial serif, clip-reveal per line */}
         <h1
           style={{
             fontFamily: 'var(--font-display)',
-            fontWeight: 800,
-            fontSize: 'clamp(2.8rem, 11vw, 8.5rem)',
-            lineHeight: 0.94,
-            letterSpacing: '-0.04em',
+            fontWeight: 500,
+            fontSize: 'clamp(3rem, 12vw, 9rem)',
+            lineHeight: 0.92,
+            letterSpacing: '-0.03em',
             margin: '0 0 30px',
           }}
         >
           <RevealLine delay={0.2}>Rushikesh</RevealLine>
           <RevealLine delay={0.34} className="gradient-text">
-            Hulage
+            <i style={{ fontStyle: 'italic', fontWeight: 400 }}>Hulage</i>
           </RevealLine>
         </h1>
 
@@ -156,12 +160,12 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.55 }}
           style={{
-            fontSize: 'clamp(1.15rem, 2.3vw, 1.6rem)',
-            lineHeight: 1.4,
-            maxWidth: '30ch',
+            fontSize: 'clamp(1.15rem, 2.3vw, 1.55rem)',
+            lineHeight: 1.5,
+            maxWidth: '32ch',
             color: 'var(--text-primary)',
-            fontWeight: 500,
-            margin: '0 0 40px',
+            fontWeight: 400,
+            margin: '0 auto 40px',
           }}
         >
           I build and secure the <GradientText>platforms</GradientText> other teams
@@ -176,8 +180,9 @@ export default function HeroSection() {
           style={{
             display: 'flex',
             flexWrap: 'wrap',
+            justifyContent: 'center',
             gap: '10px 44px',
-            fontFamily: 'var(--font-display)',
+            fontFamily: 'var(--font-geist-sans)',
             fontSize: '0.82rem',
             color: 'var(--text-secondary)',
             letterSpacing: '0',
@@ -200,7 +205,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.78 }}
-          style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginBottom: '42px' }}
+          style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '16px', marginBottom: '42px' }}
         >
           <Magnetic>
             <a href="#projects" className="btn-primary">
@@ -217,7 +222,7 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.92 }}
-          style={{ display: 'flex', gap: '14px' }}
+          style={{ display: 'flex', justifyContent: 'center', gap: '14px' }}
         >
           {socialLinks.map(({ label, href, Icon }) => (
             <a

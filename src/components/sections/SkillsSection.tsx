@@ -38,64 +38,58 @@ export default function SkillsSection() {
 
   return (
     <section id="skills" style={{ background: 'var(--bg-secondary)' }}>
-      <div className="section-container section-grid">
-        <aside className="section-rail">
-          <span className="rail-idx">03</span>
-          <span className="rail-k">Tools</span>
-          <span className="rail-k">Stack</span>
-        </aside>
-
-        <div>
-          <AnimatedSection>
+      <div className="section-container">
+        <AnimatedSection>
+          <div className="section-head">
             <span className="section-label">Stack</span>
-            <h2 className="section-title">The instruments I reach for</h2>
+            <h2 className="section-title">The instruments I <em>reach for</em></h2>
             <p className="section-subtitle">
               Tools I rely on daily to design, build, and ship production systems — by domain.
             </p>
-          </AnimatedSection>
-
-          <div style={{ marginTop: '40px' }}>
-            {skillCategories.map(([key, skills], i) => {
-              const meta = skillLabels[key] ?? { label: key, sub: '' };
-              return (
-                <AnimatedSection key={key} delay={0.08 * i} variant="blurIn">
-                  <div className="spec-row">
-                    <div className="spec-k">
-                      {meta.label}
-                      <span>{meta.sub}</span>
-                    </div>
-                    <motion.div
-                      className="spec-v"
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true, margin: '-60px' }}
-                      variants={tagListVariants}
-                    >
-                      {skills.map((skill) => (
-                        <motion.span key={skill} className="tech-tag" variants={tagVariants}>
-                          {skill}
-                        </motion.span>
-                      ))}
-                    </motion.div>
-                  </div>
-                </AnimatedSection>
-              );
-            })}
           </div>
+        </AnimatedSection>
 
-          <AnimatedSection delay={0.1}>
-            <div className="marquee" aria-hidden="true">
-              <div className="marquee-row">
-                {[...ticker, ...ticker].map((skill, i) => (
-                  <span key={i}>
-                    <b>◆</b>
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </AnimatedSection>
+        <div className="section-body">
+          {skillCategories.map(([key, skills], i) => {
+            const meta = skillLabels[key] ?? { label: key, sub: '' };
+            return (
+              <AnimatedSection key={key} delay={0.08 * i} variant="blurIn">
+                <div className="spec-row">
+                  <div className="spec-k">
+                    {meta.label}
+                    <span>{meta.sub}</span>
+                  </div>
+                  <motion.div
+                    className="spec-v"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: '-60px' }}
+                    variants={tagListVariants}
+                  >
+                    {skills.map((skill) => (
+                      <motion.span key={skill} className="tech-tag" variants={tagVariants}>
+                        {skill}
+                      </motion.span>
+                    ))}
+                  </motion.div>
+                </div>
+              </AnimatedSection>
+            );
+          })}
         </div>
+
+        <AnimatedSection delay={0.1}>
+          <div className="marquee" aria-hidden="true">
+            <div className="marquee-row">
+              {[...ticker, ...ticker].map((skill, i) => (
+                <span key={i}>
+                  <b>◆</b>
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        </AnimatedSection>
       </div>
     </section>
   );

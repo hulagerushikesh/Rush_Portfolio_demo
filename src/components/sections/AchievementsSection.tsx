@@ -8,24 +8,20 @@ export default function AchievementsSection() {
 
   return (
     <section id="achievements" style={{ background: 'var(--bg-secondary)' }}>
-      <div className="section-container section-grid">
-        <aside className="section-rail">
-          <span className="rail-idx">05</span>
-          <span className="rail-k">External</span>
-          <span className="rail-k">Signals</span>
-        </aside>
-
-        <div>
-          <AnimatedSection>
+      <div className="section-container">
+        <AnimatedSection>
+          <div className="section-head">
             <span className="section-label">Signals</span>
-            <h2 className="section-title">Recognition &amp; contribution</h2>
+            <h2 className="section-title">Recognition &amp; <em>contribution</em></h2>
             <p className="section-subtitle">
               Work and standing outside the day job.
             </p>
-          </AnimatedSection>
+          </div>
+        </AnimatedSection>
 
+        <div className="section-body wide">
           <AnimatedSection delay={0.1}>
-            <div className="signals" style={{ marginTop: '40px' }}>
+            <div className="signals">
               {resume.achievements.map((achievement, i) => (
                 <div className="signal" key={i}>
                   <span className="s-idx">{String(i + 1).padStart(2, '0')}</span>
@@ -38,29 +34,24 @@ export default function AchievementsSection() {
 
           {/* Certifications */}
           <AnimatedSection delay={0.2}>
-            <div style={{ marginTop: '56px' }}>
+            <div style={{ marginTop: '64px', textAlign: 'center' }}>
               <span className="section-label">Certifications</span>
-              <div style={{ marginTop: '20px' }}>
+              <div style={{ marginTop: '20px', maxWidth: 'var(--content)', marginInline: 'auto' }}>
                 {resume.certifications.map((cert, i) => (
                   <div key={i} className="spec-row">
-                    <div className="spec-k">
-                      CERT
-                      <span>{String(i + 1).padStart(2, '0')}</span>
+                    <div
+                      style={{
+                        fontFamily: 'var(--font-display)',
+                        fontWeight: 500,
+                        fontSize: '1.3rem',
+                        color: 'var(--text-primary)',
+                        marginBottom: '6px',
+                      }}
+                    >
+                      {cert.name}
                     </div>
-                    <div>
-                      <div
-                        style={{
-                          fontFamily: 'var(--font-display)',
-                          fontWeight: 600,
-                          color: 'var(--text-primary)',
-                          marginBottom: '4px',
-                        }}
-                      >
-                        {cert.name}
-                      </div>
-                      <div style={{ color: 'var(--text-secondary)', fontSize: '0.92rem' }}>
-                        {cert.issuer}
-                      </div>
+                    <div style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
+                      {cert.issuer}
                     </div>
                   </div>
                 ))}

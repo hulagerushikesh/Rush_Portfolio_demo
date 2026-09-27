@@ -17,21 +17,17 @@ export default async function AboutSection() {
 
   return (
     <section id="about">
-      <div className="section-container section-grid">
-        <aside className="section-rail">
-          <span className="rail-idx">04</span>
-          <span className="rail-k">Profile</span>
-          <span className="rail-k">Bio</span>
-        </aside>
-
-        <div>
-          <AnimatedSection>
+      <div className="section-container">
+        <AnimatedSection>
+          <div className="section-head">
             <span className="section-label">About</span>
-            <h2 className="section-title">Building intelligent systems at scale</h2>
-          </AnimatedSection>
+            <h2 className="section-title">Building intelligent systems <em>at scale</em></h2>
+          </div>
+        </AnimatedSection>
 
+        <div className="section-body">
           <AnimatedSection delay={0.15}>
-            <div style={{ maxWidth: '68ch', marginTop: '8px' }}>
+            <div style={{ maxWidth: '64ch', margin: '0 auto' }}>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '20px' }}>
                 I&apos;m a Software Engineer at{' '}
                 <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Telstra</strong>, where I own
@@ -62,34 +58,30 @@ export default async function AboutSection() {
             </div>
           </AnimatedSection>
 
-          {/* Stats — mono readout strip */}
+          {/* Stats — editorial figure strip */}
           <AnimatedSection delay={0.3}>
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
-                marginTop: '44px',
-                border: '1px solid var(--border-subtle)',
-                borderRadius: 'var(--radius-md)',
-                overflow: 'hidden',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+                gap: '16px',
+                marginTop: '56px',
               }}
             >
               {stats.map((stat, i) => (
                 <div
                   key={i}
-                  style={{
-                    padding: '26px 20px',
-                    borderLeft: i === 0 ? 'none' : '1px solid var(--border-subtle)',
-                    background: 'var(--bg-secondary)',
-                  }}
+                  className="glass-card"
+                  style={{ padding: '28px 20px', textAlign: 'center' }}
                 >
                   <div
                     style={{
-                      fontFamily: 'var(--font-geist-mono)',
-                      fontSize: '2.1rem',
-                      fontWeight: 600,
+                      fontFamily: 'var(--font-display)',
+                      fontSize: '2.6rem',
+                      fontWeight: 500,
                       letterSpacing: '-0.02em',
                       marginBottom: '6px',
+                      lineHeight: 1,
                     }}
                   >
                     <GradientText>
@@ -98,9 +90,9 @@ export default async function AboutSection() {
                   </div>
                   <div
                     style={{
-                      fontFamily: 'var(--font-geist-mono)',
+                      fontFamily: 'var(--font-geist-sans)',
                       fontSize: '0.7rem',
-                      letterSpacing: '0.1em',
+                      letterSpacing: '0.16em',
                       textTransform: 'uppercase',
                       color: 'var(--text-muted)',
                     }}

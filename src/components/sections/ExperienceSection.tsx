@@ -8,24 +8,20 @@ export default function ExperienceSection() {
 
   return (
     <section id="experience">
-      <div className="section-container section-grid">
-        <aside className="section-rail">
-          <span className="rail-idx">02</span>
-          <span className="rail-k">Career</span>
-          <span className="rail-k">Path</span>
-        </aside>
-
-        <div>
-          <AnimatedSection>
+      <div className="section-container">
+        <AnimatedSection>
+          <div className="section-head">
             <span className="section-label">Experience</span>
-            <h2 className="section-title">Where I&apos;ve worked</h2>
+            <h2 className="section-title">Where I&apos;ve <em>worked</em></h2>
             <p className="section-subtitle">
               The roles where I&apos;ve built and secured scalable platforms —
               most recent first.
             </p>
-          </AnimatedSection>
+          </div>
+        </AnimatedSection>
 
-          <div style={{ marginTop: '44px', display: 'grid', gap: '44px' }}>
+        <div className="section-body">
+          <div style={{ display: 'grid', gap: '28px' }}>
             {resume.experience.map((exp, i) => (
               <AnimatedSection key={i} delay={0.1 * i} variant="fadeLeft">
                 <div className="xp">
@@ -52,28 +48,34 @@ export default function ExperienceSection() {
 
           {/* Education */}
           <AnimatedSection delay={0.2}>
-            <div style={{ marginTop: '60px' }}>
+            <div style={{ marginTop: '72px', textAlign: 'center' }}>
               <span className="section-label">Education</span>
               <div style={{ marginTop: '20px' }}>
                 {resume.education.map((edu, i) => (
                   <div key={i} className="spec-row">
-                    <div className="spec-k">
-                      {edu.startDate} — {edu.endDate}
+                    <div
+                      style={{
+                        fontFamily: 'var(--font-display)',
+                        fontWeight: 500,
+                        fontSize: '1.3rem',
+                        color: 'var(--text-primary)',
+                        marginBottom: '6px',
+                      }}
+                    >
+                      {edu.degree}
                     </div>
-                    <div>
-                      <div
-                        style={{
-                          fontFamily: 'var(--font-display)',
-                          fontWeight: 600,
-                          color: 'var(--text-primary)',
-                          marginBottom: '4px',
-                        }}
-                      >
-                        {edu.degree}
-                      </div>
-                      <div style={{ color: 'var(--text-secondary)', fontSize: '0.92rem' }}>
-                        {edu.institution}
-                      </div>
+                    <div style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: '4px' }}>
+                      {edu.institution}
+                    </div>
+                    <div
+                      style={{
+                        color: 'var(--text-muted)',
+                        fontSize: '0.72rem',
+                        letterSpacing: '0.14em',
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      {edu.startDate} — {edu.endDate}
                     </div>
                   </div>
                 ))}

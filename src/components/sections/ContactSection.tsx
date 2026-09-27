@@ -66,24 +66,20 @@ export default function ContactSection() {
 
   return (
     <section id="contact">
-      <div className="section-container section-grid">
-        <aside className="section-rail">
-          <span className="rail-idx">06</span>
-          <span className="rail-k">Open a</span>
-          <span className="rail-k">Channel</span>
-        </aside>
-
-        <div>
-          <AnimatedSection>
+      <div className="section-container">
+        <AnimatedSection>
+          <div className="section-head">
             <span className="section-label">Contact</span>
-            <h2 className="section-title">Have a system worth building?</h2>
+            <h2 className="section-title">Have a system <em>worth building?</em></h2>
             <p className="section-subtitle">
               A project in mind, a question, or just want to say hello — the channel is open.
             </p>
-          </AnimatedSection>
+          </div>
+        </AnimatedSection>
 
+        <div className="section-body wide">
           <div
-            style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '40px', marginTop: '44px' }}
+            style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '40px' }}
             className="md-grid-2"
           >
             {/* Contact info — spec rows */}
@@ -114,12 +110,12 @@ export default function ContactSection() {
                     <div>
                       <div
                         style={{
-                          fontFamily: 'var(--font-geist-mono)',
-                          fontSize: '0.68rem',
+                          fontFamily: 'var(--font-geist-sans)',
+                          fontSize: '0.66rem',
                           color: 'var(--text-muted)',
                           marginBottom: '3px',
                           textTransform: 'uppercase',
-                          letterSpacing: '0.1em',
+                          letterSpacing: '0.16em',
                         }}
                       >
                         {info.label}
