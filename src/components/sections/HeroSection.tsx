@@ -15,28 +15,36 @@ const socialLinks = [
 ];
 
 const meta = [
-  { k: 'ROLE /', v: 'Identity & Platform Engineer' },
-  { k: 'AT /', v: 'Telstra' },
-  { k: 'LOC /', v: 'Pune, IN' },
+  { k: 'ROLE', v: 'Identity & Platform Engineer' },
+  { k: 'AT', v: 'Telstra' },
+  { k: 'LOC', v: 'Pune, IN' },
 ];
 
-// Renders text as per-letter spans that rise into place — used for the hero
-// name. Framer's <MotionConfig reducedMotion="user"> collapses these to an
-// instant fade for reduced-motion users, so no manual gate is needed.
-function RisingLetters({ text, delay = 0, color }: { text: string; delay?: number; color?: string }) {
+// Keywords for the kinetic band under the hero.
+const band = ['Identity', 'Platform', 'Security', 'Backend', 'Cloud', 'Applied AI', 'RAG', 'Java', 'Spring', 'GCP'];
+
+// A single display line that clip-reveals: it sits in an overflow-hidden mask
+// and slides up from below. <MotionConfig reducedMotion="user"> collapses the
+// translate to an instant fade for reduced-motion users.
+function RevealLine({
+  children,
+  delay = 0,
+  color,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  color?: string;
+}) {
   return (
-    <span style={{ color, display: 'inline-block' }}>
-      {[...text].map((ch, i) => (
-        <motion.span
-          key={`${ch}-${i}`}
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: delay + i * 0.03, ease: [0.22, 1, 0.36, 1] }}
-          style={{ display: 'inline-block', willChange: 'transform' }}
-        >
-          {ch === ' ' ? ' ' : ch}
-        </motion.span>
-      ))}
+    <span style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.06em' }}>
+      <motion.span
+        initial={{ y: '110%' }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
+        style={{ display: 'block', color, willChange: 'transform' }}
+      >
+        {children}
+      </motion.span>
     </span>
   );
 }
@@ -50,7 +58,9 @@ export default function HeroSection() {
     offset: ['start start', 'end start'],
   });
   const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 60]);
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, 70]);
+  // Big ghost index drifts opposite the content for depth.
+  const ghostX = useTransform(scrollYProgress, [0, 1], [0, -160]);
 
   return (
     <section
@@ -60,11 +70,35 @@ export default function HeroSection() {
         position: 'relative',
         minHeight: '100vh',
         display: 'flex',
-        alignItems: 'center',
+        flexDirection: 'column',
+        justifyContent: 'center',
         overflow: 'hidden',
       }}
     >
       <div className="grid-bg" aria-hidden="true" />
+
+      {/* Oversized ghost wordmark behind everything */}
+      <motion.span
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          right: '-2vw',
+          bottom: '14vh',
+          fontFamily: 'var(--font-display)',
+          fontWeight: 700,
+          fontSize: 'clamp(8rem, 26vw, 24rem)',
+          lineHeight: 0.8,
+          letterSpacing: '-0.05em',
+          color: 'transparent',
+          WebkitTextStroke: '1.5px rgba(10,10,10,0.08)',
+          pointerEvents: 'none',
+          zIndex: 0,
+          x: reducedMotion ? 0 : ghostX,
+          userSelect: 'none',
+        }}
+      >
+        RH
+      </motion.span>
 
       <motion.div
         className="section-container"
@@ -73,7 +107,7 @@ export default function HeroSection() {
           zIndex: 1,
           width: '100%',
           paddingTop: 'clamp(120px, 18vh, 200px)',
-          paddingBottom: 'clamp(80px, 12vh, 140px)',
+          paddingBottom: 'clamp(60px, 8vh, 100px)',
           opacity: reducedMotion ? 1 : heroOpacity,
           y: reducedMotion ? 0 : heroY,
         }}
@@ -91,19 +125,19 @@ export default function HeroSection() {
             fontSize: '0.72rem',
             letterSpacing: '0.14em',
             textTransform: 'uppercase',
-            color: 'var(--text-secondary)',
-            border: '1px solid var(--border-strong)',
-            padding: '6px 13px',
-            borderRadius: 'var(--radius-full)',
-            marginBottom: '32px',
+            color: 'var(--text-primary)',
+            border: '2px solid var(--ink)',
+            padding: '7px 14px',
+            marginBottom: '34px',
+            background: 'var(--bg-primary)',
+            boxShadow: '3px 3px 0 var(--ink)',
           }}
         >
           <span
             style={{
               position: 'relative',
-              width: '7px',
-              height: '7px',
-              borderRadius: '50%',
+              width: '8px',
+              height: '8px',
               background: 'var(--accent-primary)',
             }}
           >
@@ -111,42 +145,44 @@ export default function HeroSection() {
               className="animate-pulse-glow"
               style={{
                 position: 'absolute',
-                inset: '-4px',
-                borderRadius: '50%',
-                border: '1px solid var(--accent-primary)',
+                inset: '-3px',
+                border: '1.5px solid var(--accent-primary)',
               }}
             />
           </span>
           Available for senior / platform roles
         </motion.div>
 
-        {/* Name — mono display, per-letter rise */}
+        {/* Name — oversized grotesk, clip-reveal per line */}
         <h1
           style={{
-            fontFamily: 'var(--font-geist-mono)',
-            fontWeight: 600,
-            fontSize: 'clamp(2.6rem, 9vw, 6rem)',
-            lineHeight: 0.98,
-            letterSpacing: '-0.03em',
-            margin: '0 0 26px',
+            fontFamily: 'var(--font-display)',
+            fontWeight: 700,
+            fontSize: 'clamp(3rem, 12vw, 9rem)',
+            lineHeight: 0.86,
+            letterSpacing: '-0.045em',
+            margin: '0 0 30px',
+            textTransform: 'uppercase',
           }}
         >
-          <RisingLetters text="Rushikesh" delay={0.2} />
-          <br />
-          <RisingLetters text="Hulage" delay={0.2 + 0.28} color="var(--text-muted)" />
+          <RevealLine delay={0.2}>Rushikesh</RevealLine>
+          <RevealLine delay={0.34} color="var(--accent-primary)">
+            Hulage
+          </RevealLine>
         </h1>
 
         {/* Thesis */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.35 }}
+          transition={{ duration: 0.6, delay: 0.55 }}
           style={{
-            fontSize: 'clamp(1.15rem, 2.4vw, 1.5rem)',
-            lineHeight: 1.5,
-            maxWidth: '32ch',
+            fontSize: 'clamp(1.15rem, 2.3vw, 1.6rem)',
+            lineHeight: 1.4,
+            maxWidth: '30ch',
             color: 'var(--text-primary)',
-            margin: '0 0 38px',
+            fontWeight: 500,
+            margin: '0 0 40px',
           }}
         >
           I build and secure the <GradientText>platforms</GradientText> other teams
@@ -157,24 +193,24 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
+          transition={{ duration: 0.6, delay: 0.68 }}
           style={{
             display: 'flex',
             flexWrap: 'wrap',
-            gap: '10px 40px',
+            gap: '10px 44px',
             fontFamily: 'var(--font-geist-mono)',
             fontSize: '0.78rem',
             color: 'var(--text-secondary)',
             letterSpacing: '0.03em',
             padding: '20px 0',
-            marginBottom: '34px',
-            borderTop: '1px solid var(--border-subtle)',
-            borderBottom: '1px solid var(--border-subtle)',
+            marginBottom: '38px',
+            borderTop: '2px solid var(--ink)',
+            borderBottom: '2px solid var(--ink)',
           }}
         >
           {meta.map((m) => (
             <div key={m.k}>
-              <span style={{ color: 'var(--text-muted)' }}>{m.k} </span>
+              <span style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>{m.k} / </span>
               {m.v}
             </div>
           ))}
@@ -184,8 +220,8 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.62 }}
-          style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', marginBottom: '40px' }}
+          transition={{ duration: 0.6, delay: 0.78 }}
+          style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginBottom: '42px' }}
         >
           <Magnetic>
             <a href="#projects" className="btn-primary">
@@ -201,7 +237,7 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: 0.6, delay: 0.92 }}
           style={{ display: 'flex', gap: '14px' }}
         >
           {socialLinks.map(({ label, href, Icon }) => (
@@ -213,16 +249,14 @@ export default function HeroSection() {
               title={label}
               className="glow-hover"
               style={{
-                width: '42px',
-                height: '42px',
+                width: '46px',
+                height: '46px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid var(--border-subtle)',
-                background: 'var(--bg-secondary)',
-                color: 'var(--text-secondary)',
-                transition: 'all var(--transition-base)',
+                border: '2px solid var(--ink)',
+                background: 'var(--bg-primary)',
+                color: 'var(--text-primary)',
                 textDecoration: 'none',
               }}
             >
@@ -232,34 +266,23 @@ export default function HeroSection() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
+      {/* Kinetic keyword band — full-bleed, bold */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        style={{
-          position: 'absolute',
-          bottom: '28px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '10px',
-          fontFamily: 'var(--font-geist-mono)',
-          fontSize: '0.68rem',
-          letterSpacing: '0.16em',
-          textTransform: 'uppercase',
-          color: 'var(--text-muted)',
-        }}
+        transition={{ duration: 0.6, delay: 1 }}
+        className="marquee"
+        aria-hidden="true"
+        style={{ position: 'relative', zIndex: 1, marginTop: 'auto' }}
       >
-        <span>Scroll</span>
-        <motion.span
-          animate={{ y: [0, 5, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity }}
-          style={{ color: 'var(--accent-primary)' }}
-        >
-          ↓
-        </motion.span>
+        <div className="marquee-row">
+          {[...band, ...band].map((w, i) => (
+            <span key={i}>
+              <b>✳</b>
+              {w}
+            </span>
+          ))}
+        </div>
       </motion.div>
     </section>
   );

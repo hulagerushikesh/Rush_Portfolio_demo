@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Geist_Mono } from "next/font/google";
+import { Inter, Geist_Mono, Space_Grotesk } from "next/font/google";
 import MotionProvider from "@/components/MotionProvider";
 import CursorSpotlight from "@/components/ui/CursorSpotlight";
 import "./globals.css";
@@ -10,18 +10,26 @@ const inter = Inter({
   display: "swap",
 });
 
-// Monospace is the display face for the "Engineering Log" identity —
-// headings, labels, and metadata are all set in it.
+// Monospace stays the label / metadata face — captions, rails, tags.
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
   display: "swap",
 });
 
+// Space Grotesk is the display face for the "Editorial Brutalist" identity —
+// oversized grotesk headlines, index numbers, and the hero wordmark.
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Rushikesh Hulage | Software Engineer · ML · Cloud",
+  title: "Rushikesh Hulage — Identity & Platform Engineer",
   description:
-    "Portfolio of Rushikesh Hulage — Software Engineer at Telstra specializing in AI/ML, Backend Development, and Cloud Technologies. Building intelligent systems at scale.",
+    "Portfolio of Rushikesh Hulage — Software Engineer at Telstra specializing in identity, platform engineering, security, backend, cloud, and applied AI. Building and securing the systems other teams ship on.",
   keywords: [
     "Rushikesh Hulage",
     "Software Engineer",
@@ -56,7 +64,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${geistMono.variable} ${spaceGrotesk.variable} antialiased`}
       >
         <CursorSpotlight />
         <MotionProvider>{children}</MotionProvider>
