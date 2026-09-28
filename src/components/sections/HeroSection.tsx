@@ -21,6 +21,14 @@ const meta = [
   { k: 'LOC', v: 'Pune, IN' },
 ];
 
+// Right-panel quick facts — fills the space beside the intro with substance.
+const facts = [
+  { k: 'Focus', v: 'Secure backends, cloud platforms, applied AI' },
+  { k: 'Stack', v: 'Java · Spring Boot · Python · GCP · RAG' },
+  { k: 'Based', v: 'Pune, India' },
+  { k: 'Open to', v: 'Senior / platform engineering roles' },
+];
+
 // Keywords for the kinetic band under the hero.
 const band = ['Identity', 'Platform', 'Security', 'Backend', 'Cloud', 'Applied AI', 'RAG', 'Java', 'Spring', 'GCP'];
 
@@ -38,8 +46,6 @@ function RevealLine({
   className?: string;
   padB?: string;
 }) {
-  // A display line that clip-reveals: sits in an overflow-hidden mask and
-  // slides up. <MotionConfig reducedMotion="user"> collapses it to a fade.
   // padB gives the mask bottom room so italic descenders (g, q, y) aren't clipped.
   return (
     <span style={{ display: 'block', overflow: 'hidden', paddingBottom: padB }}>
@@ -107,199 +113,228 @@ export default function HeroSection() {
       />
 
       <motion.div
-        className="section-container"
+        className="section-container hero-grid"
         style={{
           position: 'relative',
           zIndex: 1,
           width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          textAlign: 'left',
-          paddingTop: 'clamp(120px, 18vh, 200px)',
-          paddingBottom: 'clamp(60px, 8vh, 100px)',
+          paddingTop: 'clamp(116px, 16vh, 180px)',
+          paddingBottom: 'clamp(48px, 7vh, 88px)',
           opacity: reducedMotion ? 1 : heroOpacity,
           y: reducedMotion ? 0 : heroY,
         }}
       >
-        {/* Status pill */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="glass"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '10px',
-            fontFamily: 'var(--font-display)',
-            fontSize: '0.76rem',
-            fontWeight: 500,
-            letterSpacing: '0.04em',
-            color: 'var(--text-secondary)',
-            padding: '8px 16px',
-            marginBottom: '34px',
-            borderRadius: 'var(--radius-full)',
-            boxShadow: 'var(--shadow-soft)',
-          }}
-        >
-          <span
+        {/* ── LEFT: intro ─────────────────────────────────────────── */}
+        <div className="hero-left">
+          {/* Status pill */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="glass"
             style={{
-              position: 'relative',
-              width: '8px',
-              height: '8px',
-              borderRadius: '50%',
-              background: 'var(--accent-primary)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '10px',
+              fontFamily: 'var(--font-display)',
+              fontSize: '0.76rem',
+              fontWeight: 500,
+              letterSpacing: '0.04em',
+              color: 'var(--text-secondary)',
+              padding: '8px 16px',
+              marginBottom: '28px',
+              borderRadius: 'var(--radius-full)',
+              boxShadow: 'var(--shadow-soft)',
             }}
           >
             <span
-              className="animate-pulse-glow"
               style={{
-                position: 'absolute',
-                inset: '-4px',
+                position: 'relative',
+                width: '8px',
+                height: '8px',
                 borderRadius: '50%',
-                border: '1.5px solid var(--accent-primary)',
-              }}
-            />
-          </span>
-          Available for senior / platform roles
-        </motion.div>
-
-        {/* Kicker — instant context above the name */}
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.16 }}
-          style={{
-            fontFamily: 'var(--font-geist-sans)',
-            fontSize: '0.8rem',
-            fontWeight: 600,
-            letterSpacing: '0.22em',
-            textTransform: 'uppercase',
-            color: 'var(--accent-text)',
-            margin: '0 0 6px',
-          }}
-        >
-          Software Engineer · Telstra
-        </motion.p>
-
-        {/* Name — geometric grotesk, clip-reveal per line */}
-        <h1
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontWeight: 600,
-            fontSize: 'clamp(2.6rem, 8.5vw, 6.4rem)',
-            lineHeight: 0.98,
-            letterSpacing: '-0.04em',
-            margin: '0 0 26px',
-          }}
-        >
-          <RevealLine delay={0.2}>Rushikesh</RevealLine>
-          <RevealLine delay={0.34} className="hero-accent" padB="0.2em">
-            Hulage
-          </RevealLine>
-        </h1>
-
-        {/* Thesis */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.55 }}
-          style={{
-            fontSize: 'clamp(1.15rem, 2.2vw, 1.6rem)',
-            lineHeight: 1.5,
-            maxWidth: '32ch',
-            color: 'var(--text-secondary)',
-            fontWeight: 400,
-            margin: '0 0 34px',
-          }}
-        >
-          I build and secure the <GradientText>platforms</GradientText> other teams
-          ship on — backend, cloud, and{' '}
-          <RotatingWord
-            className="hero-accent"
-            words={['applied AI', 'RAG systems', 'secure APIs', 'ML pipelines']}
-          />
-        </motion.p>
-
-        {/* Meta row */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.68 }}
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'flex-start',
-            width: '100%',
-            maxWidth: '640px',
-            gap: '10px 44px',
-            fontFamily: 'var(--font-geist-sans)',
-            fontSize: '0.82rem',
-            color: 'var(--text-secondary)',
-            letterSpacing: '0',
-            padding: '22px 0',
-            marginBottom: '38px',
-            borderTop: '1px solid var(--border-subtle)',
-            borderBottom: '1px solid var(--border-subtle)',
-          }}
-        >
-          {meta.map((m) => (
-            <div key={m.k}>
-              <span style={{ color: 'var(--accent-text)', fontWeight: 700 }}>{m.k} </span>
-              {m.v}
-            </div>
-          ))}
-        </motion.div>
-
-        {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.78 }}
-          style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', gap: '16px', marginBottom: '42px' }}
-        >
-          <Magnetic>
-            <a href="#projects" className="btn-primary">
-              View selected work <span>↗</span>
-            </a>
-          </Magnetic>
-          <a href="#contact" className="btn-secondary">
-            Get in touch
-          </a>
-        </motion.div>
-
-        {/* Social links */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.92 }}
-          style={{ display: 'flex', justifyContent: 'flex-start', gap: '14px' }}
-        >
-          {socialLinks.map(({ label, href, Icon }) => (
-            <a
-              key={label}
-              href={href}
-              target={href.startsWith('mailto') ? undefined : '_blank'}
-              rel="noopener noreferrer"
-              title={label}
-              className="glow-hover glass"
-              style={{
-                width: '46px',
-                height: '46px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 'var(--radius-full)',
-                boxShadow: 'var(--shadow-soft)',
-                color: 'var(--text-primary)',
-                textDecoration: 'none',
+                background: 'var(--accent-primary)',
               }}
             >
-              <Icon size={18} />
+              <span
+                className="animate-pulse-glow"
+                style={{
+                  position: 'absolute',
+                  inset: '-4px',
+                  borderRadius: '50%',
+                  border: '1.5px solid var(--accent-primary)',
+                }}
+              />
+            </span>
+            Available for senior / platform roles
+          </motion.div>
+
+          {/* Kicker */}
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.16 }}
+            style={{
+              fontFamily: 'var(--font-geist-sans)',
+              fontSize: '0.78rem',
+              fontWeight: 600,
+              letterSpacing: '0.22em',
+              textTransform: 'uppercase',
+              color: 'var(--accent-text)',
+              margin: '0 0 8px',
+            }}
+          >
+            Software Engineer · Telstra
+          </motion.p>
+
+          {/* Name — smaller, one clean unit */}
+          <h1
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 600,
+              fontSize: 'clamp(2.3rem, 5.2vw, 3.9rem)',
+              lineHeight: 1.02,
+              letterSpacing: '-0.03em',
+              margin: '0 0 20px',
+            }}
+          >
+            <RevealLine delay={0.2}>
+              Rushikesh <span className="hero-accent">Hulage</span>
+            </RevealLine>
+          </h1>
+
+          {/* Thesis */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.45 }}
+            style={{
+              fontSize: 'clamp(1.05rem, 1.6vw, 1.35rem)',
+              lineHeight: 1.55,
+              maxWidth: '46ch',
+              color: 'var(--text-secondary)',
+              fontWeight: 400,
+              margin: '0 0 30px',
+            }}
+          >
+            I build and secure the <GradientText>platforms</GradientText> other teams
+            ship on — backend, cloud, and{' '}
+            <RotatingWord
+              className="hero-accent"
+              words={['applied AI', 'RAG systems', 'secure APIs', 'ML pipelines']}
+            />
+          </motion.p>
+
+          {/* Meta row */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.58 }}
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'flex-start',
+              width: '100%',
+              maxWidth: '600px',
+              gap: '10px 40px',
+              fontFamily: 'var(--font-geist-sans)',
+              fontSize: '0.82rem',
+              color: 'var(--text-secondary)',
+              padding: '20px 0',
+              marginBottom: '32px',
+              borderTop: '1px solid var(--border-subtle)',
+              borderBottom: '1px solid var(--border-subtle)',
+            }}
+          >
+            {meta.map((m) => (
+              <div key={m.k}>
+                <span style={{ color: 'var(--accent-text)', fontWeight: 700 }}>{m.k} </span>
+                {m.v}
+              </div>
+            ))}
+          </motion.div>
+
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.68 }}
+            style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', marginBottom: '32px' }}
+          >
+            <Magnetic>
+              <a href="#projects" className="btn-primary">
+                View selected work <span>↗</span>
+              </a>
+            </Magnetic>
+            <a href="#contact" className="btn-secondary">
+              Get in touch
             </a>
-          ))}
-        </motion.div>
+          </motion.div>
+
+          {/* Social links */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            style={{ display: 'flex', gap: '14px' }}
+          >
+            {socialLinks.map(({ label, href, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith('mailto') ? undefined : '_blank'}
+                rel="noopener noreferrer"
+                title={label}
+                className="glow-hover glass"
+                style={{
+                  width: '46px',
+                  height: '46px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: 'var(--radius-full)',
+                  boxShadow: 'var(--shadow-soft)',
+                  color: 'var(--text-primary)',
+                  textDecoration: 'none',
+                }}
+              >
+                <Icon size={18} />
+              </a>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* ── RIGHT: intro card ───────────────────────────────────── */}
+        <motion.aside
+          initial={{ opacity: 0, y: 26 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.5 }}
+          className="glass-card hero-card"
+        >
+          <div className="hero-card-head">
+            <span className="hero-avatar">RH</span>
+            <div>
+              <div className="hero-card-name">Rushikesh Hulage</div>
+              <div className="hero-card-sub">Identity &amp; Platform Engineer</div>
+            </div>
+          </div>
+
+          <p className="hero-card-bio">
+            I&apos;m a software engineer at Telstra who takes systems from design to
+            production — secure authentication, cloud-native services, and applied-AI
+            platforms. VJTI Mumbai grad, Hugging Face contributor, and Top 10 at the
+            Google APAC Challenge 2025.
+          </p>
+
+          <div className="hero-facts">
+            {facts.map((f) => (
+              <div className="hero-fact" key={f.k}>
+                <span className="hero-fact-k">{f.k}</span>
+                <span className="hero-fact-v">{f.v}</span>
+              </div>
+            ))}
+          </div>
+        </motion.aside>
       </motion.div>
 
       {/* Kinetic keyword band — full-bleed, bold */}
