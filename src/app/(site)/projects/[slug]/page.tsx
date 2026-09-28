@@ -50,9 +50,22 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         <AnimatedSection delay={0.05} duration={0.5}>
           <div
             className="eyebrow"
-            style={{ marginBottom: '14px' }}
+            style={{ marginBottom: '14px', display: 'flex', gap: '14px', alignItems: 'center' }}
           >
-            {project.project_date ? `// ${project.project_date}` : '// PROJECT'}
+            <span style={{ color: 'var(--accent-text)' }}>
+              {project.status === 'coming-soon'
+                ? 'In progress'
+                : project.status === 'archived'
+                  ? 'Archived'
+                  : project.live_url
+                    ? 'Live'
+                    : project.github_url
+                      ? 'Open source'
+                      : 'Active'}
+            </span>
+            {project.project_date && (
+              <span>{new Date(project.project_date).getFullYear()}</span>
+            )}
           </div>
           <h1
             style={{
