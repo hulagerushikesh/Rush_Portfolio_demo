@@ -13,8 +13,9 @@ export default async function ProjectsSection() {
             <span className="section-label">Selected Work</span>
             <h2 className="section-title">A catalog of <em>systems</em></h2>
             <p className="section-subtitle">
-              Taken from design through production — search platforms, recommendation
-              engines, and the security infrastructure that keeps them online.
+              Applied-AI and systems work I&apos;ve taken from design to production —
+              retrieval/RAG platforms, a real-time computer-vision SDK, and a quantitative
+              backtesting SaaS.
             </p>
           </div>
         </AnimatedSection>

@@ -82,6 +82,30 @@ export default function Navbar() {
     return () => observers.forEach((obs) => obs.disconnect());
   }, [pathname]);
 
+  // On first load with a hash in the URL (e.g. someone lands on /#projects),
+  // scroll to that section once the page has painted. The native jump can fire
+  // before the section exists, and section heights shift as content mounts, so
+  // we re-align a few times until the target settles.
+  useEffect(() => {
+    if (pathname !== '/') return;
+    const hash = window.location.hash.replace('#', '');
+    if (!hash) return;
+
+    const timers: number[] = [];
+    const align = () => {
+      const el = document.getElementById(hash);
+      if (el) el.scrollIntoView({ behavior: 'auto' });
+    };
+    // Multiple passes catch late layout shifts from mounting sections.
+    [80, 250, 600, 1000].forEach((d) => timers.push(window.setTimeout(align, d)));
+    window.addEventListener('load', align);
+
+    return () => {
+      timers.forEach(clearTimeout);
+      window.removeEventListener('load', align);
+    };
+  }, [pathname]);
+
   const handleNavClick = (href: string) => {
     setIsMenuOpen(false);
     const id = href.replace('#', '');

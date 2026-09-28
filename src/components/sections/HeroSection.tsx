@@ -1,66 +1,54 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
+import Link from 'next/link';
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 import { Mail } from 'lucide-react';
-import GradientText from '@/components/ui/GradientText';
-import RotatingWord from '@/components/ui/RotatingWord';
 import Magnetic from '@/components/ui/Magnetic';
 import { GithubIcon, LinkedinIcon } from '@/components/ui/BrandIcons';
 import { usePrefersReducedMotion } from '@/lib/motion';
 
 const socialLinks = [
-  { label: 'GitHub', href: 'https://github.com/hulagerushikesh', Icon: GithubIcon },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/rushikesh-hulage-46018522b/', Icon: LinkedinIcon },
-  { label: 'Email', href: 'mailto:hulagerushikesh@gmail.com', Icon: Mail },
+  { label: 'GitHub', href: 'https://github.com/hulagerushikesh', Icon: GithubIcon, aria: 'GitHub profile' },
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/rushikesh-hulage-46018522b/',
+    Icon: LinkedinIcon,
+    aria: 'LinkedIn profile',
+  },
+  { label: 'Email', href: 'mailto:hulagerushikesh@gmail.com', Icon: Mail, aria: 'Email Rushikesh' },
 ];
 
-const meta = [
-  { k: 'ROLE', v: 'Identity & Platform Engineer' },
-  { k: 'AT', v: 'Telstra' },
-  { k: 'LOC', v: 'Pune, IN' },
+// Proof strip — four hardest facts, straight from the résumé. On mobile these
+// wrap to a 2×2 grid.
+const proof = [
+  '15+ apps migrated · zero auth downtime',
+  'Edge WAF migration · 10+ apps',
+  'Top 10 · Google APAC 2025',
+  'Hugging Face Transformers contributor',
 ];
 
-// Right-panel quick facts — fills the space beside the intro with substance.
-const facts = [
-  { k: 'Focus', v: 'Secure backends, cloud platforms, applied AI' },
-  { k: 'Stack', v: 'Java · Spring Boot · Python · GCP · RAG' },
-  { k: 'Based', v: 'Pune, India' },
-  { k: 'Open to', v: 'Senior / platform engineering roles' },
+// "Live in production" card — real, shipped work. Each links to its case study.
+const liveWork = [
+  {
+    name: 'Atlas',
+    slug: 'atlas',
+    blurb: 'Agentic RAG platform, multi-tenant, live on GCP',
+    live: 'https://atlas.hulage.in',
+  },
+  {
+    name: 'VisionTrack',
+    slug: 'visiontrack',
+    blurb: 'Real-time multi-object tracker, published PyPI SDK',
+    live: 'https://visiontrack.hulage.in',
+  },
+  {
+    name: 'Finertia',
+    slug: 'finertia',
+    blurb: 'Momentum backtesting SaaS on a pure pandas engine',
+    live: 'https://finertia.hulage.in',
+  },
 ];
-
-// Keywords for the kinetic band under the hero.
-const band = ['Identity', 'Platform', 'Security', 'Backend', 'Cloud', 'Applied AI', 'RAG', 'Java', 'Spring', 'GCP'];
-
-// A single display line that clip-reveals: it sits in an overflow-hidden mask
-// and slides up from below. <MotionConfig reducedMotion="user"> collapses the
-// translate to an instant fade for reduced-motion users.
-function RevealLine({
-  children,
-  delay = 0,
-  className,
-  padB = '0.1em',
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-  padB?: string;
-}) {
-  // padB gives the mask bottom room so italic descenders (g, q, y) aren't clipped.
-  return (
-    <span style={{ display: 'block', overflow: 'hidden', paddingBottom: padB }}>
-      <motion.span
-        className={className}
-        initial={{ y: '115%' }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
-        style={{ display: 'block', willChange: 'transform' }}
-      >
-        {children}
-      </motion.span>
-    </span>
-  );
-}
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -119,14 +107,14 @@ export default function HeroSection() {
           zIndex: 1,
           width: '100%',
           paddingTop: 'clamp(116px, 16vh, 180px)',
-          paddingBottom: 'clamp(48px, 7vh, 88px)',
+          paddingBottom: 'clamp(56px, 9vh, 110px)',
           opacity: reducedMotion ? 1 : heroOpacity,
           y: reducedMotion ? 0 : heroY,
         }}
       >
-        {/* ── LEFT: intro ─────────────────────────────────────────── */}
+        {/* ── LEFT: positioning ───────────────────────────────────── */}
         <div className="hero-left">
-          {/* Status pill */}
+          {/* Availability pill */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -142,7 +130,7 @@ export default function HeroSection() {
               letterSpacing: '0.04em',
               color: 'var(--text-secondary)',
               padding: '8px 16px',
-              marginBottom: '28px',
+              marginBottom: '26px',
               borderRadius: 'var(--radius-full)',
               boxShadow: 'var(--shadow-soft)',
             }}
@@ -166,104 +154,96 @@ export default function HeroSection() {
                 }}
               />
             </span>
-            Available for senior / platform roles
+            Open to SDE-2 / senior-track roles
           </motion.div>
 
-          {/* Kicker */}
+          {/* Eyebrow — name demoted to a label */}
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.16 }}
             style={{
               fontFamily: 'var(--font-geist-sans)',
-              fontSize: '0.78rem',
+              fontSize: '0.8rem',
               fontWeight: 600,
-              letterSpacing: '0.22em',
+              letterSpacing: '0.18em',
               textTransform: 'uppercase',
               color: 'var(--accent-text)',
-              margin: '0 0 8px',
+              margin: '0 0 14px',
             }}
           >
-            Software Engineer · Telstra
+            Rushikesh Hulage · Software Engineer, Telstra
           </motion.p>
 
-          {/* Name — smaller, one clean unit */}
-          <h1
+          {/* H1 — positioning statement.
+             Alternatives (kept for reference):
+             2. "I own the authentication behind Telstra's customer channels — and build applied-AI platforms."
+             3. "Identity & backend engineer at Telstra who also ships production AI systems." */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
             style={{
               fontFamily: 'var(--font-display)',
               fontWeight: 600,
-              fontSize: 'clamp(2.3rem, 5.2vw, 3.9rem)',
-              lineHeight: 1.02,
+              fontSize: 'clamp(2.1rem, 4.6vw, 3.6rem)',
+              lineHeight: 1.08,
               letterSpacing: '-0.03em',
-              margin: '0 0 20px',
+              color: 'var(--text-primary)',
+              maxWidth: '18ch',
+              margin: '0 0 22px',
             }}
           >
-            <RevealLine delay={0.2}>
-              Rushikesh <span className="hero-accent">Hulage</span>
-            </RevealLine>
-          </h1>
+            I build Telstra&apos;s customer login and security layer — and ship{' '}
+            <span className="hero-accent">AI systems</span>.
+          </motion.h1>
 
-          {/* Thesis */}
+          {/* Subline — concrete scope */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.45 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             style={{
-              fontSize: 'clamp(1.05rem, 1.6vw, 1.35rem)',
-              lineHeight: 1.55,
-              maxWidth: '46ch',
+              fontSize: 'clamp(1.02rem, 1.5vw, 1.24rem)',
+              lineHeight: 1.6,
+              maxWidth: '52ch',
               color: 'var(--text-secondary)',
               fontWeight: 400,
-              margin: '0 0 30px',
+              margin: '0 0 26px',
             }}
           >
-            I build and secure the <GradientText>platforms</GradientText> other teams
-            ship on — backend, cloud, and{' '}
-            <RotatingWord
-              className="hero-accent"
-              words={['applied AI', 'RAG systems', 'secure APIs', 'ML pipelines']}
-            />
+            At Telstra I own the registration, authentication and authorization behind
+            customer digital channels — Java &amp; Spring Boot on AWS, OAuth2/OIDC, mTLS
+            and edge WAF. Alongside it I build applied-AI systems — Atlas, VisionTrack and
+            Finertia — all live in production.
           </motion.p>
 
-          {/* Meta row */}
-          <motion.div
+          {/* Proof strip */}
+          <motion.ul
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.58 }}
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'flex-start',
-              width: '100%',
-              maxWidth: '600px',
-              gap: '10px 40px',
-              fontFamily: 'var(--font-geist-sans)',
-              fontSize: '0.82rem',
-              color: 'var(--text-secondary)',
-              padding: '20px 0',
-              marginBottom: '32px',
-              borderTop: '1px solid var(--border-subtle)',
-              borderBottom: '1px solid var(--border-subtle)',
-            }}
+            transition={{ duration: 0.6, delay: 0.52 }}
+            className="hero-proof"
+            aria-label="Highlights"
           >
-            {meta.map((m) => (
-              <div key={m.k}>
-                <span style={{ color: 'var(--accent-text)', fontWeight: 700 }}>{m.k} </span>
-                {m.v}
-              </div>
+            {proof.map((p) => (
+              <li key={p} className="hero-proof-item">
+                <span className="hero-proof-tick" aria-hidden="true" />
+                {p}
+              </li>
             ))}
-          </motion.div>
+          </motion.ul>
 
           {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.68 }}
-            style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', marginBottom: '32px' }}
+            transition={{ duration: 0.6, delay: 0.64 }}
+            style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', margin: '30px 0 30px' }}
           >
             <Magnetic>
               <a href="#projects" className="btn-primary">
-                View selected work <span>↗</span>
+                See projects <span>↗</span>
               </a>
             </Magnetic>
             <a href="#contact" className="btn-secondary">
@@ -275,16 +255,16 @@ export default function HeroSection() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
+            transition={{ duration: 0.6, delay: 0.76 }}
             style={{ display: 'flex', gap: '14px' }}
           >
-            {socialLinks.map(({ label, href, Icon }) => (
+            {socialLinks.map(({ label, href, Icon, aria }) => (
               <a
                 key={label}
                 href={href}
                 target={href.startsWith('mailto') ? undefined : '_blank'}
                 rel="noopener noreferrer"
-                title={label}
+                aria-label={aria}
                 className="glow-hover glass"
                 style={{
                   width: '46px',
@@ -304,56 +284,40 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* ── RIGHT: intro card ───────────────────────────────────── */}
+        {/* ── RIGHT: live-in-production card ───────────────────────── */}
         <motion.aside
           initial={{ opacity: 0, y: 26 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5 }}
           className="glass-card hero-card"
+          aria-label="Live in production"
         >
-          <div className="hero-card-head">
-            <span className="hero-avatar">RH</span>
-            <div>
-              <div className="hero-card-name">Rushikesh Hulage</div>
-              <div className="hero-card-sub">Identity &amp; Platform Engineer</div>
-            </div>
+          <div className="hero-card-eyebrow">
+            <span className="hero-live-dot" aria-hidden="true" />
+            Live in production
           </div>
 
-          <p className="hero-card-bio">
-            I&apos;m a software engineer at Telstra who takes systems from design to
-            production — secure authentication, cloud-native services, and applied-AI
-            platforms. VJTI Mumbai grad, Hugging Face contributor, and Top 10 at the
-            Google APAC Challenge 2025.
-          </p>
-
-          <div className="hero-facts">
-            {facts.map((f) => (
-              <div className="hero-fact" key={f.k}>
-                <span className="hero-fact-k">{f.k}</span>
-                <span className="hero-fact-v">{f.v}</span>
-              </div>
+          <ul className="hero-work">
+            {liveWork.map((w) => (
+              <li key={w.slug} className="hero-work-item">
+                <div className="hero-work-top">
+                  <span className="hero-work-name">{w.name}</span>
+                  <span className="hero-work-links">
+                    <Link href={`/projects/${w.slug}`}>Read</Link>
+                    <a href={w.live} target="_blank" rel="noopener noreferrer">
+                      Live ↗
+                    </a>
+                  </span>
+                </div>
+                <p className="hero-work-blurb">{w.blurb}</p>
+              </li>
             ))}
-          </div>
-        </motion.aside>
-      </motion.div>
+          </ul>
 
-      {/* Kinetic keyword band — full-bleed, bold */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 1 }}
-        className="marquee"
-        aria-hidden="true"
-        style={{ position: 'relative', zIndex: 1, marginTop: 'auto' }}
-      >
-        <div className="marquee-row">
-          {[...band, ...band].map((w, i) => (
-            <span key={i}>
-              <b>◆</b>
-              {w}
-            </span>
-          ))}
-        </div>
+          <Link href="#projects" className="hero-work-all">
+            All projects →
+          </Link>
+        </motion.aside>
       </motion.div>
     </section>
   );

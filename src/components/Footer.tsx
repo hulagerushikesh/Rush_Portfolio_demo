@@ -57,7 +57,8 @@ export default function Footer() {
               rushikesh.hulage
             </div>
             <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.6, maxWidth: '280px' }}>
-              Platform &amp; ML engineer. I build and secure the systems other teams ship on.
+              Identity &amp; backend engineer at Telstra. I build the systems customers log in
+              through — and ship applied-AI projects on the side.
             </p>
           </div>
 

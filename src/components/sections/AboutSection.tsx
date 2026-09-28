@@ -1,7 +1,7 @@
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import GradientText from '@/components/ui/GradientText';
 import CountUp from '@/components/ui/CountUp';
-import { getResumeData, getYearsOfExperience, getTechnologyCount } from '@/utils/data';
+import { getResumeData, getYearsOfExperience } from '@/utils/data';
 import { getPublishedProjects } from '@/lib/content';
 
 export default async function AboutSection() {
@@ -11,7 +11,7 @@ export default async function AboutSection() {
   const stats = [
     { value: `${getYearsOfExperience(resume.experience[0].startDate)}+`, label: 'Years' },
     { value: `${projects.length}`, label: 'Shipped' },
-    { value: `${getTechnologyCount(resume.skills)}+`, label: 'Technologies' },
+    { value: '15+', label: 'Apps migrated' },
     { value: `${resume.certifications.length}`, label: 'Certifications' },
   ];
 
@@ -21,7 +21,7 @@ export default async function AboutSection() {
         <AnimatedSection>
           <div className="section-head">
             <span className="section-label">About</span>
-            <h2 className="section-title">Building intelligent systems <em>at scale</em></h2>
+            <h2 className="section-title">Production identity at Telstra, <em>AI systems</em> on the side</h2>
           </div>
         </AnimatedSection>
 
@@ -29,31 +29,32 @@ export default async function AboutSection() {
           <AnimatedSection delay={0.15}>
             <div style={{ maxWidth: '68ch', margin: 0 }}>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '20px' }}>
-                I&apos;m a Software Engineer at{' '}
-                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Telstra</strong>, where I own
-                platform engineering initiatives spanning secure backend services, cloud
-                infrastructure, and applied AI/ML — taking systems from design through
-                production, not just the parts that are interesting.
+                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>At Telstra</strong>, I own the
+                registration, authentication and authorization services behind customer digital
+                channels — <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Java &amp; Spring
+                Boot</strong> backends implementing OAuth 2.0 and OpenID Connect, JWT/JWKS
+                validation, MFA and RBAC, with the security primitives beneath them: PKI, X.509
+                lifecycle, mTLS, and TLS termination at the edge.
               </p>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '20px' }}>
-                That&apos;s meant designing secure authentication systems with{' '}
-                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Java &amp; Spring Boot</strong>,
-                leading a critical security migration end-to-end, and building enterprise AI
-                platforms on{' '}
-                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>
-                  RAG, LLMs, and cloud-native ML pipelines
-                </strong>{' '}
-                — the kind of ownership that comes with a few years of shipping systems other
-                teams depend on.
+                That&apos;s meant migrating{' '}
+                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>15+ enterprise apps</strong>{' '}
+                from PCF to OpenShift with zero authentication downtime, moving edge security to{' '}
+                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>AWS CloudFront &amp;
+                WAFv2</strong> across 10+ downstream apps, and automating X.509 issuance and
+                rotation so manual cert renewal stopped being an outage risk.
               </p>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8 }}>
-                A B.Tech graduate from{' '}
-                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>VJTI Mumbai</strong>, I stay
-                sharp outside work too — contributing to{' '}
+                Outside the day job — separately from my Telstra work — I build{' '}
+                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>applied-AI systems</strong>:
+                agentic RAG (Atlas), real-time computer vision (VisionTrack), and quantitative
+                backtesting (Finertia). A B.Tech graduate from{' '}
+                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>VJTI Mumbai</strong>, I
+                contribute to{' '}
                 <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>
                   Hugging Face Transformers
                 </strong>{' '}
-                and placing Top 10 at the Google APAC Challenge 2025.
+                and placed Top 10 at the Google APAC Challenge 2025.
               </p>
             </div>
           </AnimatedSection>

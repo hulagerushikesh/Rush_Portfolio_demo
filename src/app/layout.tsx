@@ -19,33 +19,35 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
+const POSITIONING =
+  "Rushikesh Hulage — identity & backend engineer at Telstra (Java/Spring Boot, AWS, OAuth2/OIDC, mTLS, WAF) who also builds and ships applied-AI systems: agentic RAG, computer vision, and quantitative platforms.";
+
 export const metadata: Metadata = {
-  title: "Rushikesh Hulage — Identity & Platform Engineer",
-  description:
-    "Portfolio of Rushikesh Hulage — Software Engineer at Telstra specializing in identity, platform engineering, security, backend, cloud, and applied AI. Building and securing the systems other teams ship on.",
+  title: "Rushikesh Hulage — Identity & Backend Engineer, Telstra",
+  description: POSITIONING,
   keywords: [
     "Rushikesh Hulage",
     "Software Engineer",
-    "Machine Learning",
-    "AI",
-    "Cloud",
-    "Backend",
-    "Full Stack Developer",
+    "Identity & Access Management",
+    "OAuth2",
+    "OpenID Connect",
+    "Backend Engineer",
+    "AWS",
+    "Applied AI",
+    "RAG",
     "Portfolio",
   ],
   authors: [{ name: "Rushikesh Hulage" }],
   openGraph: {
-    title: "Rushikesh Hulage | Software Engineer · ML · Cloud",
-    description:
-      "Portfolio of Rushikesh Hulage — Software Engineer specializing in AI/ML, Backend Development, and Cloud Technologies.",
+    title: "Rushikesh Hulage — Identity & Backend Engineer, Telstra",
+    description: POSITIONING,
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rushikesh Hulage | Software Engineer · ML · Cloud",
-    description:
-      "Portfolio of Rushikesh Hulage — Software Engineer specializing in AI/ML, Backend Development, and Cloud Technologies.",
+    title: "Rushikesh Hulage — Identity & Backend Engineer, Telstra",
+    description: POSITIONING,
   },
 };
 

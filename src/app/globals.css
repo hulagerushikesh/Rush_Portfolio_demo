@@ -31,7 +31,7 @@
   --grad-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 60%);
 
   --text-primary: #eceef2;
-  --text-secondary: #9a9da6;
+  --text-secondary: #aeb1ba;
   --text-accent: #9db2ff;
   --text-muted: #63666f;
 
@@ -1075,4 +1075,128 @@ a.channel-card:hover {
   font-size: 0.88rem;
   color: var(--text-primary);
   line-height: 1.5;
+}
+
+/* ── Hero proof strip ───────────────────────────────────────── */
+.hero-proof {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  max-width: 600px;
+}
+.hero-proof-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.86rem;
+  color: var(--text-primary);
+  line-height: 1.35;
+}
+.hero-proof-tick {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--grad-accent);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--accent-primary) 55%, transparent);
+}
+@media (max-width: 560px) {
+  .hero-proof {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 18px;
+  }
+  .hero-proof-item {
+    align-items: flex-start;
+    font-size: 0.8rem;
+  }
+  .hero-proof-tick {
+    margin-top: 6px;
+  }
+}
+
+/* ── Hero "Live in production" card ──────────────────────────── */
+.hero-card-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-geist-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+.hero-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #35d07f;
+  box-shadow: 0 0 10px color-mix(in srgb, #35d07f 70%, transparent);
+}
+.hero-work {
+  list-style: none;
+  margin: 0 0 4px;
+  padding: 0;
+}
+.hero-work-item {
+  padding: 16px 0;
+  border-top: 1px solid var(--border-subtle);
+}
+.hero-work-item:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+.hero-work-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 5px;
+}
+.hero-work-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.02rem;
+  color: var(--text-primary);
+}
+.hero-work-links {
+  display: inline-flex;
+  gap: 14px;
+  flex-shrink: 0;
+}
+.hero-work-links a {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-text);
+  text-decoration: none;
+}
+.hero-work-links a:hover {
+  text-decoration: underline;
+}
+.hero-work-blurb {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+.hero-work-all {
+  display: inline-block;
+  margin-top: 18px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+.hero-work-all:hover {
+  color: var(--accent-text);
+}
+
+/* Sections sit clear of the fixed nav when reached via a hash link. */
+section[id] {
+  scroll-margin-top: 92px;
 }

@@ -22,6 +22,9 @@ export default function AchievementsSection() {
         <div className="section-body wide">
           <AnimatedSection delay={0.1}>
             <div className="signals">
+              {/* TODO(rushikesh): link the merged Hugging Face Transformers PR(s)
+                  here — turn the "Open-source contributor" signal into an anchor to
+                  the actual PR so it's verifiable. */}
               {resume.achievements.map((achievement, i) => (
                 <div className="signal" key={i}>
                   <span className="s-idx">{String(i + 1).padStart(2, '0')}</span>
