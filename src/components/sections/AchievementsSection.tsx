@@ -34,24 +34,29 @@ export default function AchievementsSection() {
 
           {/* Certifications */}
           <AnimatedSection delay={0.2}>
-            <div style={{ marginTop: '64px', textAlign: 'center' }}>
+            <div style={{ marginTop: '64px' }}>
               <span className="section-label">Certifications</span>
-              <div style={{ marginTop: '20px', maxWidth: 'var(--content)', marginInline: 'auto' }}>
+              <div style={{ marginTop: '20px' }}>
                 {resume.certifications.map((cert, i) => (
                   <div key={i} className="spec-row">
-                    <div
-                      style={{
-                        fontFamily: 'var(--font-display)',
-                        fontWeight: 500,
-                        fontSize: '1.3rem',
-                        color: 'var(--text-primary)',
-                        marginBottom: '6px',
-                      }}
-                    >
-                      {cert.name}
+                    <div className="spec-k">
+                      {String(i + 1).padStart(2, '0')}
                     </div>
-                    <div style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
-                      {cert.issuer}
+                    <div>
+                      <div
+                        style={{
+                          fontFamily: 'var(--font-display)',
+                          fontWeight: 600,
+                          fontSize: '1.05rem',
+                          color: 'var(--text-primary)',
+                          marginBottom: '4px',
+                        }}
+                      >
+                        {cert.name}
+                      </div>
+                      <div style={{ color: 'var(--text-secondary)', fontSize: '0.92rem' }}>
+                        {cert.issuer}
+                      </div>
                     </div>
                   </div>
                 ))}

@@ -27,7 +27,7 @@ export default async function AboutSection() {
 
         <div className="section-body">
           <AnimatedSection delay={0.15}>
-            <div style={{ maxWidth: '64ch', margin: '0 auto' }}>
+            <div style={{ maxWidth: '68ch', margin: 0 }}>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '20px' }}>
                 I&apos;m a Software Engineer at{' '}
                 <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Telstra</strong>, where I own

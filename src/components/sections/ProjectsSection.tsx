@@ -19,7 +19,7 @@ export default async function ProjectsSection() {
           </div>
         </AnimatedSection>
 
-        <div className="section-body">
+        <div className="section-body wide">
           {projects.map((project, i) => {
             const year = project.project_date
               ? new Date(project.project_date).getFullYear()

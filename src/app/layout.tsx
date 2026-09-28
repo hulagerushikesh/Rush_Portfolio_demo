@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Fraunces } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import MotionProvider from "@/components/MotionProvider";
 import CursorSpotlight from "@/components/ui/CursorSpotlight";
 import "./globals.css";
@@ -10,13 +10,12 @@ const inter = Inter({
   display: "swap",
 });
 
-// Fraunces is the editorial display face — an expressive high-contrast serif
-// with optical sizing and an italic cut used for accents. Body copy stays Inter.
-const fraunces = Fraunces({
+// Space Grotesk is the display face — a geometric grotesk with technical
+// character for headings on the dark "Signal" theme. Body copy stays Inter.
+const spaceGrotesk = Space_Grotesk({
   variable: "--font-display-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -58,7 +57,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${fraunces.variable} antialiased`}
+        className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
       >
         <CursorSpotlight />
         <MotionProvider>{children}</MotionProvider>

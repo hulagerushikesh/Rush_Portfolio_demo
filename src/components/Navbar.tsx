@@ -22,7 +22,6 @@ const menuItemVariants: Variants = {
 const navItems = [
   { id: 'home', name: 'Home', href: '#home' },
   { id: 'projects', name: 'Projects', href: '#projects' },
-  { id: 'blog', name: 'Blog', href: '/blog' },
   { id: 'experience', name: 'Experience', href: '#experience' },
   { id: 'skills', name: 'Skills', href: '#skills' },
   { id: 'about', name: 'About', href: '#about' },
@@ -38,12 +37,6 @@ export default function Navbar() {
   const [compact, setCompact] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const lastScrollY = useRef(0);
-
-  useEffect(() => {
-    if (pathname.startsWith('/blog')) {
-      setActiveSection('blog');
-    }
-  }, [pathname]);
 
   // Track scroll position + direction: compact while scrolling down,
   // restore as soon as the user scrolls back up.
@@ -122,8 +115,8 @@ export default function Navbar() {
           padding: compact ? '8px 24px' : '14px 32px',
           borderRadius: 'var(--radius-full)',
           background: scrolled
-            ? 'rgba(255, 255, 255, 0.72)'
-            : 'rgba(255, 255, 255, 0.5)',
+            ? 'rgba(12, 14, 17, 0.82)'
+            : 'rgba(12, 14, 17, 0.55)',
           backdropFilter: 'blur(22px) saturate(180%)',
           WebkitBackdropFilter: 'blur(22px) saturate(180%)',
           border: '1px solid var(--glass-border)',

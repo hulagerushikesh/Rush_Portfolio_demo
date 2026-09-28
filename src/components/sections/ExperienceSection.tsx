@@ -48,34 +48,29 @@ export default function ExperienceSection() {
 
           {/* Education */}
           <AnimatedSection delay={0.2}>
-            <div style={{ marginTop: '72px', textAlign: 'center' }}>
+            <div style={{ marginTop: '64px' }}>
               <span className="section-label">Education</span>
               <div style={{ marginTop: '20px' }}>
                 {resume.education.map((edu, i) => (
                   <div key={i} className="spec-row">
-                    <div
-                      style={{
-                        fontFamily: 'var(--font-display)',
-                        fontWeight: 500,
-                        fontSize: '1.3rem',
-                        color: 'var(--text-primary)',
-                        marginBottom: '6px',
-                      }}
-                    >
-                      {edu.degree}
-                    </div>
-                    <div style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: '4px' }}>
-                      {edu.institution}
-                    </div>
-                    <div
-                      style={{
-                        color: 'var(--text-muted)',
-                        fontSize: '0.72rem',
-                        letterSpacing: '0.14em',
-                        textTransform: 'uppercase',
-                      }}
-                    >
+                    <div className="spec-k">
                       {edu.startDate} — {edu.endDate}
+                    </div>
+                    <div>
+                      <div
+                        style={{
+                          fontFamily: 'var(--font-display)',
+                          fontWeight: 600,
+                          fontSize: '1.05rem',
+                          color: 'var(--text-primary)',
+                          marginBottom: '4px',
+                        }}
+                      >
+                        {edu.degree}
+                      </div>
+                      <div style={{ color: 'var(--text-secondary)', fontSize: '0.92rem' }}>
+                        {edu.institution}
+                      </div>
                     </div>
                   </div>
                 ))}

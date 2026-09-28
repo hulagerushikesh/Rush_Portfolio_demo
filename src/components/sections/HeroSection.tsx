@@ -114,8 +114,8 @@ export default function HeroSection() {
           width: '100%',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
-          textAlign: 'center',
+          alignItems: 'flex-start',
+          textAlign: 'left',
           paddingTop: 'clamp(120px, 18vh, 200px)',
           paddingBottom: 'clamp(60px, 8vh, 100px)',
           opacity: reducedMotion ? 1 : heroOpacity,
@@ -183,20 +183,20 @@ export default function HeroSection() {
           Software Engineer · Telstra
         </motion.p>
 
-        {/* Name — editorial serif, clip-reveal per line */}
+        {/* Name — geometric grotesk, clip-reveal per line */}
         <h1
           style={{
             fontFamily: 'var(--font-display)',
-            fontWeight: 500,
+            fontWeight: 600,
             fontSize: 'clamp(2.6rem, 8.5vw, 6.4rem)',
             lineHeight: 0.98,
-            letterSpacing: '-0.03em',
+            letterSpacing: '-0.04em',
             margin: '0 0 26px',
           }}
         >
           <RevealLine delay={0.2}>Rushikesh</RevealLine>
-          <RevealLine delay={0.34} className="hero-accent" padB="0.34em">
-            <i style={{ fontStyle: 'italic', fontWeight: 400 }}>Hulage</i>
+          <RevealLine delay={0.34} className="hero-accent" padB="0.2em">
+            Hulage
           </RevealLine>
         </h1>
 
@@ -206,12 +206,12 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.55 }}
           style={{
-            fontSize: 'clamp(1.25rem, 2.6vw, 1.8rem)',
+            fontSize: 'clamp(1.15rem, 2.2vw, 1.6rem)',
             lineHeight: 1.5,
-            maxWidth: '30ch',
-            color: 'var(--text-primary)',
+            maxWidth: '32ch',
+            color: 'var(--text-secondary)',
             fontWeight: 400,
-            margin: '0 auto 36px',
+            margin: '0 0 34px',
           }}
         >
           I build and secure the <GradientText>platforms</GradientText> other teams
@@ -230,7 +230,9 @@ export default function HeroSection() {
           style={{
             display: 'flex',
             flexWrap: 'wrap',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
+            width: '100%',
+            maxWidth: '640px',
             gap: '10px 44px',
             fontFamily: 'var(--font-geist-sans)',
             fontSize: '0.82rem',
@@ -255,7 +257,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.78 }}
-          style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '16px', marginBottom: '42px' }}
+          style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', gap: '16px', marginBottom: '42px' }}
         >
           <Magnetic>
             <a href="#projects" className="btn-primary">
@@ -272,7 +274,7 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.92 }}
-          style={{ display: 'flex', justifyContent: 'center', gap: '14px' }}
+          style={{ display: 'flex', justifyContent: 'flex-start', gap: '14px' }}
         >
           {socialLinks.map(({ label, href, Icon }) => (
             <a
