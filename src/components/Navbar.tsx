@@ -19,6 +19,23 @@ const menuItemVariants: Variants = {
   visible: { opacity: 1, y: 0 },
 };
 
+// Fixed nav sits at top:16px and is ~56px tall; land section headings this far
+// below the viewport top so they clear the nav with a small gap.
+const NAV_OFFSET = 88;
+
+// Scroll so the section's heading — not its padded top edge — lands just below
+// the fixed nav. Sections carry ~104px of top padding, so aligning the section
+// box (scroll-margin-top) drops the heading ~196px down; targeting the heading
+// keeps it tight to the nav on both hash-load and in-page clicks.
+const scrollToSection = (id: string, behavior: ScrollBehavior) => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const heading = el.querySelector('h1, h2, h3') as HTMLElement | null;
+  const target = heading ?? el;
+  const y = target.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+  window.scrollTo({ top: Math.max(y, 0), behavior });
+};
+
 const navItems = [
   { id: 'home', name: 'Home', href: '#home' },
   { id: 'projects', name: 'Projects', href: '#projects' },
@@ -85,25 +102,35 @@ export default function Navbar() {
   // On first load with a hash in the URL (e.g. someone lands on /#projects),
   // scroll to that section once the page has painted. The native jump can fire
   // before the section exists, and section heights shift as content mounts, so
-  // we re-align a few times until the target settles.
+  // we re-align a few times until the target settles — but the moment the
+  // visitor scrolls, taps or keys, we stop re-aligning so we never yank them back.
   useEffect(() => {
     if (pathname !== '/') return;
     const hash = window.location.hash.replace('#', '');
     if (!hash) return;
 
     const timers: number[] = [];
-    const align = () => {
-      const el = document.getElementById(hash);
-      if (el) el.scrollIntoView({ behavior: 'auto' });
+    const align = () => scrollToSection(hash, 'auto');
+
+    // Any deliberate user input cancels the remaining passes.
+    const cancel = () => {
+      timers.forEach(clearTimeout);
+      window.removeEventListener('load', align);
+      window.removeEventListener('wheel', cancel);
+      window.removeEventListener('touchstart', cancel);
+      window.removeEventListener('keydown', cancel);
+      window.removeEventListener('pointerdown', cancel);
     };
+
     // Multiple passes catch late layout shifts from mounting sections.
     [80, 250, 600, 1000].forEach((d) => timers.push(window.setTimeout(align, d)));
     window.addEventListener('load', align);
+    window.addEventListener('wheel', cancel, { passive: true });
+    window.addEventListener('touchstart', cancel, { passive: true });
+    window.addEventListener('keydown', cancel);
+    window.addEventListener('pointerdown', cancel);
 
-    return () => {
-      timers.forEach(clearTimeout);
-      window.removeEventListener('load', align);
-    };
+    return cancel;
   }, [pathname]);
 
   const handleNavClick = (href: string) => {
@@ -115,15 +142,13 @@ export default function Navbar() {
       return;
     }
 
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+    scrollToSection(id, 'smooth');
   };
 
   return (
     <>
       <motion.nav
+        className="nav-shell"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, delay: 0.5 }}
@@ -157,6 +182,7 @@ export default function Navbar() {
         >
           {/* Logo — left */}
           <button
+            className="nav-logo"
             onClick={() => handleNavClick('#home')}
             style={{
               background: 'none',
@@ -166,12 +192,14 @@ export default function Navbar() {
               fontWeight: 600,
               letterSpacing: '0.02em',
               padding: 0,
+              paddingRight: '12px',
               display: 'inline-flex',
               alignItems: 'center',
               gap: '9px',
               fontFamily: 'var(--font-geist-mono)',
               color: 'var(--text-primary)',
               justifySelf: 'start',
+              minWidth: 0,
             }}
           >
             <span
@@ -428,6 +456,22 @@ export default function Navbar() {
         @media (max-width: 767px) {
           .mobile-menu-btn {
             display: block !important;
+            /* Desktop nav + spacer are hidden on mobile, so without this the
+               button lands in the grid's centre column and overlaps the logo.
+               Pin it to the last column so it stays hard right. */
+            grid-column: 3 !important;
+          }
+        }
+        /* Narrow phones: tighten the shell and shrink the logo so the wordmark
+           and hamburger don't crowd each other at ~375px. */
+        @media (max-width: 420px) {
+          .nav-shell {
+            padding-left: 18px !important;
+            padding-right: 14px !important;
+          }
+          .nav-logo {
+            font-size: 0.82rem !important;
+            letter-spacing: 0 !important;
           }
         }
       `}</style>

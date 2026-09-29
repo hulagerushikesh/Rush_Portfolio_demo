@@ -22,8 +22,8 @@ const socialLinks = [
 // Proof strip — four hardest facts, straight from the résumé. On mobile these
 // wrap to a 2×2 grid.
 const proof = [
-  '15+ apps migrated · zero auth downtime',
-  'Edge WAF migration · 10+ apps',
+  'Part of 15+ app migrations · zero auth downtime',
+  'mTLS cert rotation automated',
   'Top 10 · Google APAC 2025',
   'Hugging Face Transformers contributor',
 ];
@@ -157,11 +157,13 @@ export default function HeroSection() {
             Open to SDE-2 / senior-track roles
           </motion.div>
 
-          {/* Eyebrow — name demoted to a label */}
+          {/* Eyebrow — name demoted to a label. On ≤560px the name prefix is
+             hidden so it fits on one line as "Software Engineer, Telstra". */}
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.16 }}
+            className="hero-eyebrow"
             style={{
               fontFamily: 'var(--font-geist-sans)',
               fontSize: '0.8rem',
@@ -172,13 +174,13 @@ export default function HeroSection() {
               margin: '0 0 14px',
             }}
           >
-            Rushikesh Hulage · Software Engineer, Telstra
+            <span className="hero-eyebrow-name">Rushikesh Hulage · </span>Software Engineer, Telstra
           </motion.p>
 
           {/* H1 — positioning statement.
              Alternatives (kept for reference):
-             2. "I own the authentication behind Telstra's customer channels — and build applied-AI platforms."
-             3. "Identity & backend engineer at Telstra who also ships production AI systems." */}
+             2. "Backend engineer on Telstra's customer identity platform. I also ship AI systems."
+             3. "Identity & backend engineer at Telstra, building applied-AI systems in production." */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -186,16 +188,16 @@ export default function HeroSection() {
             style={{
               fontFamily: 'var(--font-display)',
               fontWeight: 600,
-              fontSize: 'clamp(2.1rem, 4.6vw, 3.6rem)',
+              fontSize: 'clamp(2.1rem, 4.6vw, 3rem)',
               lineHeight: 1.08,
               letterSpacing: '-0.03em',
               color: 'var(--text-primary)',
-              maxWidth: '18ch',
+              maxWidth: '24ch',
               margin: '0 0 22px',
             }}
           >
-            I build Telstra&apos;s customer login and security layer — and ship{' '}
-            <span className="hero-accent">AI systems</span>.
+            I work on customer identity at Telstra — and ship{' '}
+            <span className="hero-accent">AI systems</span> to production.
           </motion.h1>
 
           {/* Subline — concrete scope */}
@@ -212,10 +214,10 @@ export default function HeroSection() {
               margin: '0 0 26px',
             }}
           >
-            At Telstra I own the registration, authentication and authorization behind
-            customer digital channels — Java &amp; Spring Boot on AWS, OAuth2/OIDC, mTLS
-            and edge WAF. Alongside it I build applied-AI systems — Atlas, VisionTrack and
-            Finertia — all live in production.
+            I&apos;m a backend engineer on Telstra&apos;s customer identity (CIAM) platform,
+            working on the Java/Spring Boot services behind login, registration, MFA and
+            account recovery — OAuth 2.0/OIDC, mTLS and edge WAF on AWS. Outside work I build
+            applied-AI systems: Atlas, VisionTrack and Finertia, all live.
           </motion.p>
 
           {/* Proof strip */}

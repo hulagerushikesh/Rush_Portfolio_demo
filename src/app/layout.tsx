@@ -20,10 +20,10 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 const POSITIONING =
-  "Rushikesh Hulage — identity & backend engineer at Telstra (Java/Spring Boot, AWS, OAuth2/OIDC, mTLS, WAF) who also builds and ships applied-AI systems: agentic RAG, computer vision, and quantitative platforms.";
+  "Rushikesh Hulage — backend engineer on Telstra's customer identity platform (Java/Spring Boot, AWS, OAuth 2.0/OIDC, mTLS, WAF) who also builds applied-AI systems: agentic RAG, computer vision and quantitative platforms.";
 
 export const metadata: Metadata = {
-  title: "Rushikesh Hulage — Identity & Backend Engineer, Telstra",
+  title: "Rushikesh Hulage — Software Engineer, Identity & Applied AI",
   description: POSITIONING,
   keywords: [
     "Rushikesh Hulage",
@@ -39,14 +39,14 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Rushikesh Hulage" }],
   openGraph: {
-    title: "Rushikesh Hulage — Identity & Backend Engineer, Telstra",
+    title: "Rushikesh Hulage — Software Engineer, Identity & Applied AI",
     description: POSITIONING,
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rushikesh Hulage — Identity & Backend Engineer, Telstra",
+    title: "Rushikesh Hulage — Software Engineer, Identity & Applied AI",
     description: POSITIONING,
   },
 };

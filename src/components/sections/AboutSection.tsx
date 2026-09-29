@@ -8,11 +8,12 @@ export default async function AboutSection() {
   const resume = getResumeData();
   const projects = await getPublishedProjects();
 
+  const liveCount = projects.filter((p) => p.live_url).length;
+
   const stats = [
     { value: `${getYearsOfExperience(resume.experience[0].startDate)}+`, label: 'Years' },
     { value: `${projects.length}`, label: 'Shipped' },
-    { value: '15+', label: 'Apps migrated' },
-    { value: `${resume.certifications.length}`, label: 'Certifications' },
+    { value: `${liveCount}`, label: 'Live' },
   ];
 
   return (
@@ -21,7 +22,7 @@ export default async function AboutSection() {
         <AnimatedSection>
           <div className="section-head">
             <span className="section-label">About</span>
-            <h2 className="section-title">Production identity at Telstra, <em>AI systems</em> on the side</h2>
+            <h2 className="section-title">Customer identity at Telstra. <em>Applied AI</em> in production.</h2>
           </div>
         </AnimatedSection>
 
@@ -29,23 +30,22 @@ export default async function AboutSection() {
           <AnimatedSection delay={0.15}>
             <div style={{ maxWidth: '68ch', margin: 0 }}>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '20px' }}>
-                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>At Telstra</strong>, I own the
-                registration, authentication and authorization services behind customer digital
-                channels — <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Java &amp; Spring
-                Boot</strong> backends implementing OAuth 2.0 and OpenID Connect, JWT/JWKS
-                validation, MFA and RBAC, with the security primitives beneath them: PKI, X.509
-                lifecycle, mTLS, and TLS termination at the edge.
+                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>At Telstra</strong> I&apos;m a
+                backend engineer on the customer identity (CIAM) platform —{' '}
+                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Java &amp; Spring
+                Boot</strong> services for login, registration, MFA and recovery, built on OAuth 2.0/OIDC,
+                JWT/JWKS and RBAC, with PKI, mTLS and TLS termination underneath.
               </p>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '20px' }}>
-                That&apos;s meant migrating{' '}
-                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>15+ enterprise apps</strong>{' '}
-                from PCF to OpenShift with zero authentication downtime, moving edge security to{' '}
+                I was part of the{' '}
+                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>15+ app PCF→OpenShift
+                migration</strong> with zero authentication downtime, and worked on the{' '}
                 <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>AWS CloudFront &amp;
-                WAFv2</strong> across 10+ downstream apps, and automating X.509 issuance and
-                rotation so manual cert renewal stopped being an outage risk.
+                WAFv2</strong> edge migration across 10+ downstream apps and on automated X.509
+                certificate rotation that took manual cert renewal off the outage risk list.
               </p>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8 }}>
-                Outside the day job — separately from my Telstra work — I build{' '}
+                Outside work, I build{' '}
                 <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>applied-AI systems</strong>:
                 agentic RAG (Atlas), real-time computer vision (VisionTrack), and quantitative
                 backtesting (Finertia). A B.Tech graduate from{' '}
