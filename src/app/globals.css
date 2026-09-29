@@ -1003,10 +1003,18 @@ a.channel-card:hover {
   }
 }
 
-/* Right intro card */
+/* Right intro card — pinned to the top of the row, not vertically centred. */
 .hero-card {
   padding: 32px;
   border-radius: var(--radius-lg);
+  align-self: start;
+}
+
+/* Eyebrow: drop the name prefix on narrow screens so it stays one line. */
+@media (max-width: 560px) {
+  .hero-eyebrow-name {
+    display: none;
+  }
 }
 .hero-card-head {
   display: flex;

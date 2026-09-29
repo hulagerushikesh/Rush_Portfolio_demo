@@ -3,12 +3,11 @@
     "name": "Rushikesh Hulage",
     "title": "Software Engineer - Identity & Platform Engineering",
     "email": "hulagerushikesh@gmail.com",
-    "phone": "+91-8975173649",
     "location": "Pune, Maharashtra",
     "linkedin": "https://www.linkedin.com/in/rushikesh-hulage-46018522b/",
     "github": "https://github.com/hulagerushikesh"
   },
-  "summary": "Software Engineer with 3 years building and operating customer-facing authentication platforms at enterprise scale. I work at the protocol level across OAuth 2.0, OpenID Connect, JWT/JWKS, SSO and federation, and own the security primitives beneath them — PKI, X.509 lifecycle, mTLS, and TLS termination — in production systems where an auth outage blocks customer access. Alongside the day job I build applied AI/ML platforms: agentic RAG, real-time computer vision, and quantitative systems.",
+  "summary": "Software Engineer with 3 years on a customer-facing authentication platform at enterprise scale. I work at the protocol level across OAuth 2.0, OpenID Connect, JWT/JWKS, SSO and federation, and on the security layer beneath — PKI, X.509 lifecycle, mTLS and TLS termination. Outside work I build applied AI/ML systems: agentic RAG, real-time computer vision and quantitative platforms.",
   "experience": [
     {
       "title": "Software Engineer – Identity & Platform Engineering",
@@ -17,12 +16,12 @@
       "startDate": "July 2023",
       "endDate": "Present",
       "description": [
-        "Own the registration, authentication, and authorization services behind Telstra's customer digital channels — Java and Spring Boot backend services implementing OAuth 2.0 and OpenID Connect flows, JWT/JWKS validation, token introspection and exchange, session management, MFA, and RBAC.",
-        "Migrated 15+ enterprise applications from PCF to OpenShift with zero authentication downtime and no customer-facing incidents, by rebuilding auth integration, secure routing, and IP allow-listing ahead of each cutover.",
-        "Eliminated manual certificate renewal as a recurring outage risk by implementing end-to-end mTLS with automated X.509 issuance and rotation, and owning TLS termination at the CDN edge.",
-        "Hardened the identity platform's edge by migrating from legacy WAF to AWS CloudFront and WAFv2 — OWASP-aligned custom rule groups, regex pattern sets, IP reputation lists, and rate-based rules — with a phased DNS cutover across 10+ downstream applications at zero downtime.",
-        "Standardized SSO and single logout across enterprise apps by configuring OIDC/OAuth 2.0 clients in PingFederate and SecureAuth, and integrating with Salesforce and Entra ID (Azure AD) for identity federation.",
-        "Drove platform modernization — Java and Spring Boot upgrades, dependency remediation, CI/CD automation, and vulnerability remediation — reducing security and technical-debt risk across the identity estate."
+        "Build and maintain Java/Spring Boot services on Telstra's customer identity (CIAM) platform — registration, authentication and authorization flows using OAuth 2.0/OIDC, JWT/JWKS validation, token introspection and exchange, session management, MFA and RBAC.",
+        "Part of the team that migrated 15+ enterprise applications from PCF to OpenShift with zero authentication downtime — rebuilding auth integration, secure routing and IP allow-listing ahead of each cutover.",
+        "Worked on end-to-end mTLS with automated X.509 issuance and rotation, removing manual certificate renewal as a recurring outage risk, and on TLS termination at the CDN edge.",
+        "Worked on the edge migration from legacy WAF to AWS CloudFront + WAFv2 — OWASP-aligned rule groups, regex pattern sets, IP reputation lists and rate-based rules — with a phased, zero-downtime DNS cutover across 10+ downstream apps.",
+        "Configured OIDC/OAuth 2.0 clients in PingFederate and SecureAuth for SSO and single logout across enterprise apps, including federation with Salesforce and Entra ID.",
+        "Contributed to platform modernization — Java/Spring Boot upgrades, dependency and vulnerability remediation, and CI/CD automation."
       ]
     }
   ],
