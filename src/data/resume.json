@@ -47,16 +47,7 @@
     "cloud": ["AWS (CloudFront, Route 53, S3, IAM, Lambda, CloudWatch)", "OpenShift", "Kubernetes", "Docker", "CI/CD", "GitHub Actions"],
     "aiMl": ["LLMs", "RAG", "Agentic Orchestration", "LangChain", "Qdrant", "PyTorch", "ONNX", "Computer Vision"]
   },
-  "achievements": [
-    {
-      "title": "Top 10 Rank",
-      "description": "Google APAC Challenge 2025"
-    },
-    {
-      "title": "Open-source contributor",
-      "description": "Hugging Face Transformers"
-    }
-  ],
+  "achievements": [],
   "certifications": [
     {
       "name": "Machine Learning",

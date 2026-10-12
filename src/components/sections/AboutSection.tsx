@@ -49,12 +49,7 @@ export default async function AboutSection() {
                 <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>applied-AI systems</strong>:
                 agentic RAG (Atlas), real-time computer vision (VisionTrack), and quantitative
                 backtesting (Finertia). A B.Tech graduate from{' '}
-                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>VJTI Mumbai</strong>, I
-                contribute to{' '}
-                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>
-                  Hugging Face Transformers
-                </strong>{' '}
-                and placed Top 10 at the Google APAC Challenge 2025.
+                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>VJTI Mumbai</strong>.
               </p>
             </div>
           </AnimatedSection>
