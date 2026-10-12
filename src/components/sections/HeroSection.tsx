@@ -24,8 +24,8 @@ const socialLinks = [
 const proof = [
   'Part of 15+ app migrations · zero auth downtime',
   'mTLS cert rotation automated',
-  'Top 10 · Google APAC 2025',
-  'Hugging Face Transformers contributor',
+  'Edge WAF migration · 10+ apps',
+  'OAuth 2.0 / OIDC · JWT / JWKS',
 ];
 
 // "Live in production" card — real, shipped work. Each links to its case study.

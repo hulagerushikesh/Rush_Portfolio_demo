@@ -16,7 +16,7 @@
       "startDate": "July 2023",
       "endDate": "Present",
       "description": [
-        "Build and maintain Java/Spring Boot services on Telstra's customer identity (CIAM) platform — registration, authentication and authorization flows using OAuth 2.0/OIDC, JWT/JWKS validation, token introspection and exchange, session management, MFA and RBAC.",
+        "Worked on Java/Spring Boot services on Telstra's customer identity (CIAM) platform — registration, authentication and authorization flows using OAuth 2.0/OIDC, JWT/JWKS validation, token introspection and exchange, session management, MFA and RBAC.",
         "Part of the team that migrated 15+ enterprise applications from PCF to OpenShift with zero authentication downtime — rebuilding auth integration, secure routing and IP allow-listing ahead of each cutover.",
         "Worked on end-to-end mTLS with automated X.509 issuance and rotation, removing manual certificate renewal as a recurring outage risk, and on TLS termination at the CDN edge.",
         "Worked on the edge migration from legacy WAF to AWS CloudFront + WAFv2 — OWASP-aligned rule groups, regex pattern sets, IP reputation lists and rate-based rules — with a phased, zero-downtime DNS cutover across 10+ downstream apps.",
@@ -47,16 +47,7 @@
     "cloud": ["AWS (CloudFront, Route 53, S3, IAM, Lambda, CloudWatch)", "OpenShift", "Kubernetes", "Docker", "CI/CD", "GitHub Actions"],
     "aiMl": ["LLMs", "RAG", "Agentic Orchestration", "LangChain", "Qdrant", "PyTorch", "ONNX", "Computer Vision"]
   },
-  "achievements": [
-    {
-      "title": "Top 10 Rank",
-      "description": "Google APAC Challenge 2025"
-    },
-    {
-      "title": "Open-source contributor",
-      "description": "Hugging Face Transformers"
-    }
-  ],
+  "achievements": [],
   "certifications": [
     {
       "name": "Machine Learning",
