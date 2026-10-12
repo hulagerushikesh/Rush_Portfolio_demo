@@ -55,7 +55,7 @@ export default function ContactSection() {
                   <div className="channel-icon">
                     <Icon size={18} />
                   </div>
-                  <div>
+                  <div className="channel-body">
                     <div className="channel-label">{label}</div>
                     <div className="channel-value">{value}</div>
                   </div>
