@@ -899,6 +899,102 @@ div:hover > .code-copy-btn,
 }
 @media (max-width: 720px) { .signals { grid-template-columns: 1fr; } }
 
+/* ===== CERTIFICATION CARDS ===== */
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+.cert-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 24px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  transition: transform var(--transition-spring), background var(--transition-base),
+    border-color var(--transition-base);
+}
+.cert-card:hover {
+  transform: translateY(-2px);
+  background: var(--bg-glass-hover);
+  border-color: var(--border-accent);
+}
+.cert-badge {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--accent-primary) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 28%, transparent);
+  color: var(--accent-text);
+}
+.cert-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.08rem;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  line-height: 1.25;
+}
+.cert-issuer {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+}
+@media (max-width: 480px) { .cert-grid { grid-template-columns: 1fr; } }
+
+/* ===== STAT CARDS (about figure strip) ===== */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin-top: 56px;
+}
+.stat-card {
+  position: relative;
+  overflow: hidden;
+  padding: 30px 22px 26px;
+  text-align: left;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  transition: transform var(--transition-spring), background var(--transition-base),
+    border-color var(--transition-base);
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: var(--grad-accent);
+  opacity: 0.8;
+}
+.stat-card:hover {
+  transform: translateY(-3px);
+  background: var(--bg-glass-hover);
+  border-color: var(--border-accent);
+}
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 2.9rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.stat-label {
+  font-family: var(--font-geist-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
 /* ===== DIVIDER ===== */
 .gradient-divider {
   height: 1px;

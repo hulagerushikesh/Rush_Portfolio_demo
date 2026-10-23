@@ -31,7 +31,7 @@ export default function ContactSection() {
         </AnimatedSection>
 
         <AnimatedSection delay={0.12}>
-          <div className="section-body" style={{ display: 'flex', justifyContent: 'center', marginBottom: '40px' }}>
+          <div className="section-body" style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '40px' }}>
             <Magnetic>
               <a href={MAILTO} className="btn-primary">
                 Email me <ArrowUpRight size={18} />
