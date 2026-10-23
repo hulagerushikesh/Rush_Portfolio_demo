@@ -56,45 +56,15 @@ export default async function AboutSection() {
 
           {/* Stats — editorial figure strip */}
           <AnimatedSection delay={0.3}>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-                gap: '16px',
-                marginTop: '56px',
-              }}
-            >
+            <div className="stat-grid">
               {stats.map((stat, i) => (
-                <div
-                  key={i}
-                  className="glass-card"
-                  style={{ padding: '28px 20px', textAlign: 'center' }}
-                >
-                  <div
-                    style={{
-                      fontFamily: 'var(--font-display)',
-                      fontSize: '2.6rem',
-                      fontWeight: 500,
-                      letterSpacing: '-0.02em',
-                      marginBottom: '6px',
-                      lineHeight: 1,
-                    }}
-                  >
+                <div key={i} className="stat-card">
+                  <div className="stat-value">
                     <GradientText>
                       <CountUp value={stat.value} />
                     </GradientText>
                   </div>
-                  <div
-                    style={{
-                      fontFamily: 'var(--font-geist-sans)',
-                      fontSize: '0.7rem',
-                      letterSpacing: '0.16em',
-                      textTransform: 'uppercase',
-                      color: 'var(--text-muted)',
-                    }}
-                  >
-                    {stat.label}
-                  </div>
+                  <div className="stat-label">{stat.label}</div>
                 </div>
               ))}
             </div>
