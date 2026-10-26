@@ -19,14 +19,15 @@ const socialLinks = [
   { label: 'Email', href: 'mailto:hulagerushikesh@gmail.com', Icon: Mail, aria: 'Email Rushikesh' },
 ];
 
-// Proof strip — the four hardest facts from the résumé. Each is a claim line
-// and the detail that backs it, so the grid reads as four equal statements
-// instead of four sentences of different lengths wrapping into each other.
+// Proof strip — deliberately not a second copy of the paragraph above it. That
+// paragraph already names the protocols; repeating OAuth and mTLS here in
+// smaller type spends four lines to say nothing new. These four are outcomes
+// and independent work instead, each legible without knowing the acronyms.
 const proof = [
-  { claim: '15+ apps migrated', detail: 'PCF → OpenShift, zero downtime' },
-  { claim: '10+ apps cut over', detail: 'legacy WAF → CloudFront WAFv2' },
-  { claim: 'X.509 rotation automated', detail: 'end-to-end mTLS, no renewals' },
-  { claim: 'OAuth 2.0 / OIDC', detail: 'JWT / JWKS, SSO, federation' },
+  { claim: 'Zero login outages', detail: '15+ app migrations, with the team' },
+  { claim: 'Cert renewals automated', detail: 'end-to-end mTLS, no manual step' },
+  { claim: '4 packages on PyPI', detail: 'tracking, RAG, code graphs' },
+  { claim: 'Numbers on every project', detail: 'evals, coverage, cost per query' },
 ];
 
 // "Live in production" card — real, shipped work. Each links to its case study.
