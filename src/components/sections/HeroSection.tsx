@@ -45,7 +45,7 @@ const liveWork = [
   {
     name: 'Finertia',
     slug: 'finertia',
-    blurb: 'Momentum backtesting SaaS on a pure pandas engine',
+    blurb: 'Strategy backtesting that tests itself for overfitting',
     live: 'https://finertia.hulage.in',
   },
 ];
