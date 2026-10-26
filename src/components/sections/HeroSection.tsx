@@ -19,13 +19,14 @@ const socialLinks = [
   { label: 'Email', href: 'mailto:hulagerushikesh@gmail.com', Icon: Mail, aria: 'Email Rushikesh' },
 ];
 
-// Proof strip — four hardest facts, straight from the résumé. On mobile these
-// wrap to a 2×2 grid.
+// Proof strip — the four hardest facts from the résumé. Each is a claim line
+// and the detail that backs it, so the grid reads as four equal statements
+// instead of four sentences of different lengths wrapping into each other.
 const proof = [
-  'Part of 15+ app migrations · zero auth downtime',
-  'mTLS cert rotation automated',
-  'Edge WAF migration · 10+ apps',
-  'OAuth 2.0 / OIDC · JWT / JWKS',
+  { claim: '15+ apps migrated', detail: 'PCF → OpenShift, zero downtime' },
+  { claim: '10+ apps cut over', detail: 'legacy WAF → CloudFront WAFv2' },
+  { claim: 'X.509 rotation automated', detail: 'end-to-end mTLS, no renewals' },
+  { claim: 'OAuth 2.0 / OIDC', detail: 'JWT / JWKS, SSO, federation' },
 ];
 
 // "Live in production" card — real, shipped work. Each links to its case study.
@@ -229,9 +230,9 @@ export default function HeroSection() {
             aria-label="Highlights"
           >
             {proof.map((p) => (
-              <li key={p} className="hero-proof-item">
-                <span className="hero-proof-tick" aria-hidden="true" />
-                {p}
+              <li key={p.claim} className="hero-proof-item">
+                <span className="hero-proof-claim">{p.claim}</span>
+                <span className="hero-proof-detail">{p.detail}</span>
               </li>
             ))}
           </motion.ul>
