@@ -33,7 +33,7 @@ const liveWork = [
   {
     name: 'Atlas',
     slug: 'atlas',
-    blurb: 'Agentic RAG platform, multi-tenant, live on GCP',
+    blurb: 'Agentic RAG that grades its own answers against the evidence',
     live: 'https://atlas.hulage.in',
   },
   {
