@@ -19,15 +19,16 @@ const socialLinks = [
   { label: 'Email', href: 'mailto:hulagerushikesh@gmail.com', Icon: Mail, aria: 'Email Rushikesh' },
 ];
 
-// Proof strip — deliberately not a second copy of the paragraph above it. That
-// paragraph already names the protocols; repeating OAuth and mTLS here in
-// smaller type spends four lines to say nothing new. These four are outcomes
-// and independent work instead, each legible without knowing the acronyms.
+// Proof strip — four facts the paragraph above does not already carry, each
+// chosen for what it says about judgement rather than tooling: an outcome, a
+// failure mode removed, work owned end to end, and two of my own ideas killed
+// by my own measurements. No hedging verbs; the Experience section carries who
+// else was on each of these.
 const proof = [
-  { claim: 'Zero login outages', detail: '15+ app migrations, with the team' },
-  { claim: 'Cert renewals automated', detail: 'end-to-end mTLS, no manual step' },
-  { claim: '4 packages on PyPI', detail: 'tracking, RAG, code graphs' },
-  { claim: 'Numbers on every project', detail: 'evals, coverage, cost per query' },
+  { claim: 'Zero auth downtime', detail: 'across 15+ production migrations' },
+  { claim: 'Cert expiry designed out', detail: 'automated issuance and rotation' },
+  { claim: '3 systems I run alone', detail: 'design, deploy, bill and on-call' },
+  { claim: 'Measured before shipping', detail: 'HyDE, cpu=2 — tried and rejected' },
 ];
 
 // "Live in production" card — real, shipped work. Each links to its case study.
@@ -156,7 +157,7 @@ export default function HeroSection() {
                 }}
               />
             </span>
-            Open to SDE-2 / senior-track roles
+            Open to SDE-2 and senior backend roles
           </motion.div>
 
           {/* Eyebrow — name demoted to a label. On ≤560px the name prefix is
@@ -216,10 +217,12 @@ export default function HeroSection() {
               margin: '0 0 26px',
             }}
           >
-            I&apos;m a backend engineer on Telstra&apos;s customer identity (CIAM) platform,
-            working on the Java/Spring Boot services behind login, registration, MFA and
-            account recovery — OAuth 2.0/OIDC, mTLS and edge WAF on AWS. Outside work I build
-            applied-AI systems: Atlas, VisionTrack and Finertia, all live.
+            I work at the protocol level on the platform behind Telstra&apos;s customer
+            logins — OAuth 2.0 and OIDC, token exchange and session, and the PKI and mTLS
+            beneath it. When that breaks nobody signs in, so the job is migrations that
+            don&apos;t drop a session and certificates that renew themselves. Outside it I
+            design, ship and pay for three AI systems of my own: Atlas, VisionTrack and
+            Finertia, each live with its numbers published.
           </motion.p>
 
           {/* Proof strip */}
