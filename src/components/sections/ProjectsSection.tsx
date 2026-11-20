@@ -59,6 +59,11 @@ export default async function ProjectsSection() {
                         Live ↗
                       </a>
                     )}
+                    {project.package_url && (
+                      <a href={project.package_url} target="_blank" rel="noopener noreferrer">
+                        PyPI ↗
+                      </a>
+                    )}
                     <Link href={`/projects/${project.slug}`} style={{ color: 'var(--accent-text)', fontWeight: 600 }}>
                       Read →
                     </Link>

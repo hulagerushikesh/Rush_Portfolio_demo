@@ -181,6 +181,7 @@ export const staticProjects: Project[] = [
     featured: false,
     github_url: 'https://github.com/hulagerushikesh/sextant',
     live_url: null,
+    package_url: 'https://pypi.org/project/sextant-kb/',
     project_date: '2026-09-20',
     published: true,
     sort_order: 4,

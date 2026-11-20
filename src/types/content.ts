@@ -10,6 +10,8 @@ export interface Project {
   featured: boolean;
   github_url: string | null;
   live_url: string | null;
+  /** Where to install it, for projects shipped as a package rather than a site. */
+  package_url?: string | null;
   project_date: string | null;
   published: boolean;
   sort_order: number;
