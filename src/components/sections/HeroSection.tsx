@@ -28,7 +28,7 @@ const proof = [
   { claim: 'Zero auth downtime', detail: 'across 15+ production migrations' },
   { claim: 'Cert expiry designed out', detail: 'automated issuance and rotation' },
   { claim: '3 systems I run alone', detail: 'design, deploy, bill and on-call' },
-  { claim: 'Measured before shipping', detail: 'HyDE, cpu=2 — tried and rejected' },
+  { claim: 'Measured before shipping', detail: 'my own ideas cut when the numbers said no' },
 ];
 
 // "Live in production" card — real, shipped work. Each links to its case study.

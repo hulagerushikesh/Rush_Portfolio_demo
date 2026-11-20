@@ -30,7 +30,7 @@ export default async function AboutSection() {
           <AnimatedSection delay={0.15}>
             <div style={{ maxWidth: '68ch', margin: 0 }}>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '20px' }}>
-                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>At Telstra</strong> I&apos;m a
+                <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>At Telstra,</strong>{' '}I&apos;m a
                 backend engineer on the customer identity (CIAM) platform —{' '}
                 <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Java &amp; Spring
                 Boot</strong> services for login, registration, MFA and recovery, built on OAuth 2.0/OIDC,
