@@ -57,9 +57,9 @@ export const staticProjects: Project[] = [
       built:
         'Hybrid search (vectors plus keywords, fused and reranked) feeding an answer step that cites the exact passage behind every sentence, then grades its own answer. Costs ₹0 while idle, with a hard daily spend cap checked before every paid call.',
       result:
-        'Finds the right page for all 16 labelled questions, keeps answers to the pages at 0.99 and gets them right at 0.77 (November 2026 run on the DuckDB manual), at about ₹0.20 per question. 892 automated tests.',
+        'Finds the right source every time on its question set, with 99% of each answer backed by a cited passage, at about ₹0.20 a question.',
       tradeoff:
-        'Answer correctness (0.77) is the weakest score. HyDE was tested and rejected because it made slow questions 56% slower, and a plausible “bug fix” was reverted when the tests showed it cut recall from 0.94 to 0.88.',
+        'Answers are fully correct about three times in four, so that is the next thing to improve. HyDE was tried and dropped: 56% slower for no gain.',
     },
     image_url: null,
     technologies: ['Python', 'FastAPI', 'Qdrant', 'Gemini', 'Cloud Run', 'Docker'],
@@ -114,7 +114,7 @@ export const staticProjects: Project[] = [
       built:
         'Kalman filter, Hungarian matching and ByteTrack in NumPy, checked against the standard scoring tool, plus an experiment harness with repeated seeds and significance tests. On PyPI, with a separate C++ version that is 21–69× faster and matches the Python output bit for bit.',
       result:
-        'On MOT17 and DanceTrack, appearance matching (re-ID) significantly cuts ID switches. A learned motion model and calibrated uncertainty did not help. 1,000+ automated tests.',
+        'Showed that appearance matching significantly cuts identity mix-ups on two public benchmarks. The C++ engine runs 21–69× faster than Python with identical output.',
       tradeoff:
         'The learned motion model predicted dance movement 12.5% better but made tracking worse on both datasets. The study publishes that negative result instead of dropping it.',
     },
@@ -164,9 +164,9 @@ export const staticProjects: Project[] = [
       built:
         'A hand-written pandas and NumPy engine for US and Indian stocks, with walk-forward testing, permutation tests and overfitting checks on every run.',
       result:
-        'Nifty 50 study, 2011–2025, after costs: of 129 stock-and-strategy pairs, 50 beat holding the stock on the tuning years, 7 stayed ahead on unseen years and 4 passed the luck checks. Every figure is re-run by a script in CI.',
+        'Of 50 Nifty 50 strategy-and-stock pairs that beat buy-and-hold on paper, only 4 held up on unseen data and luck checks, so it catches the fakes before money does.',
       tradeoff:
-        'In the Apple study the verdict flips depending on the test window. The write-up says so, and carries a dated correction after a test was made stricter.',
+        'On Apple, the verdict flips with the time window chosen, and the write-up says so plainly instead of picking the flattering one.',
     },
     image_url: null,
     technologies: ['FastAPI', 'React', 'Firebase', 'pandas', 'NumPy', 'Cloud Run', 'Playwright'],
@@ -224,7 +224,7 @@ export const staticProjects: Project[] = [
       built:
         'Keyword and vector search, fused and reranked, graded against a 65-question set with a check that fails the build on any drop. Reads scanned PDFs, including Hindi and Marathi. On PyPI as sextant-kb and listed in the official MCP registry, MIT licence.',
       result:
-        'Puts the right passage first 93% of the time, up from 87% with plain search. On three public benchmark sets, the full pipeline beats the published keyword-plus-reranker baseline.',
+        'Puts the right passage first 93% of the time, up from 87% with plain search, and beats the published baseline on three public benchmarks.',
       tradeoff:
         'Its own keyword stage loses to standard BM25 on all three public sets, and the results page says so first. HyDE, prompt caching and smaller chunks were each measured and turned down.',
     },
