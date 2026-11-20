@@ -19,18 +19,6 @@ const socialLinks = [
   { label: 'Email', href: 'mailto:hulagerushikesh@gmail.com', Icon: Mail, aria: 'Email Rushikesh' },
 ];
 
-// Proof strip — four facts the paragraph above does not already carry, each
-// chosen for what it says about judgement rather than tooling: an outcome, a
-// failure mode removed, work owned end to end, and two of my own ideas killed
-// by my own measurements. No hedging verbs; the Experience section carries who
-// else was on each of these.
-const proof = [
-  { claim: 'Zero auth downtime', detail: 'across 15+ production migrations' },
-  { claim: 'Cert expiry designed out', detail: 'automated issuance and rotation' },
-  { claim: '3 systems I run alone', detail: 'design, deploy, bill and on-call' },
-  { claim: 'Measured before shipping', detail: 'my own ideas cut when the numbers said no' },
-];
-
 // "Live in production" card — real, shipped work. Each links to its case study.
 const liveWork = [
   {
@@ -225,28 +213,12 @@ export default function HeroSection() {
             Finertia, each live with its numbers published.
           </motion.p>
 
-          {/* Proof strip */}
-          <motion.ul
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.52 }}
-            className="hero-proof"
-            aria-label="Highlights"
-          >
-            {proof.map((p) => (
-              <li key={p.claim} className="hero-proof-item">
-                <span className="hero-proof-claim">{p.claim}</span>
-                <span className="hero-proof-detail">{p.detail}</span>
-              </li>
-            ))}
-          </motion.ul>
-
           {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.64 }}
-            style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', margin: '30px 0 30px' }}
+            transition={{ duration: 0.6, delay: 0.52 }}
+            style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', margin: '8px 0 30px' }}
           >
             <Magnetic>
               <a href="#projects" className="btn-primary">
