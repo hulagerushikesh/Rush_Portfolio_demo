@@ -65,7 +65,7 @@ export default function Footer() {
           {/* Quick links */}
           <div>
             <p className="eyebrow" style={{ marginBottom: '16px' }}>Index</p>
-            <nav style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <nav className="footer-index" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {quickLinks.map((link) => (
                 <a
                   key={link.label}
