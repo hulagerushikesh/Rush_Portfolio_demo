@@ -1269,3 +1269,61 @@ a.channel-card:hover {
 section[id] {
   scroll-margin-top: 92px;
 }
+
+/* ── Touch targets ─────────────────────────────────────────────
+   On touch screens, small text links and the menu button get a larger
+   invisible tap area (about 44px tall), the minimum comfortable thumb
+   target. Drawn as a transparent ::before so nothing moves or changes
+   look; horizontal growth stays under half of each row's gap so
+   neighbouring links never steal each other's taps. */
+@media (pointer: coarse) {
+  .hero-work-links a,
+  .hero-work-all,
+  .work-item .wi-meta a,
+  .link-underline,
+  .glow-hover,
+  .nav-logo,
+  .mobile-menu-btn {
+    position: relative;
+  }
+  .hero-work-links a::before,
+  .hero-work-all::before,
+  .work-item .wi-meta a::before,
+  .link-underline::before,
+  .glow-hover::before,
+  .nav-logo::before,
+  .mobile-menu-btn::before {
+    content: '';
+    position: absolute;
+  }
+  /* Text links ~19–20px tall: grow 13px up and down, 6px sideways. */
+  .hero-work-links a::before,
+  .hero-work-all::before,
+  .work-item .wi-meta a::before,
+  .link-underline::before,
+  .nav-logo::before {
+    inset: -13px -6px;
+  }
+  /* The footer index stacks its links 10px apart, so grown tap areas would
+     overlap; space them 24px apart on touch screens (44px pitch) and keep
+     their tap areas to exactly that pitch. */
+  .footer-index {
+    gap: 24px !important;
+  }
+  .footer-index .link-underline::before {
+    inset: -12px -6px;
+  }
+  /* "Read" is 30px wide with a 14px gap to "Live": 7px each side reaches
+     44px and the two areas meet exactly in the middle of the gap. */
+  .hero-work-links a::before {
+    inset: -13px -7px;
+  }
+  /* 40px icon buttons: just enough to reach 44px. */
+  .glow-hover::before {
+    inset: -2px;
+  }
+  /* 28×24 hamburger: grow to 48×44. */
+  .mobile-menu-btn::before {
+    inset: -10px;
+  }
+}
