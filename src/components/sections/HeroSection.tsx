@@ -1,44 +1,16 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
-import Link from 'next/link';
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
-import { Mail } from 'lucide-react';
+import { FileText } from 'lucide-react';
 import Magnetic from '@/components/ui/Magnetic';
 import { GithubIcon, LinkedinIcon } from '@/components/ui/BrandIcons';
 import { usePrefersReducedMotion } from '@/lib/motion';
 
-const socialLinks = [
-  { label: 'GitHub', href: 'https://github.com/hulagerushikesh', Icon: GithubIcon, aria: 'GitHub profile' },
-  {
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/rushikesh-hulage-46018522b/',
-    Icon: LinkedinIcon,
-    aria: 'LinkedIn profile',
-  },
-  { label: 'Email', href: 'mailto:hulagerushikesh@gmail.com', Icon: Mail, aria: 'Email Rushikesh' },
-];
-
-// "Live in production" card — real, shipped work. Each links to its case study.
-const liveWork = [
-  {
-    name: 'Atlas',
-    slug: 'atlas',
-    blurb: 'Agentic RAG that grades its own answers against the evidence',
-    live: 'https://atlas.hulage.in',
-  },
-  {
-    name: 'VisionTrack',
-    slug: 'visiontrack',
-    blurb: 'Real-time multi-object tracker, published PyPI SDK',
-    live: 'https://visiontrack.hulage.in',
-  },
-  {
-    name: 'Finertia',
-    slug: 'finertia',
-    blurb: 'Strategy backtesting that tests itself for overfitting',
-    live: 'https://finertia.hulage.in',
-  },
+const smallLinks = [
+  { label: 'GitHub', href: 'https://github.com/hulagerushikesh', Icon: GithubIcon },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/rushikesh-hulage-46018522b/', Icon: LinkedinIcon },
+  { label: 'Résumé (PDF)', href: '/resume/Rushikesh_Hulage_Resume.pdf', Icon: FileText },
 ];
 
 export default function HeroSection() {
@@ -92,7 +64,7 @@ export default function HeroSection() {
       />
 
       <motion.div
-        className="section-container hero-grid"
+        className="section-container hero-grid hero-single"
         style={{
           position: 'relative',
           zIndex: 1,
@@ -145,7 +117,7 @@ export default function HeroSection() {
                 }}
               />
             </span>
-            Open to SDE-2 and senior backend roles
+            Open to SDE-2 and senior backend roles · relocation or remote
           </motion.div>
 
           {/* Eyebrow — name demoted to a label. On ≤560px the name prefix is
@@ -165,13 +137,9 @@ export default function HeroSection() {
               margin: '0 0 14px',
             }}
           >
-            <span className="hero-eyebrow-name">Rushikesh Hulage · </span>Software Engineer, Telstra
+            <span className="hero-eyebrow-name">Rushikesh Hulage · </span>Software Engineer · Pune, India
           </motion.p>
 
-          {/* H1 — positioning statement.
-             Alternatives (kept for reference):
-             2. "Backend engineer on Telstra's customer identity platform. I also ship AI systems."
-             3. "Identity & backend engineer at Telstra, building applied-AI systems in production." */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -179,16 +147,16 @@ export default function HeroSection() {
             style={{
               fontFamily: 'var(--font-display)',
               fontWeight: 600,
-              fontSize: 'clamp(2.1rem, 4.6vw, 3rem)',
+              fontSize: 'clamp(2.1rem, 4.8vw, 3.4rem)',
               lineHeight: 1.08,
               letterSpacing: '-0.03em',
               color: 'var(--text-primary)',
-              maxWidth: '24ch',
+              maxWidth: '22ch',
               margin: '0 0 22px',
             }}
           >
-            I work on customer identity at Telstra — and ship{' '}
-            <span className="hero-accent">AI systems</span> to production.
+            Backend engineer on Telstra&apos;s customer sign-in platform. I also build and run my
+            own <span className="hero-accent">AI systems</span>.
           </motion.h1>
 
           {/* Subline — concrete scope */}
@@ -205,12 +173,10 @@ export default function HeroSection() {
               margin: '0 0 26px',
             }}
           >
-            I work at the protocol level on the platform behind Telstra&apos;s customer
-            logins — OAuth 2.0 and OIDC, token exchange and session, and the PKI and mTLS
-            beneath it. When that breaks nobody signs in, so the job is migrations that
-            don&apos;t drop a session and certificates that renew themselves. Outside it I
-            design, ship and pay for three AI systems of my own: Atlas, VisionTrack and
-            Finertia, each live with its numbers published.
+            Three years on OAuth 2.0, OpenID Connect and mTLS at enterprise scale, including a
+            team migration of 15+ apps with zero sign-in downtime. Outside work, Atlas,
+            VisionTrack and Finertia are live and Sextant is on PyPI, each with its results
+            published.
           </motion.p>
 
           {/* CTAs */}
@@ -222,81 +188,37 @@ export default function HeroSection() {
           >
             <Magnetic>
               <a href="#projects" className="btn-primary">
-                See projects <span>↗</span>
+                See my work <span>↓</span>
               </a>
             </Magnetic>
-            <a href="#contact" className="btn-secondary">
-              Get in touch
+            <a href="mailto:hulagerushikesh@gmail.com" className="btn-secondary">
+              Email me
             </a>
           </motion.div>
 
-          {/* Social links */}
-          <motion.div
+          {/* Small links */}
+          <motion.nav
+            aria-label="Profiles and résumé"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.76 }}
-            style={{ display: 'flex', gap: '14px' }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="hero-links"
           >
-            {socialLinks.map(({ label, href, Icon, aria }) => (
+            {smallLinks.map(({ label, href, Icon }) => (
               <a
                 key={label}
                 href={href}
-                target={href.startsWith('mailto') ? undefined : '_blank'}
+                target="_blank"
                 rel="noopener noreferrer"
-                aria-label={aria}
-                className="glow-hover glass"
-                style={{
-                  width: '46px',
-                  height: '46px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: 'var(--radius-full)',
-                  boxShadow: 'var(--shadow-soft)',
-                  color: 'var(--text-primary)',
-                  textDecoration: 'none',
-                }}
+                className="link-underline"
               >
-                <Icon size={18} />
+                <Icon size={15} aria-hidden="true" />
+                {label}
               </a>
             ))}
-          </motion.div>
+          </motion.nav>
         </div>
 
-        {/* ── RIGHT: live-in-production card ───────────────────────── */}
-        <motion.aside
-          initial={{ opacity: 0, y: 26 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5 }}
-          className="glass-card hero-card"
-          aria-label="Live in production"
-        >
-          <div className="hero-card-eyebrow">
-            <span className="hero-live-dot" aria-hidden="true" />
-            Live in production
-          </div>
-
-          <ul className="hero-work">
-            {liveWork.map((w) => (
-              <li key={w.slug} className="hero-work-item">
-                <div className="hero-work-top">
-                  <span className="hero-work-name">{w.name}</span>
-                  <span className="hero-work-links">
-                    <Link href={`/projects/${w.slug}`}>Read</Link>
-                    <a href={w.live} target="_blank" rel="noopener noreferrer">
-                      Live ↗
-                    </a>
-                  </span>
-                </div>
-                <p className="hero-work-blurb">{w.blurb}</p>
-              </li>
-            ))}
-          </ul>
-
-          <Link href="#projects" className="hero-work-all">
-            All projects →
-          </Link>
-        </motion.aside>
       </motion.div>
     </section>
   );

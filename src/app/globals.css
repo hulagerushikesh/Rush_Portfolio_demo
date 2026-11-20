@@ -1327,3 +1327,73 @@ section[id] {
     inset: -10px;
   }
 }
+
+/* ===== Homepage rewrite (Nov 2026) ===== */
+/* Hero is one column now: the words carry it, no side card. */
+@media (min-width: 900px) {
+  .hero-grid.hero-single { grid-template-columns: minmax(0, 1fr); }
+}
+.hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  font-size: 0.9rem;
+}
+.hero-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+.hero-links a:hover { color: var(--text-primary); }
+
+/* Project card facts: label column + text, result highlighted. */
+.work-item .wi-facts {
+  display: grid;
+  gap: 0;
+  margin: 4px 0 0;
+  max-width: 78ch;
+}
+.work-item .wi-fact {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 18px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border-subtle);
+}
+.work-item .wi-fact dt {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding-top: 3px;
+}
+.work-item .wi-fact dd {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.work-item .wi-fact-result dt { color: var(--accent-text); }
+.work-item .wi-fact-result dd { color: var(--text-primary); font-weight: 500; }
+@media (max-width: 640px) {
+  .work-item .wi-fact { grid-template-columns: 1fr; gap: 4px; }
+}
+
+.xp .xp-intro {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 68ch;
+  margin: 0 0 14px;
+}
+.xp .xp-outcome { color: var(--text-primary); font-weight: 600; }
+
+.about-text {
+  max-width: 62ch;
+  margin: 0;
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  line-height: 1.75;
+  color: var(--text-secondary);
+}

@@ -20,16 +20,6 @@ const tagVariants: Variants = {
   },
 };
 
-const skillLabels: Record<string, { label: string; sub: string }> = {
-  languages: { label: 'Languages', sub: 'LANG' },
-  identity: { label: 'Identity & Access', sub: 'IAM' },
-  security: { label: 'Security', sub: 'SEC' },
-  backend: { label: 'Backend', sub: 'API' },
-  cloud: { label: 'Cloud / DevOps', sub: 'INFRA' },
-  aiMl: { label: 'AI / ML', sub: 'MODELS' },
-  frameworks: { label: 'Frameworks', sub: 'LIBS' },
-};
-
 export default function SkillsSection() {
   const resume = getResumeData();
   const skillCategories = Object.entries(resume.skills);
@@ -39,23 +29,23 @@ export default function SkillsSection() {
       <div className="section-container">
         <AnimatedSection>
           <div className="section-head">
-            <span className="section-label">Stack</span>
-            <h2 className="section-title">The instruments I <em>reach for</em></h2>
+            <span className="section-label">Skills</span>
+            <h2 className="section-title">Skills, and <em>where I used them</em></h2>
             <p className="section-subtitle">
-              Tools I rely on daily to design, build, and ship production systems — by domain.
+              Each group says where it was used, so you can check it against the work above.
             </p>
           </div>
         </AnimatedSection>
 
         <div className="section-body">
           {skillCategories.map(([key, skills], i) => {
-            const meta = skillLabels[key] ?? { label: key, sub: '' };
+            const usedIn = resume.skillsUsedIn?.[key];
             return (
               <AnimatedSection key={key} delay={0.08 * i} variant="blurIn">
                 <div className="spec-row">
                   <div className="spec-k">
-                    {meta.label}
-                    <span>{meta.sub}</span>
+                    {key}
+                    {usedIn && <span>Used in {usedIn}</span>}
                   </div>
                   <motion.div
                     className="spec-v"

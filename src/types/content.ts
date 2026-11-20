@@ -12,6 +12,14 @@ export interface Project {
   live_url: string | null;
   /** Where to install it, for projects shipped as a package rather than a site. */
   package_url?: string | null;
+  /** Homepage card text: problem, what was built, one measured result, one trade-off. */
+  card?: {
+    oneLine: string;
+    problem: string;
+    built: string;
+    result: string;
+    tradeoff: string;
+  };
   project_date: string | null;
   published: boolean;
   sort_order: number;

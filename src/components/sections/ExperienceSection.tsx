@@ -12,11 +12,7 @@ export default function ExperienceSection() {
         <AnimatedSection>
           <div className="section-head">
             <span className="section-label">Experience</span>
-            <h2 className="section-title">Where I&apos;ve <em>worked</em></h2>
-            <p className="section-subtitle">
-              The roles where I&apos;ve built and secured scalable platforms —
-              most recent first.
-            </p>
+            <h2 className="section-title">Customer sign-in at <em>Telstra</em></h2>
           </div>
         </AnimatedSection>
 
@@ -36,10 +32,20 @@ export default function ExperienceSection() {
                       {exp.startDate.toUpperCase()} — {exp.endDate.toUpperCase()}
                     </span>
                   </div>
+                  {exp.intro && <p className="xp-intro">{exp.intro}</p>}
                   <ul>
-                    {exp.description.map((bullet, j) => (
-                      <li key={j}>{bullet}</li>
-                    ))}
+                    {exp.description.map((bullet, j) => {
+                      // Lead sentence is the outcome; bold it so a skim reads results first.
+                      const cut = bullet.indexOf('. ');
+                      return cut > 0 && !bullet.startsWith('Java') ? (
+                        <li key={j}>
+                          <strong className="xp-outcome">{bullet.slice(0, cut + 1)}</strong>
+                          {bullet.slice(cut + 1)}
+                        </li>
+                      ) : (
+                        <li key={j}>{bullet}</li>
+                      );
+                    })}
                   </ul>
                 </div>
               </AnimatedSection>

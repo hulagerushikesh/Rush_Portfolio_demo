@@ -4,7 +4,7 @@ import type { Project } from '@/types/content';
 // unconfigured (e.g. production before Firebase is provisioned), so the public
 // site always shows real work. If the CMS has published projects, those win —
 // see getPublishedProjects() in src/lib/content.ts.
-const now = '2026-09-25T00:00:00.000Z';
+const now = '2026-11-20T00:00:00.000Z';
 
 export const staticProjects: Project[] = [
   {
@@ -20,7 +20,7 @@ export const staticProjects: Project[] = [
       '',
       '“RAG over your documents” is commoditised — a weekend of work gets you a demo that answers most questions. What is not commoditised is knowing whether the answer was actually supported by the retrieved text, and what it cost. So the parts of Atlas that got the attention are the unglamorous ones: a verification pass that grades the generated answer against its own evidence, an evaluation harness that decides whether a pipeline change helped, per-request cost attribution, and a daily spend cap the server enforces rather than trusts.',
       '',
-      'The corpus it ships with is the FastAPI documentation — 155 pages, 4,020 chunks — so the retrieval quality claims below are measured against a real, labelled question set rather than asserted.',
+      'The demo corpus is the DuckDB 2.0 manual — 226 pages, 3,975 passages — so the retrieval quality claims below are measured against a real, labelled question set rather than asserted.',
       '',
       '### Six stages, each one timed',
       '',
@@ -32,10 +32,10 @@ export const staticProjects: Project[] = [
       '',
       '### Measured, not guessed',
       '',
-      '- **The numbers, as of the 2026-10-03 run** — faithfulness 1.0000, context recall 0.9378, answer relevance 0.8377, answer correctness 0.7105, context precision 0.4667, over a 16-question labelled set. Precision is the weak one and is reported as such: the pipeline retrieves generously and relies on the reranker and the grader to carry the cost.',
+      '- **The numbers, as of the November 2026 run** — on 16 labelled questions over the DuckDB manual, Atlas finds the right page for all 16 (recall 1.00), keeps its answers to the retrieved pages at 0.99 and gets them right at 0.77 against hand-written references, at a median of about 7 seconds. Answer correctness is the weak one and is reported as such. (The earlier FastAPI-docs run, 3 October 2026, scored faithfulness 1.00, recall 0.94 and precision 0.47.)',
       '- **A harness that resists its own author** — a later full rerun put answer correctness at 0.7992, a 12.5% apparent improvement, and the project’s own significance test scored it a tie on all five metrics (p = 0.61, 7 of 16 samples differing). The older, lower number is still the quoted one. A measurement whose gaps are silenced reports whatever you expected it to.',
       '- **Rejections are output too** — HyDE was implemented, measured on both arms and turned down: warm p95 latency +56% for the concat variant and +139% for replace, with no quality win to pay for it. Doubling the container’s CPU was measured and rejected the same way — the cold path is a sequential import, 43.38s against 43.49s.',
-      '- **Cost is measured per query, not estimated once** — $0.0028 (≈₹0.25) per question over 16 samples, and an evaluation run costs about ₹6 once the grading model’s own calls are counted. Omitting the judges under-states a run by roughly a third.',
+      '- **Cost is measured per query, not estimated once** — about ₹0.20 (≈$0.002) per question, ₹0 while idle, and an evaluation run costs about ₹6 once the grading model’s own calls are counted. Omitting the judges under-states a run by roughly a third.',
       '',
       '### Built to be depended on',
       '',
@@ -47,10 +47,20 @@ export const staticProjects: Project[] = [
       '',
       '### Stack',
       '',
-      'Gemini through an OpenAI-compatible base URL, Qdrant Cloud for vectors, Firestore for API keys and spend, FastAPI and Docker on Cloud Run, fronted by a Vercel rewrite, with a React console for upload, querying and the trace view. 842 tests at 94.14% coverage run in CI alongside the linter, the type checker, a console build, and a check that the committed static bundle matches a fresh one.',
+      'Gemini through an OpenAI-compatible base URL, Qdrant Cloud for vectors, Firestore for API keys and spend, FastAPI and Docker on Cloud Run, fronted by a Vercel rewrite, with a React console for upload, querying and the trace view. 892 tests run in CI with a 90% coverage floor alongside the linter, the type checker, a console build, and a check that the committed static bundle matches a fresh one.',
       '',
-      'The site above is live and the console is public to look at, but asking it a question needs an API key — the daily cap is real money, so keys are issued per person rather than left open.',
+      'The site above is live. Anyone can ask questions about the demo DuckDB manual without a key, under a ₹10-a-day cap; uploading your own documents still needs a key, because the cap is real money.',
     ].join('\n'),
+    card: {
+      oneLine: 'A document Q&A system that checks its own answers.',
+      problem: 'AI answers over company documents can sound right and still be made up.',
+      built:
+        'Hybrid search (vectors plus keywords, fused and reranked) feeding an answer step that cites the exact passage behind every sentence, then grades its own answer. Costs ₹0 while idle, with a hard daily spend cap checked before every paid call.',
+      result:
+        'Finds the right source every time on its question set, with 99% of each answer backed by a cited passage, at about ₹0.20 a question.',
+      tradeoff:
+        'Answers are fully correct about three times in four, so that is the next thing to improve. HyDE was tried and dropped: 56% slower for no gain.',
+    },
     image_url: null,
     technologies: ['Python', 'FastAPI', 'Qdrant', 'Gemini', 'Cloud Run', 'Docker'],
     status: 'active',
@@ -66,9 +76,9 @@ export const staticProjects: Project[] = [
   {
     id: 'static-visiontrack',
     slug: 'visiontrack',
-    title: 'VisionTrack — Real-Time Multi-Object Tracker & SDK',
+    title: 'VisionTrack — Multi-Object Tracking Study',
     description:
-      'A real-time multi-object tracking engine built from first principles — Kalman filter, Hungarian assignment, and ByteTrack association — shipped as a published PyPI SDK.',
+      'A multi-object tracker built from first principles — Kalman filter, Hungarian assignment and ByteTrack association — used for a significance-tested study of which tracking tricks actually help. On PyPI, with a C++ version 21–69× faster.',
     content: [
       'VisionTrack is a real-time multi-object tracker written from first principles — no third-party tracking libraries — then packaged as a real SDK and a live demo site. It is published on PyPI as [`visiontrack-mot`](https://pypi.org/project/visiontrack-mot/) and runs in the browser at [visiontrack.hulage.in](https://visiontrack.hulage.in).',
       '',
@@ -80,14 +90,36 @@ export const staticProjects: Project[] = [
       '',
       '- **From first principles** — an 8-state Kalman filter predicts each track’s next position, an O(n³) Hungarian solver optimally matches detections to tracks, and ByteTrack-style association recovers low-confidence detections that a naive tracker would drop.',
       '- **Lifecycle state machine** — tracks are born, confirmed, coasted through misses, and retired on explicit rules, which is what keeps identities stable through occlusion.',
-      '- **Built to ship** — the per-frame hot path was profiled and tuned for ~1.5× throughput; the library has a stable public API, 344 automated tests, and CI across Python 3.10–3.12.',
+      '- **Built to ship** — the per-frame hot path was profiled and tuned for ~1.5× throughput; the library has a stable public API, 1,000+ automated tests, and CI across supported Python versions.',
+      '',
+      '### The study',
+      '',
+      'On top of the tracker sits an experiment harness that runs on real MOT17 and DanceTrack data with repeated seeds and paired significance tests, with HOTA and IDF1 checked against the standard `trackeval` tool to within 1.4e-3. Three questions, answered either way:',
+      '',
+      '- **Does appearance matching (re-ID) help?** Yes — deep re-ID significantly cuts ID switches on both datasets.',
+      '- **Does a learned motion model help?** It predicts 12.5% better where motion is non-linear (dance), but it makes tracking worse on both datasets. That negative result is published, not dropped.',
+      '- **Does calibrated uncertainty help?** No — null as a cost term, and calibrating the filter to real motion hurts badly under noisy detections.',
+      '',
+      '### The C++ version',
+      '',
+      'A separate C++ ByteTrack, [`visiontrack-cpp`](https://pypi.org/project/visiontrack-cpp/), runs 21–69× faster and is gated on matching the NumPy version bit for bit — the Python code is the reference it must agree with.',
       '',
       '### The demo',
       '',
       'The core algorithm was ported to JavaScript so the site runs an on-device webcam tracker with nothing leaving your machine, alongside teaching, benchmark, and video-upload routes that make the internals legible to both engineers and non-technical visitors.',
     ].join('\n'),
+    card: {
+      oneLine: 'A multi-object tracker written from scratch, used to test which common tracking tricks actually help.',
+      problem: 'Tracking results are usually one run of one setup, so nobody can tell which tricks really help and which are noise.',
+      built:
+        'Kalman filter, Hungarian matching and ByteTrack in NumPy, checked against the standard scoring tool, plus an experiment harness with repeated seeds and significance tests. On PyPI, with a separate C++ version that is 21–69× faster and matches the Python output bit for bit.',
+      result:
+        'Showed that appearance matching significantly cuts identity mix-ups on two public benchmarks. The C++ engine runs 21–69× faster than Python with identical output.',
+      tradeoff:
+        'The learned motion model predicted dance movement 12.5% better but made tracking worse on both datasets. The study publishes that negative result instead of dropping it.',
+    },
     image_url: null,
-    technologies: ['Python', 'NumPy', 'ONNX', 'Kalman Filter', 'ByteTrack', 'PyPI'],
+    technologies: ['Python', 'NumPy', 'C++', 'Kalman Filter', 'ByteTrack', 'PyPI'],
     status: 'active',
     featured: true,
     github_url: 'https://github.com/hulagerushikesh/visiontrack',
@@ -115,17 +147,27 @@ export const staticProjects: Project[] = [
       '',
       '- **Pure engine** — signals, positions, costs and every metric are hand-written pandas/numpy, with no backtesting library. Look-ahead bias is closed structurally (signals always shift one bar), costs are charged on turnover by default, and volatility-targeted sizing, stop-loss and take-profit are built in.',
       '- **Validation on every result** — walk-forward (tune on the first 70%, score on the rest, then rolled across four folds), a signal permutation test, the Deflated Sharpe Ratio with a measured number of effective trials, Probability of Backtest Overfitting, purged and embargoed splits, block-bootstrap confidence intervals on every metric, a paired Sharpe test against holding, and White’s Reality Check / Hansen’s SPA across the whole parameter grid.',
-      '- **What it found** — on AAPL 2018–2024, ranking the three strategies on the data they were tuned on gives exactly the wrong order: momentum looked best and failed out of sample, Bollinger looked worst and held up. The [write-up](https://finertia.hulage.in/writeup) re-runs every figure from a script.',
-      '- **Public research pages** — 39 US and Indian stock pages and a comparison page per strategy pair, each built from real backtests with its own link-preview card, and checked in CI against the data they quote.',
+      '- **What it found** — in the [Nifty 50 study](https://finertia.hulage.in/writeup/nifty-50) (2011–2025, after costs), of 129 stock-and-strategy pairs 50 beat holding the stock on the years they were tuned on, 7 stayed ahead on unseen years, and 4 passed the luck checks. In the [Apple study](https://finertia.hulage.in/writeup) the checks disagree and the verdict flips with the test window; it carries a dated correction after the timing test was made stricter. Both write-ups re-run every figure from a script.',
+      '- **Public research pages** — US and Indian stock pages and a comparison page per strategy pair, each built from real backtests with its own link-preview card, checked in CI against the data they quote, and listed in a sitemap Google has accepted.',
       '',
       '### Built to be depended on',
       '',
-      'FastAPI on Cloud Run behind a Vercel same-origin proxy, Firebase Auth and Firestore with a cached price store, per-user rate limits and a hard instance cap so a public demo cannot run up a bill. 850+ backend tests, front-end unit tests and Playwright end-to-end runs gate every merge, and each backend release goes through a scripted pre- and post-deploy check.',
+      'FastAPI on Cloud Run behind a Vercel same-origin proxy, Firebase Auth and Firestore with a cached price store, per-user rate limits and a hard instance cap so a public demo cannot run up a bill. 856 backend tests, 342 front-end tests and 26 Playwright end-to-end runs gate every merge, and each backend release goes through a scripted pre- and post-deploy check.',
       '',
       '### Stack',
       '',
       'FastAPI + React + Firebase, pandas/numpy for the numerics, Cloud Run + Vercel for hosting. Submitted to Builders Pitch Fest 2026 (BFSI track).',
     ].join('\n'),
+    card: {
+      oneLine: 'Strategy backtesting that tells you whether a result is skill or luck.',
+      problem: 'Most backtests are tuned and judged on the same data, so they look better than they are.',
+      built:
+        'A hand-written pandas and NumPy engine for US and Indian stocks, with walk-forward testing, permutation tests and overfitting checks on every run.',
+      result:
+        'Of 50 Nifty 50 strategy-and-stock pairs that beat buy-and-hold on paper, only 4 held up on unseen data and luck checks, so it catches the fakes before money does.',
+      tradeoff:
+        'On Apple, the verdict flips with the time window chosen, and the write-up says so plainly instead of picking the flattering one.',
+    },
     image_url: null,
     technologies: ['FastAPI', 'React', 'Firebase', 'pandas', 'NumPy', 'Cloud Run', 'Playwright'],
     status: 'active',
@@ -143,9 +185,9 @@ export const staticProjects: Project[] = [
     slug: 'sextant',
     title: 'Sextant — MCP-Native Retrieval Engine',
     description:
-      'A retrieval system whose knowledge base is a real MCP server — its own process, usable in any MCP client, installable from PyPI as sextant-kb. Every retrieval stage is there because a measurement said so. Open source, MIT.',
+      'A retrieval system whose knowledge base is a real MCP server — its own process, usable in any MCP client, installable from PyPI as sextant-kb and listed in the official MCP registry. Every retrieval stage is there because a measurement said so. Open source, MIT.',
     content: [
-      'Sextant is a retrieval system built on the Model Context Protocol. The knowledge base is not an internal module — it is a real MCP server that runs as its own process and speaks JSON-RPC over stdio, so an IDE assistant, an agent or a chat app can query it natively with no glue code. It is published on PyPI as [`sextant-kb`](https://pypi.org/project/sextant-kb/) (0.9.0, MIT) and open source at [github.com/hulagerushikesh/sextant](https://github.com/hulagerushikesh/sextant).',
+      'Sextant is a retrieval system built on the Model Context Protocol. The knowledge base is not an internal module — it is a real MCP server that runs as its own process and speaks JSON-RPC over stdio, so an IDE assistant, an agent or a chat app can query it natively with no glue code. It is published on PyPI as [`sextant-kb`](https://pypi.org/project/sextant-kb/) (MIT), listed in the official MCP registry, and open source at [github.com/hulagerushikesh/sextant](https://github.com/hulagerushikesh/sextant).',
       '',
       '### The aim',
       '',
@@ -156,6 +198,7 @@ export const staticProjects: Project[] = [
       '### Retrieval, measured',
       '',
       '- **Four modes, all graded** — dense cosine search over ChromaDB, Okapi BM25 implemented from scratch, Reciprocal Rank Fusion over both, then a cross-encoder rerank. All four are scored against a 65-question golden set in CI: dense reaches hit@1 0.873, fusion 0.909, and the reranked pipeline 0.927 with recall@5 0.982 and nDCG@5 0.952.',
+      '- **Checked on public data too** — on three public BEIR benchmark sets the full pipeline beats the published BM25 + cross-encoder baseline. Its own keyword stage loses to standard BM25 on all three, and the results page says that first.',
       '- **A quality gate that can actually fail** — `sextant-eval --check` compares a run against a committed baseline and fails on a regression, on a mode left ungraded, on a shortened question set, or on a missing baseline file. No baseline is a failure, not a pass.',
       '- **The rejections are output too** — HyDE, prompt caching, a score-floor fallback and per-query index routing were each measured and deliberately turned down. Table-aware chunking (a table row is a record, so each row becomes its own chunk carrying the caption and header in front of it), per-document candidate caps, and model-written document overviews earned their place and shipped. Each decision is a write-up with its numbers in `learning/`.',
       '',
@@ -171,10 +214,20 @@ export const staticProjects: Project[] = [
       '',
       '### Stack',
       '',
-      'Python 3.11+, roughly 9,800 lines across one import package. ChromaDB with all-MiniLM-L6-v2 embeddings and a ms-marco cross-encoder reranker, PyMuPDF ingestion, FastAPI for the agent server, and a React 19 + TypeScript + Tailwind v4 + shadcn front end with inline citations, an agent trace and drag-and-drop upload. 829 Python tests and 52 front-end tests run in CI alongside the type checker, the linter and the retrieval gate.',
+      'Python 3.11+, roughly 9,800 lines across one import package. ChromaDB with all-MiniLM-L6-v2 embeddings and a ms-marco cross-encoder reranker, PyMuPDF ingestion, FastAPI for the agent server, and a React 19 + TypeScript + Tailwind v4 + shadcn front end with inline citations, an agent trace and drag-and-drop upload. 939 Python tests and 72 front-end tests run in CI alongside the type checker, the linter and the retrieval gate.',
       '',
-      'The hosted stack — Caddy TLS with a Basic-auth gate in front of the API on a GCE box — is built and verified, and the box is parked between trips under a daily cost cap. That is why there is no public demo link here: the package is the part you can run yourself today.',
+      'Recent versions also read scanned PDFs with text recognition (English by default, Hindi and Marathi on request) and name each document by its path, so files that share a name are all indexed. A hosted version was built and verified with test accounts, then removed in November 2026 to keep costs at zero: the package is the part you can run yourself today.',
     ].join('\n'),
+    card: {
+      oneLine: 'Document search that any AI assistant can use, as an MCP server.',
+      problem: 'An assistant’s search tool can quietly get worse, and nobody notices.',
+      built:
+        'Keyword and vector search, fused and reranked, graded against a 65-question set with a check that fails the build on any drop. Reads scanned PDFs, including Hindi and Marathi. On PyPI as sextant-kb and listed in the official MCP registry, MIT licence.',
+      result:
+        'Puts the right passage first 93% of the time, up from 87% with plain search, and beats the published baseline on three public benchmarks.',
+      tradeoff:
+        'Its own keyword stage loses to standard BM25 on all three public sets, and the results page says so first. HyDE, prompt caching and smaller chunks were each measured and turned down.',
+    },
     image_url: null,
     technologies: ['Python', 'MCP', 'ChromaDB', 'Gemini', 'FastAPI', 'PyPI'],
     status: 'active',

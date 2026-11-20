@@ -10,52 +10,80 @@
   "summary": "Software Engineer with 3 years on a customer-facing authentication platform at enterprise scale. I work at the protocol level across OAuth 2.0, OpenID Connect, JWT/JWKS, SSO and federation, and on the security layer beneath — PKI, X.509 lifecycle, mTLS and TLS termination. Outside work I build applied AI/ML systems: agentic RAG, real-time computer vision and quantitative platforms.",
   "experience": [
     {
-      "title": "Software Engineer – Identity & Platform Engineering",
+      "title": "Software Engineer, Identity & Platform Engineering",
       "company": "Telstra",
-      "location": "Pune, India",
+      "location": "Pune",
       "startDate": "July 2023",
       "endDate": "Present",
       "description": [
-        "Worked on Java/Spring Boot services on Telstra's customer identity (CIAM) platform — registration, authentication and authorization flows using OAuth 2.0/OIDC, JWT/JWKS validation, token introspection and exchange, session management, MFA and RBAC.",
-        "Part of the team that migrated 15+ enterprise applications from PCF to OpenShift with zero authentication downtime — rebuilding auth integration, secure routing and IP allow-listing ahead of each cutover.",
-        "Worked on end-to-end mTLS with automated X.509 issuance and rotation, removing manual certificate renewal as a recurring outage risk, and on TLS termination at the CDN edge.",
-        "Worked on the edge migration from legacy WAF to AWS CloudFront + WAFv2 — OWASP-aligned rule groups, regex pattern sets, IP reputation lists and rate-based rules — with a phased, zero-downtime DNS cutover across 10+ downstream apps.",
-        "Configured OIDC/OAuth 2.0 clients in PingFederate and SecureAuth for SSO and single logout across enterprise apps, including federation with Salesforce and Entra ID.",
-        "Contributed to platform modernization — Java/Spring Boot upgrades, dependency and vulnerability remediation, and CI/CD automation."
-      ]
+        "Zero sign-in downtime across 15+ app migrations from PCF to OpenShift. Part of the team that rebuilt auth integration, secure routing and IP allow-lists ahead of each cutover.",
+        "Certificate expiry no longer an outage risk. Worked on end-to-end mTLS with automated X.509 issuance and rotation, and TLS termination at the CDN edge.",
+        "Edge security moved with no downtime. Worked on the move from a legacy WAF to AWS CloudFront and WAFv2 across 10+ apps, with a phased DNS cutover.",
+        "Single sign-on and single logout across enterprise apps. Configured OIDC and OAuth clients in PingFederate and SecureAuth, including federation with Salesforce and Entra ID.",
+        "Java and Spring Boot services for registration, sign-in, token exchange, MFA and RBAC, plus upgrades, vulnerability fixes and CI/CD automation."
+      ],
+      "intro": "I work on the platform behind Telstra's customer sign-in: OAuth 2.0 and OpenID Connect flows, sessions and MFA, and the certificates and edge security underneath."
     }
   ],
   "education": [
     {
-      "degree": "B.Tech in Electronics & Telecommunication (EXTC)",
-      "institution": "Veermata Jijabai Technological Institute, Mumbai",
-      "startDate": "Aug 2019",
-      "endDate": "May 2023"
-    },
-    {
-      "degree": "HSC (Maharashtra State Board)",
-      "institution": "Residential Junior College, Ahmednagar",
-      "startDate": "Jun 2017",
-      "endDate": "May 2019"
+      "degree": "B.Tech, Electronics & Telecommunication",
+      "institution": "VJTI Mumbai",
+      "startDate": "2019",
+      "endDate": "2023"
     }
   ],
   "skills": {
-    "languages": ["Java", "Python", "SQL", "Bash", "C++"],
-    "identity": ["OAuth 2.0", "OpenID Connect", "SAML 2.0", "JWT/JWKS", "SSO", "MFA", "RBAC", "LDAP", "PingFederate", "Entra ID"],
-    "security": ["PKI", "X.509", "mTLS", "TLS termination", "AWS WAFv2", "OWASP Top 10", "CORS", "Secure SDLC"],
-    "backend": ["Spring Boot", "Spring Security", "Hibernate", "JPA", "REST APIs", "FastAPI", "JUnit", "Mockito"],
-    "cloud": ["AWS (CloudFront, Route 53, S3, IAM, Lambda, CloudWatch)", "OpenShift", "Kubernetes", "Docker", "CI/CD", "GitHub Actions"],
-    "aiMl": ["LLMs", "RAG", "Agentic Orchestration", "LangChain", "Qdrant", "PyTorch", "ONNX", "Computer Vision"]
+    "Identity & security": [
+      "OAuth 2.0",
+      "OpenID Connect",
+      "SAML 2.0",
+      "JWT/JWKS",
+      "MFA",
+      "RBAC",
+      "PKI and X.509",
+      "mTLS"
+    ],
+    "Backend": [
+      "Java",
+      "Spring Boot",
+      "Spring Security",
+      "Python",
+      "FastAPI",
+      "SQL",
+      "REST APIs"
+    ],
+    "Cloud & delivery": [
+      "AWS (CloudFront, WAFv2, Route 53)",
+      "OpenShift",
+      "Docker",
+      "Google Cloud Run",
+      "GitHub Actions"
+    ],
+    "AI & search": [
+      "RAG",
+      "Qdrant",
+      "ChromaDB",
+      "BM25",
+      "Rerankers",
+      "LLM evaluation",
+      "Gemini",
+      "MCP"
+    ],
+    "Tracking & numerics": [
+      "Kalman filters",
+      "NumPy",
+      "pandas",
+      "C++"
+    ]
   },
   "achievements": [],
-  "certifications": [
-    {
-      "name": "Machine Learning",
-      "issuer": "Stanford University (Coursera)"
-    },
-    {
-      "name": "Deep Learning Specialization",
-      "issuer": "deeplearning.ai / Coursera"
-    }
-  ]
+  "certifications": [],
+  "skillsUsedIn": {
+    "Identity & security": "Telstra",
+    "Backend": "Telstra, Atlas, Finertia",
+    "Cloud & delivery": "Telstra, Atlas, Finertia",
+    "AI & search": "Atlas, Sextant",
+    "Tracking & numerics": "VisionTrack, Finertia"
+  }
 }
