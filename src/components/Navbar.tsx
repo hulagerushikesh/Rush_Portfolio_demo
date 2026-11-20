@@ -38,11 +38,10 @@ const scrollToSection = (id: string, behavior: ScrollBehavior) => {
 
 const navItems = [
   { id: 'home', name: 'Home', href: '#home' },
-  { id: 'projects', name: 'Projects', href: '#projects' },
+  { id: 'projects', name: 'Work', href: '#projects' },
   { id: 'experience', name: 'Experience', href: '#experience' },
   { id: 'skills', name: 'Skills', href: '#skills' },
   { id: 'about', name: 'About', href: '#about' },
-  { id: 'achievements', name: 'Achievements', href: '#achievements' },
   { id: 'contact', name: 'Contact', href: '#contact' },
 ];
 

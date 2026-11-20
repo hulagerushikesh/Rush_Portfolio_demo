@@ -4,15 +4,13 @@ import Magnetic from '@/components/ui/Magnetic';
 import { GithubIcon, LinkedinIcon } from '@/components/ui/BrandIcons';
 
 const EMAIL = 'hulagerushikesh@gmail.com';
-const MAILTO = `mailto:${EMAIL}?subject=${encodeURIComponent(
-  "Let's build something",
-)}`;
+const MAILTO = `mailto:${EMAIL}`;
 
 const channels = [
   { Icon: Mail, label: 'Email', value: EMAIL, href: MAILTO },
   { Icon: LinkedinIcon, label: 'LinkedIn', value: 'in/rushikesh-hulage', href: 'https://www.linkedin.com/in/rushikesh-hulage-46018522b/' },
   { Icon: GithubIcon, label: 'GitHub', value: 'hulagerushikesh', href: 'https://github.com/hulagerushikesh' },
-  { Icon: MapPin, label: 'Location', value: 'Pune, India', href: null },
+  { Icon: MapPin, label: 'Location', value: 'Pune, India · relocation or remote', href: null },
 ];
 
 export default function ContactSection() {
@@ -22,10 +20,10 @@ export default function ContactSection() {
         <AnimatedSection>
           <div className="section-head">
             <span className="section-label">Contact</span>
-            <h2 className="section-title">Let&apos;s build something</h2>
+            <h2 className="section-title">Get in <em>touch</em></h2>
             <p className="section-subtitle">
-              Have a platform to design, a system to secure, or a role in mind? The fastest
-              way to reach me is email.
+              I&apos;m looking for SDE-2 and senior backend roles, especially in identity,
+              platform or applied AI. Email is the fastest way to reach me.
             </p>
           </div>
         </AnimatedSection>

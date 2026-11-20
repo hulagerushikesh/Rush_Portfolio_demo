@@ -16,6 +16,7 @@ export interface ResumeData {
     location: string;
     startDate: string;
     endDate: string;
+    intro?: string;
     description: string[];
   }>;
   education: Array<{
@@ -25,6 +26,7 @@ export interface ResumeData {
     endDate: string;
   }>;
   skills: Record<string, string[]>;
+  skillsUsedIn?: Record<string, string>;
   achievements: Array<{
     title: string;
     description: string;
